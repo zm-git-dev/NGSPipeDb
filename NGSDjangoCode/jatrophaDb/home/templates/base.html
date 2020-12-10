@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link type="favicon" rel="shortcut icon" href="{% static 'Plukenetiavolubilis/img/favicon.ico' %}" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+    <!-- This site -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    
+    <!-- Java scripts -->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    
+    {% block stylesheets %} {% endblock %}
+    {% block javascript %} {% endblock %}
+</head>
+
+<body style="background: #f4f6f8">
+    <div class="container" style="background: #ffffff;">
+
+        <!-- menu start -->
+        {% include 'banner.html' %} 
+        <!-- menu finished! -->
+
+        <!-- menu start -->
+        {% include 'nav.html' %} 
+        <!-- menu finished! -->
+
+        <!-- content start -->
+        <div id='content' style="padding-left:2px;padding-right:2px;">
+        {% block content %}
+        
+        {% endblock %} 
+        </div>
+        <!-- content finished! -->
+        
+        <!-- footer start -->
+        {% include 'bottom.html' %} 
+        <!-- footer finished! -->
+
+    </div>
+    
+</body>
+
+</html>
