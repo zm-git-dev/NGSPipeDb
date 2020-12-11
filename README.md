@@ -22,13 +22,13 @@
 
 ```shell
 # creating directory
-mkdir jatropha_transcriptome_analysis
+mkdir mouse_transcriptome_analysis
 
 # enter directory
-cd jatropha_transcriptome_analysis
+cd mouse_transcriptome_analysis
 
 # download NGSPipeDb source code
-git clone http://xuanblo.github.com/NGSPipeDb
+git clone https://github.com/xuanblo/NGSPipeDb.git
 ```
 
 然后执行`tree -L 2 -d`，你将会看到如下的目录结构：
@@ -52,13 +52,14 @@ git clone http://xuanblo.github.com/NGSPipeDb
 code size control：`du -sh ./*`
 
 ```shell
-0	./NGSDjangoCode
-0	./NGSDjangoDB
-50M	./NGSPipeCode
-8.0K	./NGSPipeOut
-0	./Rawdata
-8.0K	./README.md
-16K	./Testdata
+4.3M	./NGSDjangoCode
+4.0K	./NGSDjangoDB
+1.9M	./NGSPipeCode
+ 30M	./NGSPipeOut
+ 12K	./README.md
+  0B	./Rawdata
+ 20K	./Testdata
+4.0K	./requirement.yaml
 ```
 
 #### 2. install conda environment
@@ -88,7 +89,7 @@ conda create -p ngspipedb_py38_conda_env python=3.8
 # activate conda env
 conda activate ./ngspipedb_py38_conda_env
 conda install mamba -c conda-forge
-mamba install --file req.txt
+mamba env update --prefix ./ngspipedb_py38_conda_env/ --file requirement.yaml  --prune
 
 # exit env
 conda deactivate
@@ -168,7 +169,7 @@ rsync保留权限，scp不保留权限
 
 ## NGSDb使用
 
-#### 0. env
+#### 1. 安装环境
 
 ```shell
 pip install django
@@ -201,7 +202,7 @@ python manage.py runserver
 1 directory, 6 files
 ```
 
-#### config
+#### 2. config
 
 1. 修改 `mysite/mysite/settings.py`
 
@@ -222,13 +223,13 @@ INSTALLED_APPS = [
 ]
 ```
 
-#### 1. using test data
+#### 3. using test data
 
-#### 2. run NGSPipe for custom data
+#### 4. run NGSPipe for custom data
 
-#### 3. generate sqlite
+#### 5. generate sqlite
 
-#### 4. run server
+#### 6. run server
 
 ```shell
 python manage.py runserver 0.0.0.0:8000
@@ -301,43 +302,28 @@ find NGSPipeOut/* | grep -v '\(RunMe.sh\|samples.xls\)' | xargs rm
     conda update conda
     conda update anaconda
     ```
+    conda config --set channel_priority strict
 
 ## Exporting an environment file across platforms/conda环境分享
 
+1. use conda env export
+
 ```shell
 cd NGSPipeDB_source_code
-# on linux
-conda env export --no-builds -p ./ngspipedb_py36_conda_env >ngspipedb_py36_conda_env.yaml
-# on mac os
-conda install conda-devenv -c conda-forge
-# 如果上一步安装出错
-# conda update --force conda
-conda create -f ngspipedb_py36_conda_env.yaml -p ./ngspipedb_py36_conda_env
-conda devenv -f ngspipedb_py36_conda_env.yaml -n ngs
+# export to yaml
+conda env export --no-builds -p ./ngspipedb_py38_conda_env >ngspipedb_py38_conda_env.yaml
 ```
 
-#### package conda env
+2. use conda pack
 
 ```shell
-# on source 
-conda install -c conda-forge conda-pack
-source activate ./ngspipedb_py36_conda_env
-conda pack -p ./ngspipedb_py36_conda_env -j 2 -o ngspipedb_py36_conda_env_osx64.tar.gz
-# target
-mkdir -p ngspipedb_py36_conda_env
-tar -xzf ngspipedb_py36_conda_env.tar.gz -C ngspipedb_py36_conda_env
+# pack
+cd NGSPipeDB_source_code
+mamba install -c conda-forge conda-pack
+conda pack -p ./ngspipedb_py38_conda_env -o ngspipedb_py38_conda_env_osx64.tar.gz
+# unpack on another machine
+mkdir -p ngspipedb_py38_conda_env
+tar -xzf ngspipedb_py38_conda_env_osx64.tar.gz -C ngspipedb_py38_conda_env
+source activate ./ngspipedb_py38_conda_env
 conda-unpack
 ```
-
-conda Solving environment
-
-```shell
-conda install mamba -c conda-forge
-mamba install snakemake=5.27.4
-conda config --set channel_priority strict
-```
-
-conda update env
-
-source activate ./ngspipedb_py38_conda_env/
-mamba env update --prefix ./ngspipedb_py38_conda_env/ --file req.yaml  --prune
