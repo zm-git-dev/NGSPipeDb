@@ -157,21 +157,19 @@ samplesPath: "../Testdata/samples.xls"
 fastq: "gz"
 # rna-seq sequencing type, can be fr-firststrand, none, fr-secondstrand
 rna_library: "fr-firststrand"
-# for test the pipe, you can choose to the part of the input file, can be whole,head:40000,tail:40000,random:0.5,random:40000
-preRun: "random:"
 ```
 
 #### 6. run NGSPipe
 
 ```shell
+# dry run, use -n parameter only print task plan, -p print commands
 snakemake -np --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml
+# run pipe
 snakemake -p --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml -j1
-snakemake -p --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml -j1 --use-conda --conda-frontend mamba
-snakemake -np --snakefile Snakefile.test.py --configfile config.yaml 
-snakemake -s rnaseq.snakefile.py --use-conda -n 20
+# generate report
 snakemake --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml --report report.html
 ```
-rsync保留权限，scp不保留权限
+
 
 ## NGSDb使用
 

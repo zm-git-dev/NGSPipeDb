@@ -15,6 +15,7 @@ SAMPLES = list(smpList.index)[0:]
 # detail parameters in pipe #
 #
 # 1. sampling data
+# for test the pipe, you can choose to the part of the input file, can be whole,head:40000,tail:40000,random:0.5,random:40000
 sampling_method = 'tail' # tail, seqkit_number, seqkit_proportion, head, tail
 sampling_data_outdir = join(config["resultsDir"], "sampling_data", "sampling_data_by_{}".format(sampling_method))
 
