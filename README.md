@@ -152,26 +152,42 @@ tar -zxvf NGSPipeDb.tar.gz
 
 #### 5. config NGSPipe
 
-edit file `NGSPipeCode/config.yaml`
+1. edit file `NGSPipeCode/config.yaml` for general data path or something.
 
 ```yaml
 # gene annotation file, can be gtf or gff
 genomeAnno: "../test_data/GRCm38.83.chr19.gtf"
+
 # genome sequence
 genomeFasta: "../test_data/chr19.fa"
+
 # result directory of NGSPipe
 resultsDir: "../NGSPipeOut/Result/20201102-StringtieMaxIntron1000"
+
 # sample description file
 samplesPath: "../Testdata/samples.xls"
+
 # fastq suffix
 fastq: "gz"
+
 # rna-seq sequencing type, can be fr-firststrand, none, fr-secondstrand
 rna_library: "fr-firststrand"
 ```
 
+2. edit file `NGSPipeCode/Snakefile` for advance setting, such as sampling method, mapping tool, email address to receive run log.
+
 #### 6. run NGSPipe
 
-run snakemake under directory `NGSPipeDB`
+our current pipeline include 7 step:
+1. sampling data
+2. raw reads qc
+3. junction alignmnet
+4. transcript assembly
+5. quantification
+6. statistic
+7. generate report
+
+Note: run snakemake under directory `NGSPipeDB`
 
 ```shell
 # dry run, use -n parameter only print task plan, -p print commands
