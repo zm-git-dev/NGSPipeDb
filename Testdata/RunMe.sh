@@ -8,7 +8,7 @@ done
 wget --no-clobber http://www.liu-lab.com/ngspipedb/Testdata/chr19.fa.gz 2> chr19.fa_wget.log
 gunzip chr19.fa.gz # uncompress the file
 
-curl ftp://ftp.ensembl.org/pub/release-83/gtf/mus_musculus/Mus_musculus.GRCm38.83.chr.gtf.gz | gunzip -c | grep "^19" | sed 's/^19/chr19/' > GRCm38.83.chr19.gtf
+curl http://www.liu-lab.com/ngspipedb/Testdata/GRCm38.83.chr19.gtf.gz | gunzip -c > GRCm38.83.chr19.gtf
 
 
 # generate replicate sample, need install seqkit first, conda install seqkit -c bioconda
