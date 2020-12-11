@@ -12,4 +12,4 @@ curl http://www.liu-lab.com/ngspipedb/Testdata/GRCm38.83.chr19.gtf.gz | gunzip -
 
 
 # generate replicate sample, need install seqkit first, conda install seqkit -c bioconda
-python generate_replicat.py control_R1.fq.gz treated_R1.fq.gz control_R2.fq.gz treated_R2.fq.gz
+# python generate_replicat.py control_R1.fq.gz treated_R1.fq.gz control_R2.fq.gz treated_R2.fq.gz

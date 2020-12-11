@@ -92,10 +92,14 @@ conda create -p ngspipedb_py38_conda_env python=3.8
 
 # activate conda env
 conda activate ./ngspipedb_py38_conda_env
+
+# install mamba to make install software faster.
 conda install mamba -c conda-forge
+
+# update some bioinformatics tools we will use bellow.
 mamba env update --prefix ./ngspipedb_py38_conda_env/ --file requirement.yaml  --prune
 
-# exit env
+# you can exit virtual environment by 
 conda deactivate
 ```
 
