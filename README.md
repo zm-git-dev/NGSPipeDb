@@ -29,6 +29,8 @@ cd mouse_transcriptome_analysis
 
 # download NGSPipeDb source code
 git clone https://github.com/xuanblo/NGSPipeDb.git
+# or 
+wget http://www.liu-lab.com/ngspipedb/NGSPipeDb.tar.gz ./
 ```
 
 然后执行`tree -L 2 -d`，你将会看到如下的目录结构：
@@ -49,7 +51,8 @@ git clone https://github.com/xuanblo/NGSPipeDb.git
 10 directories
 ```
 
-code size control：`du -sh ./*`
+进入目录：`cd NGSPipeDb`
+查看文件大小：`du -sh ./*`
 
 ```shell
 4.3M	./NGSDjangoCode
@@ -67,7 +70,6 @@ code size control：`du -sh ./*`
 - On linux
 
 ```shell
-cd NGSPipeDb
 
 # download latest miniconda3 and install
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/Miniconda3-latest-Linux-x86_64.sh && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p ~/miniconda3
@@ -102,11 +104,13 @@ conda deactivate
 curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 ```
 
-3. On Win10
+3. On Win10 
 
-```shell
-hello
-```
+    1. 安装ubuntu子系统，请参考[链接](https://zhuanlan.zhihu.com/p/34133795)
+
+2. anaconda 命令行
+
+    安装anaconda
 
 #### 3. using test data (Optional)
 
