@@ -31,6 +31,8 @@ cd mouse_transcriptome_analysis
 git clone https://github.com/xuanblo/NGSPipeDb.git
 # or 
 wget http://www.liu-lab.com/ngspipedb/NGSPipeDb.tar.gz ./
+# decompress
+tar -zxvf NGSPipeDb.tar.gz 
 ```
 
 然后执行`tree -L 2 -d`，你将会看到如下的目录结构：
