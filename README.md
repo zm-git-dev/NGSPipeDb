@@ -71,44 +71,44 @@ tar -zxvf NGSPipeDb.tar.gz
 
 - On linux
 
-```shell
+    ```shell
 
-# download latest miniconda3 and install
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/Miniconda3-latest-Linux-x86_64.sh && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p ~/miniconda3
+    # download latest miniconda3 and install
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/Miniconda3-latest-Linux-x86_64.sh && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p ~/miniconda3
 
-# activate base and set miniconda path
-conda init
+    # activate base and set miniconda path
+    conda init
 
-# Conda Prompt Customization
-conda config --set env_prompt '({name}) '
+    # Conda Prompt Customization
+    conda config --set env_prompt '({name}) '
 
-source ~/.bashrc
+    source ~/.bashrc
 
-# update conda, (optional)
-conda update conda
+    # update conda, (optional)
+    conda update conda
 
-# create conda visual environment, python version, snakemake version, env directory,django version
-conda create -p ngspipedb_py38_conda_env python=3.8
+    # create conda visual environment, python version, snakemake version, env directory,django version
+    conda create -p ngspipedb_py38_conda_env python=3.8
 
-# activate conda env
-conda activate ./ngspipedb_py38_conda_env
+    # activate conda env
+    conda activate ./ngspipedb_py38_conda_env
 
-# install mamba to make install software faster.
-conda install mamba -c conda-forge
+    # install mamba to make install software faster.
+    conda install mamba -c conda-forge
 
-# update some bioinformatics tools we will use bellow.
-mamba env update --prefix ./ngspipedb_py38_conda_env/ --file requirement.yaml  --prune
+    # update some bioinformatics tools we will use bellow.
+    mamba env update --prefix ./ngspipedb_py38_conda_env/ --file requirement.yaml  --prune
 
-# you can exit virtual environment by 
-conda deactivate
-```
+    # you can exit virtual environment by 
+    conda deactivate
+    ```
 
 2. On Mac
 
-```shell
-# mac用户请用：
-curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-```
+    ```shell
+    # mac用户请用：
+    curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+    ```
 
 3. On Win10 
 
@@ -122,27 +122,33 @@ curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 
 1. download test data
 
-```shell
-cd Testdata
-sh RunMe.sh
-```
+    ```shell
+    cd Testdata
+    sh RunMe.sh
+    ```
 
 2. generate replicate data (Optional)
 
-```shell
-# move your data to Rawdata and 
-```
+    ```shell
+    # move your data to Rawdata and 
+    ```
 
 3. create samples.xls
 
-```
-```
+    for example, if you have two samples named "control" and "treated", just create a text file (maybe named sample.xls) with one column and two rows.
+    ```
+    control
+    treated
+    ```
 
 #### 4. Custom data
 
-1. your own data
+1. using your own data
+    - copy your data to Rawdata
+    - or create soft links to this directory
 
 2. download rawdata from NCBI
+    `i will tell you how to do this later`
 
 #### 5. config NGSPipe
 
@@ -165,11 +171,15 @@ rna_library: "fr-firststrand"
 
 #### 6. run NGSPipe
 
+run snakemake under directory `NGSPipeDB`
+
 ```shell
 # dry run, use -n parameter only print task plan, -p print commands
 snakemake -np --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml
+
 # run pipe
 snakemake -p --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml -j1
+
 # generate report
 snakemake --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml --report report.html
 ```
