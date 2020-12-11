@@ -83,15 +83,12 @@ source ~/.bashrc
 conda update conda
 
 # create conda visual environment, python version, snakemake version, env directory,django version
-conda create -p ngspipedb_py36_conda_env python=3.6
+conda create -p ngspipedb_py38_conda_env python=3.8
 
 # activate conda env
-conda activate ./ngspipedb_py36_conda_env
-conda install snakemake=3.13.3 -c bioconda
-conda install django=2.2.5 -c default
-
-# or 
-conda env create -f=./ngspipedb_py36_conda_env.yaml -p ngspipedb_py36_conda_env
+conda activate ./ngspipedb_py38_conda_env
+conda install mamba -c conda-forge
+mamba install --file req.txt
 
 # exit env
 conda deactivate
