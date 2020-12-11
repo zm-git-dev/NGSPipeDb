@@ -1,3 +1,4 @@
+import sys
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -9,7 +10,7 @@ from email.utils import formataddr
 smtp_server = 'smtp.qq.com'
 port = 465
 sender_email = '296373256@qq.com'
-receiver_email='zhangxuan@xtbg.ac.cn'
+receiver_email=sys.argv[1]
 Authorization_code = 'rmcwksassrkgbjcf'
 
 

@@ -65,6 +65,8 @@ stat_outdir = join(config["resultsDir"], "statistic")
 
 # 7. generate report
 
+receiver_email = 'zhangxuan@xtbg.ac.cn'
+
 # 8. database create
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
@@ -126,7 +128,7 @@ onsuccess:
             .,:cccccccc:,.
 
     """)
-    #shell("python NGSPipeCode/script/sendmail.py")
+    shell("python NGSPipeCode/script/sendmail.py {}".format(receiver_email))
     # NGSPipeDB_source_code/.snakemake/log/
     
     
