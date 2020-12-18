@@ -1,0 +1,25 @@
+# path relative to where you run snakemake
+
+# gene annotation file, can be gtf or gff
+genomeAnno: "resources/testdata/GRCm38.83.chr19.gtf"
+# genome sequence
+genomeFasta: "resources/testdata/chr19.fa"
+# result directory of NGSPipe
+resultsDir: "results/result"
+reportsDir: "results/report"
+dbDir: "results/sqlite3"
+
+djangoCode: "ngsdb"
+
+# sample list file
+samplesList: "resources/testdata/samples.xls"
+# sample file directory
+samplesDir: "resources/testdata"
+# fastq suffix, read1
+read1Suffix: "_R1.fq.gz"
+read2Suffix: "_R2.fq.gz"
+
+# rna-seq sequencing type, can be fr-firststrand, none, fr-secondstrand
+rna_library: "fr-firststrand"
+# for test the pipe, you can choose to the part of the input file, can be whole,head:40000,tail:40000,random:0.5,random:40000
+preRun: "random:"
