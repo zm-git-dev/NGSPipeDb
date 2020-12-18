@@ -1,5 +1,0 @@
-channels:
-  - bioconda
-  - conda-forge
-dependencies:
-  - eggnog-mapper =1.0.3

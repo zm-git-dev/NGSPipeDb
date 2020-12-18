@@ -1,5 +1,0 @@
-name: agat_1
-channels:
-  - bioconda
-dependencies:
-  - agat

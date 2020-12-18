@@ -1,6 +1,0 @@
-name: stringtie_1
-channels:
-  - bioconda
-  - conda-forge
-dependencies:
-  - stringtie =2.0
