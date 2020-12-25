@@ -1,38 +1,44 @@
 
-# NGSPipeDb - NGS data analysis pipeline and database generate
+# NGSPipeDb - NGS pipeline and database
 
-*Author: Dr. Xuan Zhang* <sup>[![github](https://img.icons8.com/ios/15/000000/github.png)](https://github.com/xuanblo)</sup> <sup>[![github](https://img.icons8.com/material/17/000000/google-scholar--v2.png)](https://scholar.google.com/citations?user=omUk0vUAAAAJ)</sup>
-*Last update: 2020-12-18*
-*Citation:*
+*__Author:__ Dr. Xuan Zhang* <sup>[![github](https://img.icons8.com/ios/15/000000/github.png)](https://github.com/xuanblo)</sup> <sup>[![github](https://img.icons8.com/material/17/000000/google-scholar--v2.png)](https://scholar.google.com/citations?user=omUk0vUAAAAJ)</sup>
+*__Last update:__ 2020-12-19*
+*__Citation:__ NGSPipeDb: An automated pipeline for parallel processing of huge NGS data and database generation. 2020. bioinformatics.*
 
-__Table of Contents__:
+__Table of Contents:__
 
 1. [Introduction to NGSPipeDb](#Intro)
-2. [System requirements](#)
-3. [Anatomy of a NGSPipeDb PROJECT](#)
+2. [System requirements](#Require)
+3. [Anatomy of a NGSPipeDb PROJECT](#anatomy)
 4. [Quick Start - One time Installation of components necessary and run test for an individual user](#QuickStarted)  
-5. [Step-by-step - slow steps for user custom need](#SettingUpForProject)  
+5. [Step-by-step - RNA-seq analysis](#step-by-step)  
     1. [Installing wget and git](#config)  
-    2. [Installing Miniconda3](#metasheet)  
-    3. [Installing the NGSPipeDb conda environments](#metasheet)  
-    4. [DOWNLOADING the NGSPipeDb static reference files](#metasheet)  
-    5. [Setting up your PROJECT folder for a NGSPipeDb run](#metasheet)  
-    6. [NGSDb使用](#metasheet)  
+    2. [Installing Miniconda3](#miniconda)  
+    3. [Installing the NGSPipeDb conda environments](#condaEnv)  
+    4. [Downloading the NGSPipeDb source code](#ngspipedbCode)  
+    5. [Downloading the NGSPipeDb test files](#testdata)  
+    6. [run test data](#runtest)
+    7. [run your custome data](#rawdata)
+6. [generate report](#report)
+7. [step-by-step database generate]()
+    1. [data to sqlite3](#sqlite3)
+    2. [database config](#databaseConfig)
+    3. [database run](#django)
 6. [Troubleshooting](#RunningViper)
 7. [Share your code](#DFmembers)
 8. [example result](#replotting)
 
 ## Introduction to NGSPipeDb <a name="Intro"></a>
 
-__NGSPipeDb__ is a comprehensive next generation sequencing (NGS) data analysis and result share tool built using [snakemake workflow](https://snakemake.readthedocs.io/en/stable/index.html) which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users. NGSPipeDb can be further divided into `NGSPipe` and `NGSDb` for separate use. 
+__NGSPipeDb__ is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation using [snakemake workflow](https://snakemake.readthedocs.io/en/stable/index.html) which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users. It can be further divided into `NGSPipe` and `NGSDb` for individual usage. 
 
-__NGSPipe__ consists of a `Snakefile` (`workflow/rnaseq.snakefile`), [`conda`](https://conda.io/docs/) environment files (`envs/*.yaml`), a configuration file (`workflow/config/rnaseq.config.yaml`), a set of `python` scripts (`scripts/*.py`), and a set of `reStructuretext` reports (`reports/*.rst`). It combines the use of several dozen omic-seq tools, suites, and packages to create a complete pipeline that takes RNA-seq analysis, resequcing analysis etc. from raw sequencing data all the way through alignment, quality control, unsupervised analyses, differential expression, and downstream pathway analysis. It is implemented such that alternative or similar analysis can be added or removed. The results are compiled in a simple and highly visual report containing the key figures to explain the analysis, and then compiles all of the relevant files, tables, and pictures into an easy to navigate folder. Table file such as csv, tsv, xlsx etc. can be convert to Sqlite3 format.
+__NGSPipe__ consists of a [Snakefile](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html) (`ngspipe/rnaseq.snakefile.py`, it includes some basic rules `ngspipe/rule/*.snakefile.py`), [conda](https://conda.io/docs/) environment files (`ngspipe/envs/*.yaml`), a configuration file (`ngspipe/config/rnaseq.config.yaml`), a set of [python](#), [R](#), [Shell](#) and [Perl](#) scripts (`ngspipe/scripts/*.py`), and a set of [reStructuretext](#) reports (`reports/*.rst`). It combines the use of several dozen omic-seq tools, suites, and packages to create a complete pipeline that takes [RNA-seq analysis](), [resequcing analysis]() etc. from raw sequencing data all the way through alignment, quality control, unsupervised analyses, differential expression, and downstream pathway analysis. It is implemented such that alternative or similar analysis can be added or removed. The results are compiled in a simple and highly visual [report](ngspipe/metadata/report.html) containing the key figures to explain the analysis, and then compiles all of the relevant files, tables, and pictures into an easy to navigate folder. Table file such as csv, tsv, xlsx etc. 
 
-In addition, __NGSDb__ has been outfitted with several recently published tools that allow for visualize and data share. The Django project and apps can be orgined by user defined. It is easy to share your data with a web inteface. a set of `apps` (such as `home`, `igv`, `geneExpAtlas`, `efp brwose`).
+In addition, __NGSDb__ has been outfitted with several recently published tools that allow for visualize and data share.can be convert to [Sqlite3](#) format. The [Django](#) project and apps can be orgined by user defined. It is easy to share your data with a web inteface. a set of `apps` (such as `home`, `igv`, `geneExpAtlas`, `efp brwose`).
 
-By default, the NGSPipeDb performs all the steps shown in the [diagram](img/report_2019_03_14_salmonAlignment_visualization.png) below. However, advanced user, you can easily modify the `Snakefile` and the `config.yaml` and/or add "custom rules" to enable additional functions. Currently, transcript quantification with `Salmon` at the read-level or gene quantification by [`featureCounts`](http://subread.sourceforge.net) can be activated.
+By default, the __NGSPipeDb__ performs all the steps shown in the [diagram](img/report_2019_03_14_salmonAlignment_visualization.png) below. However, advanced user, you can easily modify the `Snakefile` and the `config.yaml` and/or add "custom rules" to enable additional functions. Currently, transcript quantification with `Salmon` at the read-level or gene quantification by [`featureCounts`](http://subread.sourceforge.net) can be activated.
 
-![img](resources/img/workflow.png)
+![img](ngspipe/imgs/workflow.png)
 
 The first version handles protein-coding genes, lncRNAs and circRNAs and includes six core-workflows.
 
@@ -49,21 +55,21 @@ __TODO__:
 2. efp
 3. ChIP-seq*
 
-## System requirements:
+## System requirements <a name="Require"></a>
 
-Building NGSPipeDb and running the examples require Linux, MacOS or WSL on Win10. Other Unix environments will probably work but have not been tested.
+Building NGSPipeDb and running the examples require Linux, MacOS or Windows Subsystem for Linux ([WSL](https://wiki.ubuntu.com/WSL)) on Win10. Other Unix environments will probably work but have not been tested.
 
-Some of the tools that NGSPipeDb uses, e.g. STAR and cufflinks are very memory intensive programs.  Therefore we recommend the following system requirements for NGSPipeDb:
+Some of the tools that NGSPipeDb uses, e.g. STAR and cufflinks are very memory intensive programs. Therefore we recommend the following system requirements for NGSPipeDb:
 
-### Minimal system requirements:
+### Minimal system requirements
 
-We recommend that you run NGSPipeDb on a server that has at least 30GB of ram.  This will allow for a single-threaded NGSPipeDb run (on human samples).
+We recommend that you run NGSPipeDb on a server that has at least 30GB of ram. This will allow for a single-threaded NGSPipeDb run (on mouse samples).
 
-### Recommended system requirements:
+### Recommended system requirements
 
-We recommend that you have at least 128GB of ram and at least a 4-core CPU if you want to run NGSPipeDb in multi-threaded mode (which will speedup the workflow significantly).  Our own servers have 256GB of ram and 32 cores.
+We recommend that you have at least 128GB of ram and at least a 4-core CPU if you want to run NGSPipeDb in multi-threaded mode (which will speedup the workflow significantly). Our own servers have 256GB of ram and 32 cores.
 
-## Anatomy of a NGSPipeDb project: <a name="anatomy"></a>
+## Anatomy of a NGSPipeDb project <a name="anatomy"></a>
 
 It is recommended to download NGSPipeDb source and change its name to your project name (For example: `mv NGSPipeDb mouse_transcriptome_analysis`), it may looks like the following structure (command: `tree -d -L 2 mouse_transcriptome_analysis`):
 
@@ -99,18 +105,53 @@ In other words, the workflow code goes into a subfolder `ngspipe`, while the con
 
 The *config.yaml* and *metasheet.csv* are configurations for your NGSPipeDb run (also explained below).
 
-After a successful __NGSPipeDb__ run, another runname `xxx_result` folder is generated which contains all of the resulting output files.
+After a successful __NGSPipeDb__ run, another runname `results` subfolder is generated which contains all of the resulting output files `result` for analysis result, `report` for html report and `sqlite3` for django database.
 
-## Quick Start - One time installation of components necessary for an individual user: <a name="QuickStarted"></a>
+## Quick Start - One time installation of components necessary for an individual user <a name="QuickStarted"></a>
 
 Three commands to start analysing test data:
 ```shell
-# download ngspipedb
-git clone https://github.com/xuanblo/NGSPipeDb.git mouse_transcriptome_analysis
-# download test data
-sh download_testdata.sh
-# run ngspipe
-snakemake -p --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml -j1
+# download ngspipedb to anywhere you want
+git clone https://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis
+# download test data and create environment
+bash ngspipe/script/one_step_runtest.sh
+# run rnaseq analysis
+snakemake -p --snakefile NGSPipeCode/Snakefile -j1
+# generate report
+snakemake -p --snakefile NGSPipeCode/Snakefile --report report.html
+# 
+```
+
+```python
+Usage:
+    One time installation of components necessary for an individual use.
+
+    The default result was stored  under current directory.
+
+    if -e not 指定, env will not be installed. conda path or xxx path.
+
+        The gene_matrix_file.
+
+    Alternatively, you can specify the filenames directly with
+    :option:`-p`/:option:`--condapath` and
+    :option:`-n`/:option:`--condaname`
+    :option:`-d`/:option:`--testdatapath`
+    :option:`-t`/:option:`--pathform` option.
+
+    Example::
+
+        python run_one_step_test.py -p linux -d testdata -e condapath -g gene_matrix_file
+
+
+Options:
+  -h, --help            show this help message and exit
+  -t STR, --platform=STR
+                        mac or linux
+  -d DIR, --testdatadir=DIR
+                        download test file
+  -n FILE, --name=FILE  download ngspipedb env
+  -p FILE, --path=FILE  download ngspipedb env
+
 ```
 All Result, Report (Example in <sub>[![html](https://img.icons8.com/ios/25/000000/html-filetype.png)](http://www.liu-lab.com)</sub>) and Sqlite are stored on the directory `output`.
 
@@ -126,19 +167,19 @@ If you have more time, then we recommend you configure atlas according to your n
   - run atlas on any [cluster system](https://metagenome-atlas.readthedocs.io/en/latest/usage/cluster.html)
 For more details see [documentation](https://metagenome-atlas.rtfd.io/).
 
-## Step-by-step - slow steps for user custom need
+## Step-by-step - slow steps for user custom need <a href="step-by-step"></a>
 
 __If you are looking to install for a system of users, we recommend you look at appendix C below. Note that this can also be a very useful step for individual users as well!__
 
 Although included in this README are step-by-step instructions, it is assumed that the user has a basic understanding of the [nix command line interface](https://en.wikipedia.org/wiki/Command-line_interface).
 
-### 1. Installing wget and git:
+### 1. Installing wget and git
 
 To get some of the required software packages, we will use the command line tools called [wget](http://www.gnu.org/software/wget/) and [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).  *wget* is a popular tool for downloading things off of the internet.  *git* is a distributed version control system which we will use to checkout the NGSPipeDb code.
 
 __These tools are already pre-installed in most systems__, but if you are unsure whether or not you have *wget* enter `wget` and if the return is `wget: command not found`, then you will have to install *wget*.  Do likewise for *git*.
 
-### 2. Installing Miniconda3:
+### 2. Installing Miniconda3
 
 Snakepipes uses conda for installation and dependency resolution, so you will need to `install conda <https://conda.io/docs/user-guide/install/index.html>`__ first.
 
@@ -149,15 +190,15 @@ Use following commands to retrieve and then __RUN__ the Minicoda3 installation s
 2. `bash Miniconda3-latest-Linux-x86_64.sh`  
     - Whilst running the installation script, follow the commands listed on screen, and press the _enter_ key to scroll.
     - __Make sure to answer yes when asked if you want to prepend Miniconda3 to PATH.__
-    - Close your terminal, open a new one and you should now have Conda working! Test by entering:  
+    - Close your terminal, open a new one and you should now have Conda working! or run `source ~/.bashrc`. Test by entering:  
         `conda update conda`
         - Press `y` to confirm the conda updates
-3. install mamba to make install software faster. `conda install mamba -c conda-forge`
+3. install [mamba](#) to make install software faster. `conda install mamba -c conda-forge`
     
 __NOTE__: you will only have to install Minicoda3 once.  
 __NOTE__: remember to close your terminal session and re-login
 
-### Installing the NGSPipeDb conda environments:
+### 3. Installing the NGSPipeDb conda environments
 
 We are now ready to use __CONDA__ to install the software packages which __NGSPipeDb__ is dependent on. Simply run the following:
 
@@ -166,29 +207,29 @@ We are now ready to use __CONDA__ to install the software packages which __NGSPi
 
 2. `conda activate ngspipedb` to activate the appropriate conda environment.
 
-3. `mamba env update -n ngspipedb --file ngspipe/nev/requirement.yaml --prune` to update some bioinformatics tools we will use bellow.
+3. `mamba env update -n ngspipedb --file ngspipe/envs/requirement.yaml --prune` to update some bioinformatics tools we will use bellow.
 
 
 __NOTE__: you will only have to install the NGSPipeDb conda environments once. For more information about how to `install conda env local`, `share conda env` can see bellow.
 
-### DOWNLOADING the NGSPipeDb source code:
+### 4. DOWNLOADING the NGSPipeDb source code:
 
 Within your __PROJECT__ directory, issue the following commands:  
 1. `wget http://www.liu-lab.com/pub/NGSPipeDb_v1.0.tar.gz`  
 2. `tar -xf NGSPipeDb_v1.0.tar.gz`  
 3. `mv NGSPipeDb_v1.0 mouse_transcriptome_analysis`  
-__NOTE__: the XXXXX refers to the latest changeset of viper, so it will differ  
+__NOTE__: the XXXXX refers to the latest changeset of NGSPipeDb, so it will differ  
 
-__ADVANCED__: you may clone the latest version of [__VIPER__](https://bitbucket.org/cfce/viper) using git
+__ADVANCED__: you may clone the latest version of [__NGSPipeDb__](https://www.github.com/xuanblo/NGSPipeDb) using git: `git clone https://www.github.com/xuanblo/NGSPipeDb`
 
 
-### DOWNLOADING the NGSPipeDb test files:
+### 5. DOWNLOADING the NGSPipeDb test files:
 
 __ngspipedb__ is dependent on reference files which can be found for the supported species listed below:  [download link](https://www.dropbox.com/sh/8cqooj05i7rnyou/AAB-i4hHxQwqJDTXbzM_2JPua?dl=0)
 
-1. run `sh resources/testdata/runMe.sh` to download test data to `resources/testdata/`:
+1. run `bash ngspipe/scripts/download_testdata.sh testdata` to download test data to `./testdata`:
 
-2. run `python replicated.py` to generate replicate data (Optional):
+2. run `python ngspipe/scripts/generate_replicat.py` to generate replicate data (Optional):
 
 3. create samples.xls, for example, if you have two samples named "control" and "treated", just create a text file (maybe named sample.xls) with one column and two rows.
 
@@ -217,7 +258,7 @@ resources/testdata/
 
 __NOTE__: you will only have to download the static references once.
 
-## run test data
+### 6. run test data
 
 simply run `snakemake -s ngspipe/RNA-Seq.Snakefile.py -p -j1`
 `snakemake -s ngspipe/RNA-Seq.Snakefile.py --report results/report/report.html`
@@ -406,9 +447,9 @@ include: join("modules", "8.db_generate_of_exp.Snakefile.py")
 
 ```
 
-## run your custome data
+### 7. run your custome data
 
-### Copying over the __META__ files:
+#### 1. Copying over the __META__ files:
 
 The __META__ files (*config.yaml* and *metasheet.csv*) allow you to configure each run.  They are explained in much more detail below.  For now, we simply copy them from the viper source directory:
 ```
@@ -419,16 +460,16 @@ The __META__ files (*config.yaml* and *metasheet.csv*) allow you to configure ea
 __We will explain how to edit and configure these files shortly below__
 
 
-#### PATHS:
+#### 2. PATHS:
 In this section, you will need to specify the location of the following static reference files.
 
 __The script path is always relative to the Snakefile containing the directive (in contrast to the input and output file paths, which are relative to the working directory).__
 
 All paths in the snakefile are interpreted relative to the directory snakemake is executed in. 
 
-#### PARAMS:
+#### 3. PARAMS:
 
-##### SAMPLES:
+##### 4. SAMPLES:
 
 In this section of the configuration file, you specify the __NAMES__ of each sample, and the __PATHS__ to the sample's raw data.  Raw data files can either be fastq, fastq.gz, or bam formated files.
 
@@ -448,7 +489,7 @@ samples:
 		- data/SAMPLE2.fastq.gz
 ```  
 
-###### __For Paired-end samples, simply add the second samples of the pait__
+__For Paired-end samples, simply add the second samples of the pait__
 
 __EXAMPLE__:
 ```
@@ -464,7 +505,7 @@ samples:
 __IMPORTANT__: __You cannot mix Paired-end and Single-end samples within the same VIPER run as this will cause an ERROR__. If necessary, run all of one type of data first, followed by the net type of data after.
 
 
-### Configuring the META files: config.yaml <a name="config"></a>
+#### Configuring the META files: config.yaml <a name="config"></a>
 The config.yaml file has three main sections. __PATHS__, __PARAMS__, __SAMPLES__:
 
 
@@ -509,7 +550,18 @@ snakemake --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml
 
 Note: if you get connected error in this step, you can solve this problem by edit file `ngspipedb_py38_conda_env/lib/python3.8/site-packages/snakemake/report/report.html.jinja2` to change `https://raw.githubusercontent.com/eligrey/FileSaver.js/2.0.0/src/FileSaver.js` to `https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.js`
 
-## NGSDb使用
+### 6. NGSDb使用
+
+django apps | description
+---- | -----------
+home | home page
+geneExpAtlas | table
+network      |
+igv          | genome browse
+blastplus    | ncbi blast +
+ngstools     | wooey
+efp          | efp browse
+
 
 #### 1. 安装环境
 
@@ -651,3 +703,4 @@ mamba env update --prefix ./ngspipedb_py38_conda_env/ --file requirement.yaml  -
 
 9. you can exit virtual environment by 
 conda deactivate
+https://wooey.readthedocs.io/en/latest/install.html
