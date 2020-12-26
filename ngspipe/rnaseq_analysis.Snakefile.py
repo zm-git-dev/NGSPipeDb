@@ -125,7 +125,7 @@ onsuccess:
  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ 
                                                                                            
     """)
-    shell("python NGSPipeCode/script/sendmail.py {}".format(receiver_email))
+    shell("python NGSPipeCode/scripts/sendmail.py {}".format(receiver_email))
     # NGSPipeDB_source_code/.snakemake/log/
     
     

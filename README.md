@@ -1,7 +1,7 @@
 
 # NGSPipeDb - NGS pipeline and database
 
-*__Author:__ Dr. Xuan Zhang* <sup>[![github](https://img.icons8.com/ios/15/000000/github.png)](https://github.com/xuanblo)</sup> <sup>[![github](https://img.icons8.com/material/17/000000/google-scholar--v2.png)](https://scholar.google.com/citations?user=omUk0vUAAAAJ)</sup>
+*__Author:__ Dr. Xuan Zhang* <sup>[![github](https://img.icons8.com/ios/15/000000/github.png)](https://github.com/xuanblo)</sup> <sup>[![google scholar]](https://img.icons8.com/material/17/000000/google-scholar--v2.png)](https://scholar.google.com/citations?user=omUk0vUAAAAJ)</sup>
 *__Last update:__ 2020-12-19*
 *__Citation:__ NGSPipeDb: An automated pipeline for parallel processing of huge NGS data and database generation. 2020. bioinformatics.*
 
@@ -74,38 +74,40 @@ We recommend that you have at least 128GB of ram and at least a 4-core CPU if yo
 It is recommended to download NGSPipeDb source and change its name to your project name (For example: `mv NGSPipeDb mouse_transcriptome_analysis`), it may looks like the following structure (command: `tree -d -L 2 mouse_transcriptome_analysis`):
 
 ```shell
-mouse_transcriptome_analysis/
+mouse_transcriptome_analysis
+├── README.md
 ├── ngsdb
 │   ├── blastplus
-│   ├── collectstatic
-│   ├── commonstatic
+│   ├── db.sqlite3
 │   ├── geneAnno
 │   ├── geneExpAtlas
 │   ├── home
 │   ├── igv
+│   ├── manage.py
 │   └── ngsdb
 ├── ngspipe
 │   ├── config
+│   ├── db_generate.Snakefile.py
 │   ├── envs
+│   ├── imgs
+│   ├── metadata
 │   ├── notebooks
-│   ├── report
+│   ├── reports
+│   ├── rnaseq_analysis.Snakefile.py
 │   ├── rules
 │   └── scripts
-├── resources
-│   ├── img
-│   ├── rawdata
-│   └── testdata
-└── results
-    ├── runname_report
-    ├── runname_result
-    └── runname_sqlite3
+├── results
+│   ├── report
+│   ├── resultdata
+│   └── sqlite3
+└── testdata
 ```
 
-In other words, the workflow code goes into a subfolder `ngspipe`, while the configuration is stored in a subfolder `config`. Inside of the workflow subfolder, the central Snakefile marks the entrypoint of the workflow (it will be automatically discovered when running snakemake from the root of above structure. In addition to the central Snakefile, rules can be stored in a modular way, using the optional subfolder `ngspipe/rules`. Such modules should end with `.smk` the recommended file extension of Snakemake. Further, scripts should be stored in a subfolder `workflow/scripts` and notebooks in a subfolder `workflow/notebooks`. Conda environments (see Integrated Package Management) should be stored in a subfolder `workflow/envs` (make sure to keep them as finegrained as possible to improve transparency and maintainability). Finally, report caption files should be stored in `workflow/report`. All output files generated in the workflow should be stored under results, unless they are rather retrieved resources, in which case they should be stored under resources. The latter subfolder may also contain small resources that shall be delivered along with the workflow via git (although it might be tempting, please refrain from trying to generate output file paths with string concatenation of a central outdir variable or so, as this hampers readability).
+The workflow code goes into a subfolder `ngspipe`, while the configuration is stored in a subfolder `config`. Inside of the workflow subfolder, the central Snakefile marks the entrypoint of the workflow. In addition to the central Snakefile, rules are stored in a modular way, using the optional subfolder `ngspipe/rules`. Further, scripts are stored in a subfolder `workflow/scripts` and notebooks in a subfolder `workflow/notebooks`. Conda environments are stored in a subfolder `workflow/envs`. Finally, report caption files are stored in `workflow/report`. 
 
-The *config.yaml* and *metasheet.csv* are configurations for your NGSPipeDb run (also explained below).
+The database code goes into a subfolder `ngsdb`, while the `manage.py` is ngsdb's command-line utility for administrative tasks. A golabl setting file is stored under `ngsdb/ngsdb`, such as `ngsdb/ngsdb/setting.py` and `ngsdb/ngsdb/urls.py`. Many ngsdb function module take a app name. For example, if your INSTALLED_APPS in `ngsdb/ngsdb/setting.py` contains the string 'igv', the database will contain a page of IGV genome browser.
 
-After a successful __NGSPipeDb__ run, another runname `results` subfolder is generated which contains all of the resulting output files `result` for analysis result, `report` for html report and `sqlite3` for django database.
+All output files generated in the workflow should be stored under `results/result`, unless they are rather retrieved report, in which case they should be stored under `results/report`. The latter subfolder `results/sqlite3` contains Sqlite3 kind file that shall be used by ngsdb.
 
 ## Quick Start - One time installation of components necessary for an individual user <a name="QuickStarted"></a>
 
@@ -114,58 +116,15 @@ Three commands to start analysing test data:
 # download ngspipedb to anywhere you want
 git clone https://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis
 # download test data and create environment
-bash ngspipe/script/one_step_runtest.sh
-# run rnaseq analysis
-snakemake -p --snakefile NGSPipeCode/Snakefile -j1
-# generate report
-snakemake -p --snakefile NGSPipeCode/Snakefile --report report.html
-# 
+bash ngspipe/scripts/one_step_runtest.sh
 ```
 
-```python
-Usage:
-    One time installation of components necessary for an individual use.
-
-    The default result was stored  under current directory.
-
-    if -e not 指定, env will not be installed. conda path or xxx path.
-
-        The gene_matrix_file.
-
-    Alternatively, you can specify the filenames directly with
-    :option:`-p`/:option:`--condapath` and
-    :option:`-n`/:option:`--condaname`
-    :option:`-d`/:option:`--testdatapath`
-    :option:`-t`/:option:`--pathform` option.
-
-    Example::
-
-        python run_one_step_test.py -p linux -d testdata -e condapath -g gene_matrix_file
+Now you can viste your website on http://127.0.0.1:8000. All result are stored in `results`.
+- Example of report <sub>[![html](https://img.icons8.com/ios/20/000000/html-filetype.png)](http://www.liu-lab.com)</sub>.
+- Example of database <sub>[![html](https://img.icons8.com/dotty/25/000000/copy-link.png)](http://www.liu-lab.com)</sub>.
 
 
-Options:
-  -h, --help            show this help message and exit
-  -t STR, --platform=STR
-                        mac or linux
-  -d DIR, --testdatadir=DIR
-                        download test file
-  -n FILE, --name=FILE  download ngspipedb env
-  -p FILE, --path=FILE  download ngspipedb env
-
-```
-All Result, Report (Example in <sub>[![html](https://img.icons8.com/ios/25/000000/html-filetype.png)](http://www.liu-lab.com)</sub>) and Sqlite are stored on the directory `output`.
-
-One commands to start web server (Example at <sub>[![html](https://img.icons8.com/dotty/25/000000/copy-link.png)](http://www.liu-lab.com)</sub>):
-```shell
-# viste your website on http://127.0.0.1:8000
-python manage.py runserver
-```
-
-If you have more time, then we recommend you configure atlas according to your needs. For more details, please see [step by step](#step) bellow.
-  - check the `samples.tsv`
-  - edit the `config.yaml`
-  - run atlas on any [cluster system](https://metagenome-atlas.readthedocs.io/en/latest/usage/cluster.html)
-For more details see [documentation](https://metagenome-atlas.rtfd.io/).
+If you have more time, then we recommend you configure ngspipedb according to your needs. For more details, please see [step by step](#step-by-step) bellow.
 
 ## Step-by-step - slow steps for user custom need <a href="step-by-step"></a>
 
@@ -267,185 +226,10 @@ url: https://raw.githubusercontent.com/eligrey/FileSaver.js/2.0.0/src/FileSaver.
 
 edit file `NGSPipeCode/config.yaml` for general data path or something.
 
-```yaml
-# gene annotation file, can be gtf or gff
-genomeAnno: "../test_data/GRCm38.83.chr19.gtf"
-
-# genome sequence
-genomeFasta: "../test_data/chr19.fa"
-
-# result directory of NGSPipe
-resultsDir: "../NGSPipeOut/Result/20201102-StringtieMaxIntron1000"
-
-# sample description file
-samplesPath: "../Testdata/samples.xls"
-
-# fastq suffix
-fastq: "gz"
-
-# rna-seq sequencing type, can be fr-firststrand, none, fr-secondstrand
-rna_library: "fr-firststrand"
-```
 
 edit file `snakefile` for general data path or something.
 
-```python
-import os
-from os.path import join
-import sys
-import pandas as pd
 
-# configfile
-configfile: join("NGSPipeCode", "config.yaml")
-
-# ----------------------------------------------------------------------- #
-# sample information #
-#
-smpList = pd.read_csv(config["samplesList"], index_col=0, header=None)
-SAMPLES = list(smpList.index)[0:]
-
-# ----------------------------------------------------------------------- #
-
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
-# detail parameters in pipe #
-#
-# 1. sampling data
-# for test the pipe, you can choose to the part of the input file, can be whole,head:40000,tail:40000,random:0.5,random:40000
-sampling_method = 'tail' # tail, seqkit_number, seqkit_proportion, head, tail
-sampling_data_outdir = join(config["resultsDir"], "sampling_data", "sampling_data_by_{}".format(sampling_method))
-
-# 2. raw reads qc
-qc_method = 'trim-galore' # trimomatic
-qc_outdir = join(config["resultsDir"], "rawReads_qc", "rawReads_qc_by_{}".format(qc_method))
-
-# 3. junction alignmnet
-junction_align_method = 'hisat2' # star
-junction_align_outdir = join(config["resultsDir"], "junction_align", "junction_align_by_{}".format(junction_align_method))
-genome_index_prefix = "genome"
-rna_library = "" # "--rna-strandness RF"(fr-firststrand) or "--rna-strandness FR"(fr-secondstrand)
-
-# 4. transcript assembly
-transcript_assembly_method = 'stringtie' # star
-transcript_assembly_outdir = join(config["resultsDir"], "transcript_assembly", "transcript_assembly_by_{}".format(transcript_assembly_method))
-
-# 5. quantification
-quantify_method = 'stringtie' # htseqcounts or featurecounts
-quantify_outdir = join(config["resultsDir"], "quantify", "quantify_by_{}".format(quantify_method))
-
-# 6. statistic
-statistic_data_all = [
-                  '0.genomeFa', 
-                  '0.genomeAnno', 
-                  '1.rawReads', 
-                  '2.cleanReads', 
-                  '2.multiqc', 
-                  '3.bam', 
-                  '4.mergedGtf', 
-                  '5.exp',
-                  ]
-genomeFa_outdir, genomeAnno_outdir, rawReads_outdir, cleanReads_outdir, multiqc_outdir, bam_outdir, mergedGtf_outdir, exp_outdir \
-  = [join(config["resultsDir"], "statistic", "statistic_data_of_{}".format(i)) for i in statistic_data_all]
-
-statistic_data_choose = [
-                  #'0.genomeFa', 
-                  #'0.genomeAnno', 
-                  '1.rawReads', 
-                  '2.cleanReads', 
-                  #'2.multiqc', 
-                  '3.bam', 
-                  #'4.mergedGtf', 
-                  #'5.exp',
-                  ]
-stat_outdir = join(config["resultsDir"], "statistic")
-
-# 7. generate report
-receiver_email = 'zhangxuan@xtbg.ac.cn'
-
-# 8. database create
-exp_db_outdir = join(config["dbDir"], "exp")
-anno_db_outdir = join(config["dbDir"], "anno")
-gff_db_outdir = join(config["dbDir"], "gff")
-
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
-
-# ------------------------------
-#report: "report/workflow.rst"
-report_outdir = join(config["reportsDir"], "report.html")
-# ------------------------------
-
-rule all:
-    input:
-        #
-        # 1. sampling data #
-        sampling_data_result                = expand(join(sampling_data_outdir, "{sample}"+config["read1Suffix"]), sample=SAMPLES),
-        #
-        # 2. raw reads qc #
-        rawReads_qc_result                 = expand(join(qc_outdir, "{sample}", "{sample}.cleanR1.fq.gz"), sample=SAMPLES),
-        #
-        # 3. juntion alignment #
-        junction_align_result              = expand(join(junction_align_outdir, "{sample}", "{sample}.sorted.bam"), sample=SAMPLES),
-        #
-        # 4. transcript_assembly #
-        transcript_assembly                = join(transcript_assembly_outdir, "merged.gtf"),
-        #
-        # 5. qunatification #
-        quantify                           = join(quantify_outdir, "gene.csv"),
-        #
-        # 6. statistic #
-        statistic_result                   = expand(join(stat_outdir, "statistic_data_of_{statistic_data}", 'statistic.completed'), statistic_data=statistic_data_choose),
-        #
-        # 7. report #
-        report_result    = join(config['reportsDir'], "report.ok"),
-        #
-        # 8. database create #
-        sqlite3_exp                     = join(exp_db_outdir, "exp.sqlite3"),
-        exp_django_model = join(config["djangoCode"], "geneExpAtlas", "models.py"),
-        
-
-onsuccess:
-    print("""
-    Workflow finished, no error
-                ............                zhangxuan@T640P 
-         .';;;;;.       .,;,.            --------------- 
-      .,;;;;;;;.       ';;;;;;;.         OS: Deepin 20 x86_64 
-    .;::::::::'     .,::;;,''''',.       Host: PowerEdge T640 
-   ,'.::::::::    .;;'.          ';      Kernel: 5.4.50-amd64-desktop 
-  ;'  'cccccc,   ,' :: '..        .:     Uptime: 1 hour, 47 mins 
- ,,    :ccccc.  ;: .c, '' :.       ,;    Packages: 2097 (dpkg) 
-.l.     cllll' ., .lc  :; .l'       l.   Shell: bash 5.0.3 
-.c       :lllc  ;cl:  .l' .ll.      :'   Resolution: 1920x1058 
-.l        'looc. .   ,o:  'oo'      c,   WM: _NET_SUPPORTING_WM_CHECK: window id # 0x400001 
-.o.         .:ool::coc'  .ooo'      o.   Icons: bloom [GTK2/3] 
- ::            .....   .;dddo      ;c    Terminal: /dev/pts/0 
-  l:...            .';lddddo.     ,o     CPU: Intel Xeon Gold 5218R (80) @ 803MHz 
-   lxxxxxdoolllodxxxxxxxxxc      :l      GPU: NVIDIA Quadro P620 
-    ,dxxxxxxxxxxxxxxxxxxl.     'o,       Memory: 2601MiB / 128539MiB 
-      ,dkkkkkkkkkkkkko;.    .;o;
-        .;okkkkkdl;.    .,cl:.                                   
-            .,:cccccccc:,.
-
-    """)
-    #shell("python NGSPipeCode/script/sendmail.py {}".format(receiver_email))
-    # NGSPipeDB_source_code/.snakemake/log/
-    
-    
-
-onerror:
-    print("An error occurred")
-    #shell("mail -s 'an error occurred' 296373256@qq.com ")
-
-include: join("modules", "1.sampling_data_by_{}.Snakefile.py".format(sampling_method))
-include: join("modules", "2.rawReads_qc_by_{}.Snakefile.py".format(qc_method))
-include: join("modules", "3.junction_align_by_{}.Snakefile.py".format(junction_align_method))
-include: join("modules", "4.transcript_assembly_by_{}.Snakefile.py".format(transcript_assembly_method))
-include: join("modules", "5.quant_by_{}.Snakefile.py".format(quantify_method))
-include: join("modules", "6.statistic_data_of_bam.Snakefile.py")
-include: join("modules", "6.statistic_data_of_rawReads.Snakefile.py")
-include: join("modules", "6.statistic_data_of_cleanReads.Snakefile.py")
-include: join("modules", "7.report.Snakefile.py")
-include: join("modules", "8.db_generate_of_exp.Snakefile.py")
-
-```
 
 ### 7. run your custome data
 
@@ -629,7 +413,7 @@ INSTALLED_APPS = [
 python manage.py runserver 0.0.0.0:8000
 ```
 
-## make clean清除数据重来
+## make clean
 
 1. NGSPipeData
 ```shell
@@ -642,10 +426,6 @@ find NGSPipeOut/* | grep -v '\(RunMe.sh\|samples.xls\)' | xargs rm
 2. NGSDBData
 ```shell
 ```
-
-## Troubleshooting
-
-#### 1. conda install software error
 
 ## Exporting an environment file across platforms/conda环境分享
 
@@ -704,3 +484,5 @@ mamba env update --prefix ./ngspipedb_py38_conda_env/ --file requirement.yaml  -
 9. you can exit virtual environment by 
 conda deactivate
 https://wooey.readthedocs.io/en/latest/install.html
+
+## Troubleshooting

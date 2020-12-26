@@ -20,6 +20,8 @@ rule index_genome_by_hisat2_build:
         join(genome_index_outdir, "benchmark.txt")
     log:
         join(genome_index_outdir, "index.log")
+    conda:
+        "../envs/hisat2.yaml"
     threads:
         5
     shell:
