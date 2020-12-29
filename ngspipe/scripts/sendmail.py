@@ -1,8 +1,18 @@
+import os
 import sys
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import formataddr
+
+def get_last_log():
+    workdir = os.getcwd()
+    snakelogpath = os.path.join(workdir, '.snakemake', 'log')
+    lists = os.listdir(snakelogpath)
+    lists.sort(key=lambda x:os.path.getmtime(os.path.join(snakelogpath, x)))
+    logfile = os.path.join(snakelogpath, lists[-1])
+    with open(logfile, 'r') as f:
+        return f.read()
 
 # ref: https://realpython.com/python-send-email/
 
@@ -16,24 +26,28 @@ Authorization_code = 'rmcwksassrkgbjcf'
 
 message = MIMEMultipart("alternative")
 message["Subject"] = "inform from ngsPipe! work compeled!"
-message["From"] = formataddr(["ngsPipe", sender_email])
+message["From"] = formataddr(["NGSPipeDb", sender_email])
 message["To"] = formataddr(["", receiver_email])
 
 # Create the plain-text and HTML version of your message
 
-html = """\
+html = """
 <html>
-    <body>
+    <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    <body background-color='red'>
     <p>Hi,<br>
         if you like this project?<br>
-        <a href="http://www.realpython.com">ngsPipe</a> 
+        <a href="http://www.realpython.com">NGSPipeDb</a> 
         Please star it on Github.
     </p>
+    <p>{}</p>
     </body>
 </html>
-"""
+""".format(get_last_log())
 
-text = """\
+text = """
 rule1,rule2,stastics!"""
 
 # Turn these into plain/html MIMEText objects
@@ -63,6 +77,6 @@ def mail():
 ret = mail()
 
 if ret:
-    print("邮件发送成功")
+    print("Mail was successfully sended.")
 else:
-    print("邮件发送失败")
+    print("Mail was failed sended.")

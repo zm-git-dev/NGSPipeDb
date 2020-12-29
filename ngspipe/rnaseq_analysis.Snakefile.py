@@ -107,7 +107,7 @@ rule all:
         #
         # 7. report #
         report_result    = join(config['reportsDir'], "report.ok"),
-        
+
 
 onsuccess:
     print("""
@@ -125,10 +125,9 @@ onsuccess:
  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ 
                                                                                            
     """)
-    shell("python NGSPipeCode/scripts/sendmail.py {}".format(receiver_email))
+    shell("python NGSPipe/scripts/sendmail.py {}".format(receiver_email))
     # NGSPipeDB_source_code/.snakemake/log/
-    
-    
+
 
 onerror:
     print("An error occurred")

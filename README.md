@@ -171,7 +171,7 @@ __NOTE__: you will only have to install the NGSPipeDb conda environments once. F
 
 ### 4. Downloading the NGSPipeDb source code <a name="NGSPipeDbSource"></a>
 
-Within your __PROJECT__ directory, issue the following commands:  
+Within your __Project__ directory, issue the following commands:  
 1. `wget http://www.liu-lab.com/pub/NGSPipeDb_v1.0.tar.gz`  
 2. `tar -xf NGSPipeDb_v1.0.tar.gz`  
 3. `mv NGSPipeDb_v1.0 mouse_transcriptome_analysis`  
@@ -180,40 +180,23 @@ __NOTE__: the XXXXX refers to the latest changeset of NGSPipeDb, so it will diff
 __ADVANCED__: you may clone the latest version of [__NGSPipeDb__](https://www.github.com/xuanblo/NGSPipeDb) using git: `git clone https://www.github.com/xuanblo/NGSPipeDb`
 
 
-### 5. DOWNLOADING the NGSPipeDb test files <a name="Testdata"></a>
+### 5. Downloading the NGSPipeDb test files <a name="Testdata"></a>
 
-__ngspipedb__ is dependent on reference files which can be found for the supported species listed below:  [download link](https://www.dropbox.com/sh/8cqooj05i7rnyou/AAB-i4hHxQwqJDTXbzM_2JPua?dl=0)
+__ngspipedb__ is dependent on reference files which can be found for the supported species listed below:  [download link](http://www.liu-lab.com/ngspipedb)
 
-1. run `bash ngspipe/scripts/download_testdata.sh testdata` to download test data to `./testdata`:
+Run `bash ngspipe/scripts/download_testdata.sh testdata` to download test data to `./testdata`:
 
-2. run `python ngspipe/scripts/generate_replicat.py` to generate replicate data (Optional):
-
-3. create samples.xls, for example, if you have two samples named "control" and "treated", just create a text file (maybe named sample.xls) with one column and two rows.
-
-resources/testdata/sample.info.xls:
+__BEST PRACTICE:__ we recommend that you download the reference files that you need and then untarring then in a directory called `testdata`.  So for example, suppose you make `tree testdata/` in you home directory then you would have the following directory structure:
 ```
-control
-treated
-```
-
-__BEST PRACTICE:__ we recommend that you download the reference files that you need and then untarring then in a directory called "VIPER_static".  So for example, suppose you make "resources/testdata" in you home directory then you would have the following directory structure:
-```
-resources/testdata/
+testdata/
 ├── GRCm38.83.chr19.gtf
-├── RunMe.sh
 ├── chr19.fa
-├── chr19.fa_wget.log
 ├── control_R1.fq.gz
 ├── control_R2.fq.gz
-├── generate_replicat.py
 ├── samples.xls
 ├── treated_R1.fq.gz
 └── treated_R2.fq.gz
-
-0 directories, 10 files
 ```
-
-__NOTE__: you will only have to download the static references once.
 
 ### 6. run test data <a name="RunTest"></a>
 
@@ -228,13 +211,16 @@ We provied a simple workflow for you to take a glance of NGSPipedb. In NGSPipe p
 6. statistic
 ```
 
-Please see the dag plot by command `snakemake -s ngspipe/RNA-Seq.Snakefile.py --dag|`
+Please see the dag plot by command `snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --dag|dot -Tpng > dag.png`
 
-![img]()
+![img](ngspipe/imgs/dag.png)
 
-You can simply run `snakemake -s ngspipe/RNA-Seq.Snakefile.py -p -j1` and all the result are stored in `resutls` folder.
+Use command `snakemake -s ngspipe/rnaseq_analysis.Snakefile.py -np` to dry run, See [plan]().
 
-```tree
+You can simply run `snakemake -s ngspipe/rnaseq_analysis.Snakefile.py -p -j1` and all the result are stored in `resutls` folder by `tree results/`.
+
+```
+
 ```
 
 __Note__: /Users/zhangxuan/opt/anaconda3/envs/ngspipedb_py38_conda_env/lib/python3.8/site-packages/snakemake/report/report.html.jinja2
@@ -253,6 +239,15 @@ The config.yaml file has three main sections. __PATHS__, __PARAMS__, __SAMPLES__
 edit file `NGSPipeCode/Snakefile` for advance setting, such as sampling method, mapping tool, email address to receive run log.
 
 __*1. Perepare your sample*__:
+2. run `python ngspipe/scripts/generate_replicat.py` to generate replicate data (Optional):
+
+3. create samples.xls, for example, if you have two samples named "control" and "treated", just create a text file (maybe named sample.xls) with one column and two rows.
+
+resources/testdata/sample.info.xls:
+```
+control
+treated
+```
 
 Raw data files can either be fastq, fastq.gz, or bam formated files. If your raw data are located in __somewhere else__, you can copy them to `rawdata`, or create soft links like `cd rawdata && ln -s yoursamplepath/*.fq.gz ./`.
 
