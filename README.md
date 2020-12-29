@@ -391,7 +391,12 @@ INSTALLED_APPS = [
 ### 4. start server <a name="RunServer"></a>
 
 ```shell
-python ngsdb/manage.py runserver
+# cd project (same foder as manage.py)
+celery -A ProjectName worker -c 1 --beat -l info
+python manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+python manage.py addscript ../ngsdb/tools/test1.py
 ```
 0.0.0.0:8000
 127.0.0.0:8000
