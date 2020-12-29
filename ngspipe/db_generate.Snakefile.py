@@ -12,7 +12,16 @@ configfile: join(snake_dir, "config", "rnaseq.config.yaml")
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # detail parameters in pipe #
-#
+
+# 5. quantification
+quantify_method = 'stringtie' # htseqcounts or featurecounts
+quantify_outdir = join(config["resultsDir"], "quantify", "quantify_by_{}".format(quantify_method))
+
+# 8. database create
+exp_db_outdir = join(config["dbDir"], "exp")
+anno_db_outdir = join(config["dbDir"], "anno")
+gff_db_outdir = join(config["dbDir"], "gff")
+
 
 rule all:
     input:

@@ -88,7 +88,6 @@ mouse_transcriptome_analysis
 │   ├── db_generate.Snakefile.py
 │   ├── envs
 │   ├── imgs
-│   ├── metadata
 │   ├── notebooks
 │   ├── reports
 │   ├── rnaseq_analysis.Snakefile.py
@@ -307,7 +306,7 @@ input和output，log都是相对于你的执行目录
 ```shell
 # generate report 
 # need run step 7 first
-snakemake --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml --report NGSPipeOut/Report/20201102-StringtieMaxIntron1000/report.html
+snakemake --snakefile ngspipe/rnaseq_analysis.Snakefile.py --report results/Report/report.html
 ```
 
 __Note__: run snakemake under directory `NGSPipeDB`
@@ -363,6 +362,11 @@ python manage.py runserver
 
 ### 2. data to sqlite3 <a name="Table2Sqlite3"></a>
 
+modify model.py
+```
+snakemake -s ngspipe/db_generate.Snakefile.py -p -j1 
+```
+
 ### 3. config <a name="DatabaseConfig"></a>
 
 1. 修改 `mysite/mysite/settings.py`
@@ -387,8 +391,10 @@ INSTALLED_APPS = [
 ### 4. start server <a name="RunServer"></a>
 
 ```shell
-python manage.py runserver 0.0.0.0:8000
+python ngsdb/manage.py runserver
 ```
+0.0.0.0:8000
+127.0.0.0:8000
 
 ## 8. reproducibility <a name="Reproducibility"></a>
 

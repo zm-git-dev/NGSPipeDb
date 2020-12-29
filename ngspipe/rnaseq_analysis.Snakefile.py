@@ -72,11 +72,6 @@ stat_outdir = join(config["resultsDir"], "statistic")
 # 7. generate report
 receiver_email = 'zhangxuan@xtbg.ac.cn'
 
-# 8. database create
-exp_db_outdir = join(config["dbDir"], "exp")
-anno_db_outdir = join(config["dbDir"], "anno")
-gff_db_outdir = join(config["dbDir"], "gff")
-
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
 # ------------------------------
