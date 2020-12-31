@@ -321,7 +321,7 @@ django apps | description | package
 home | home page   | 
 geneExpAtlas | table
 network      |
-igv          | genome browse | IGV
+igv          | genome browse | [IGV](https://github.com/igvteam/igv.js/wiki)
 blastplus    | ncbi blast +  | NCBI
 ngstools     | wooey         |
 efp          | efp browse    |
@@ -415,6 +415,10 @@ conda env export --no-builds -p ./ngspipedb_py38_conda_env >ngspipedb_py38_conda
 
 2. use conda pack
 
+用--use-conda这个参数的话，因为所有软件的环境都是单独的，所有conda安装的时候不会出错，那么如果已经下载安装好了环境，用这种方式如何使用？默认的环境是.snakemake文件夹下，如何指定？
+用上面的方式好安装，不会出错，但是会导致文件很大，多大？
+是否能把一环境分成两部分？一部分软件集合起来变成一个大环境，另一部分软件就用--use-conda环境单独指定，但是这两种方式能结合到一起用吗？
+
 ```shell
 # pack
 cd NGSPipeDB_source_code
@@ -459,4 +463,17 @@ mamba env update --prefix ./ngspipedb_py38_conda_env/ --file requirement.yaml  -
 conda deactivate
 https://wooey.readthedocs.io/en/latest/install.html
 
+--conda-frontend mamba 选择更快一点的mamba
+
+--conda-create-envs-only 只创建环境，然后退出，不运行程序，这个可以用来专门测试环境
+
+mac上的conda环境好像没有linux上面那么好用，特别是anaconda创建的环境
+--conda-prefix 指定conda环境安装地址
+清理conda安装包和缓存
+snakemake -s ngspipe/db_generate.Snakefile.py --use-conda --conda-prefix condaEnvSplit -p -j1
+
+Simplest is just abandon the --use-conda flag, as suggested in the answer. Alternatively, you could make a container that has the env pre-created and configured, then use --use-singularity. Or, if the post-installation can be automated, one could build a custom Conda package that runs some post-linking scripts. Sorry I seem to have missed your comment!
+
+snakemake 如何运行单个程序？这个也很有用
+基因的命令，像dkango这样的命令在很多rules中都有，所有比如有个顶层的环境中安装了django
 ## 9. Troubleshooting <a name="Troubleshooting"></a>

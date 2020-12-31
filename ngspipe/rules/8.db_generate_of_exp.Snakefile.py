@@ -44,3 +44,17 @@ rule sqlite3ForModel_auto_by_django:
         # 使用migrate执行迁移
         python {config[djangoCode]}/manage.py migrate 1>{log} 2>&1;
         '''
+
+rule expression_blast:
+    input:
+    output:
+    shell:
+        '''
+        '''
+
+rule expression_heatmap:
+    input:
+    output:
+    shell:
+        '''
+        '''

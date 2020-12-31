@@ -1,0 +1,178 @@
+{
+    "data": [
+        {
+            "model": "geneAnno.features",
+            "pk": "ENSMUST00000119292",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "transcript",
+                "start": 3260924,
+                "end": 3283017,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"\":[],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"],\"gene_id\":[\"MSTRG.1\"]}",
+                "extra": "[]",
+                "bin": 588
+            }
+        },
+        {
+            "model": "geneAnno.features",
+            "pk": "exon_1",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "exon",
+                "start": 3260924,
+                "end": 3261635,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"\":[],\"exon_number\":[\"1\"],\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"gene_id\":[\"MSTRG.1\"],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"]}",
+                "extra": "[]",
+                "bin": 4705
+            }
+        },
+        {
+            "model": "geneAnno.features",
+            "pk": "exon_2",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "exon",
+                "start": 3264811,
+                "end": 3265665,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"\":[],\"exon_number\":[\"2\"],\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"gene_id\":[\"MSTRG.1\"],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"]}",
+                "extra": "[]",
+                "bin": 4705
+            }
+        },
+        {
+            "model": "geneAnno.features",
+            "pk": "exon_3",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "exon",
+                "start": 3266336,
+                "end": 3266459,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"\":[],\"exon_number\":[\"3\"],\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"gene_id\":[\"MSTRG.1\"],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"]}",
+                "extra": "[]",
+                "bin": 4705
+            }
+        },
+        {
+            "model": "geneAnno.features",
+            "pk": "exon_4",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "exon",
+                "start": 3267242,
+                "end": 3267336,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"\":[],\"exon_number\":[\"4\"],\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"gene_id\":[\"MSTRG.1\"],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"]}",
+                "extra": "[]",
+                "bin": 4705
+            }
+        },
+        {
+            "model": "geneAnno.features",
+            "pk": "exon_5",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "exon",
+                "start": 3268298,
+                "end": 3268416,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"\":[],\"exon_number\":[\"5\"],\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"gene_id\":[\"MSTRG.1\"],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"]}",
+                "extra": "[]",
+                "bin": 4705
+            }
+        },
+        {
+            "model": "geneAnno.features",
+            "pk": "exon_6",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "exon",
+                "start": 3268660,
+                "end": 3268842,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"\":[],\"exon_number\":[\"6\"],\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"gene_id\":[\"MSTRG.1\"],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"]}",
+                "extra": "[]",
+                "bin": 4705
+            }
+        },
+        {
+            "model": "geneAnno.features",
+            "pk": "exon_7",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "exon",
+                "start": 3271526,
+                "end": 3271700,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"\":[],\"exon_number\":[\"7\"],\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"gene_id\":[\"MSTRG.1\"],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"]}",
+                "extra": "[]",
+                "bin": 4705
+            }
+        },
+        {
+            "model": "geneAnno.features",
+            "pk": "exon_8",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "exon",
+                "start": 3272888,
+                "end": 3273035,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"\":[],\"exon_number\":[\"8\"],\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"gene_id\":[\"MSTRG.1\"],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"]}",
+                "extra": "[]",
+                "bin": 4705
+            }
+        },
+        {
+            "model": "geneAnno.features",
+            "pk": "exon_9",
+            "fields": {
+                "seqid": "chr19",
+                "source": "StringTie",
+                "featuretype": "exon",
+                "start": 3274356,
+                "end": 3274556,
+                "score": "1000",
+                "strand": "-",
+                "frame": ".",
+                "attributes": "{\"\":[],\"exon_number\":[\"9\"],\"ref_gene_id\":[\"ENSMUSG00000024831\"],\"gene_id\":[\"MSTRG.1\"],\"transcript_id\":[\"ENSMUST00000119292\"],\"gene_name\":[\"Ighmbp2\"]}",
+                "extra": "[]",
+                "bin": 4705
+            }
+        }
+    ],
+    "page": 1,
+    "per_page": 10,
+    "recordsTotal": 21979,
+    "recordsFiltered": 21979
+}

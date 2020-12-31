@@ -1,35 +1,44 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
 {% block title %} {{ config.title }} | Home {% endblock %}
 
-{% block javascript %}
-<script src="{% static "igv.min.js" %}"></script>
-{% endblock %}
+
 
 {% block content %}
-
+<h1>genome browse</h1>
 <div id="igv-div"></div>
+{% endblock %}
 
+{% block javascript %}
+<script src="{% static " igv.min.js" %}"></script>
 <script>
     var igvDiv = document.getElementById("igv-div");
-      var options =
-        {
-            genome: "hg38",
-            locus: "chr8:127,736,588-127,739,371",
-            tracks: [
-                {
-                    "name": "HG00103",
-                    "url": "https://s3.amazonaws.com/1000genomes/data/HG00103/alignment/HG00103.alt_bwamem_GRCh38DH.20150718.GBR.low_coverage.cram",
-                    "indexURL": "https://s3.amazonaws.com/1000genomes/data/HG00103/alignment/HG00103.alt_bwamem_GRCh38DH.20150718.GBR.low_coverage.cram.crai",
-                    "format": "cram"
-                }
-            ]
-        };
+    var options =
+    {
+        // genome: "hg19", # this is test genome
+        locus: "chr19:7,736,588-7,739,371",
+        reference: {
+            id: "hg19",
+            fastaURL: "https://s3.amazonaws.com/igv.broadinstitute.org/genomes/seq/1kg_v37/human_g1k_v37_decoy.fasta",
+            cytobandURL: "https://s3.amazonaws.com/igv.broadinstitute.org/genomes/seq/b37/b37_cytoband.txt"
+        },
+        tracks: [
+            {
+                name: "mm chr 16 (gtf)",
+                type: "annotation",
+                format: "gtf",
+                sourceType: "file",
+                url: "https://s3.amazonaws.com/igv.broadinstitute.org/annotations/hg19/genes/gencode.v24lift37.annotation.sorted.gtf.gz",
+                indexURL: "https://s3.amazonaws.com/igv.broadinstitute.org/annotations/hg19/genes/gencode.v24lift37.annotation.sorted.gtf.gz.tbi",
+                displayMode: "EXPANDED",
+                visibilityWindow: 10000000
+            },
+        ]
+    };
 
-        igv.createBrowser(igvDiv, options)
-                .then(function (browser) {
-                    console.log("Created IGV browser");
-                })
+    igv.createBrowser(igvDiv, options)
+        .then(function (browser) {
+            console.log("Created IGV browser");
+        })
 </script>
-
 {% endblock %}

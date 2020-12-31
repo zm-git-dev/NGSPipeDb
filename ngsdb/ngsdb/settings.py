@@ -24,6 +24,7 @@ ngsdb_DIR = path.join(path.dirname(BASE_DIR), "results", "sqlite3")
 
 EXP_DB_PATH = os.path.join(ngsdb_DIR, 'exp', 'exp.sqlite3')
 EXP_DB_PATH = os.path.join(workdir, 'results', 'sqlite3', 'exp', 'exp.sqlite3')
+GFF_DB_PATH = os.path.join(workdir, 'results', 'sqlite3', 'gff_sqlite3', 'gtf.sqlite3')
 
 
 #SITE_TITLE = 'Plukenetia volubilis'
@@ -62,7 +63,7 @@ INSTALLED_APPS = [
     'geneExpAtlas', # gene expression matrix
     'blastplus', # blast tool
     'igv',
-    'ProjectName',
+    'wooey',
 ]
 
 MIDDLEWARE = [
@@ -109,6 +110,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': EXP_DB_PATH
     },
+    'gffDb': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': GFF_DB_PATH
+    },
     # ------------------------------------------------------------------
 }
 
@@ -118,6 +123,7 @@ DATABASE_APPS_MAPPING = {
     # example:
     #'app_name':'database_name',
     'geneExpAtlas': 'expDb',
+    'geneAnno': 'gffDb',
 }
 #-----------------------------------------------------------
 

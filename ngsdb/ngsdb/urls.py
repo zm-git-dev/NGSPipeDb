@@ -25,5 +25,5 @@ urlpatterns = [
     path(r'geneAnno/', include('geneAnno.urls')), # gborwse page
     path(r'geneExpAtlas/', include('geneExpAtlas.urls')), # exp
     path(r'igv/', include('igv.urls')), # exp
-    path(r'tools/', include('ProjectName.urls.wooey_urls')), # exp
+    path(r'tools/', include('wooey.urls')),
 ]
