@@ -1,5 +1,0 @@
-The flag 'touch' used in rule all is only valid for outputs, not inputs.
-Building DAG of jobs...
-MissingInputException in line 1 of /Users/zhangxuan/Documents/NGSPipeDb/ngspipe/rules/8.db_generate_of_exp.Snakefile.py:
-Missing input files for rule sqlite3_auto_by_expression_data:
-results/result/quantify/quantify_by_stringtie/gene_fpkm_all_samples.tsv

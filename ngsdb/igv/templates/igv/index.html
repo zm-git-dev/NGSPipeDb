@@ -6,20 +6,23 @@
 
 {% block content %}
 <h1>genome browse</h1>
-<div id="igv-div"></div>
+<div class="row-fluid">
+    <div id="igv-div"></div>
+</div>
+
 {% endblock %}
 
 {% block javascript %}
-<script src="{% static " igv.min.js" %}"></script>
+<script src="{% static 'igv/igv.min.js' %}"></script>
 <script>
     var igvDiv = document.getElementById("igv-div");
     var options =
     {
         // genome: "hg19", # this is test genome
-        locus: "chr19:7,736,588-7,739,371",
+        locus: "chr19:3278807-3280996",
         reference: {
             id: "hg19",
-            fastaURL: "https://s3.amazonaws.com/igv.broadinstitute.org/genomes/seq/1kg_v37/human_g1k_v37_decoy.fasta",
+            fastaURL: "{% static 'sqlite3/gbrowse/annotation/chr19.fa' %}",
             cytobandURL: "https://s3.amazonaws.com/igv.broadinstitute.org/genomes/seq/b37/b37_cytoband.txt"
         },
         tracks: [
@@ -28,8 +31,8 @@
                 type: "annotation",
                 format: "gtf",
                 sourceType: "file",
-                url: "https://s3.amazonaws.com/igv.broadinstitute.org/annotations/hg19/genes/gencode.v24lift37.annotation.sorted.gtf.gz",
-                indexURL: "https://s3.amazonaws.com/igv.broadinstitute.org/annotations/hg19/genes/gencode.v24lift37.annotation.sorted.gtf.gz.tbi",
+                url: "{% static 'sqlite3/gbrowse/annotation/merged.sorted.gff.bgzip' %}",
+                indexURL: "{% static 'sqlite3/gbrowse/annotation/merged.sorted.gff.bgzip.tbi' %}",
                 displayMode: "EXPANDED",
                 visibilityWindow: 10000000
             },

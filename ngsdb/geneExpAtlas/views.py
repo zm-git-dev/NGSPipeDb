@@ -38,3 +38,35 @@ def exp_json(request):
     }
     
     return JsonResponse(response, content_type='application/json')
+
+def exp_heatmap_json(request):
+    import pandas as pd
+    from clustergrammer import Network
+    exps = Exp.objects.all().using("expDb").values_list("gene_id", "control", "treated")
+    df = pd.DataFrame(list(exps), columns=["gene_id", "control", "treated"])
+    df.index = df.gene_id
+    df = df.loc[:,df.columns[1:]]
+    net = Network()
+    net.load_df(df)
+
+    # Z-score normalize the rows
+    net.normalize(axis='row', norm_type='zscore', keep_orig=True)
+
+    # filter for the top 100 columns based on their absolute value sum
+    net.filter_N_top('col', 100, 'sum')
+
+    # cluster using default parameters
+    net.cluster()
+
+    # save visualization JSON to file for use by front end
+    data = net.export_net_json('viz')
+    data = json.loads(data)
+    #print(data)
+    response = {
+        'data': data,
+    }
+    return JsonResponse(response, content_type='application/json')
+
+def heatmap(request):
+
+    return render(request, 'geneExpAtlas/heatmap.html')

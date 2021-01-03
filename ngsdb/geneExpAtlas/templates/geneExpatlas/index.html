@@ -12,12 +12,11 @@
 {% endblock %}
 
 {% block content %}
-<h2>Sample description</h2>
+<h2>Gene expression atlas</h2>
 <hr>
 <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">heatmap</a></li>
-  <li role="presentation"><a href="#">efp</a></li>
+  <li role="presentation" class="active"><a href="{% url 'geneExpAtlas:index' %}">expression matrix</a></li>
+  <li role="presentation"><a href="{% url 'geneExpAtlas:heatmap' %}">expression heatmap</a></li>
 </ul>
 
 
@@ -51,7 +50,7 @@
     $('#myTable').DataTable({
       "processing": true,
       "serverSide": true,
-      "ajax": '/geneExpAtlas/exp_json',
+      "ajax": "{% url 'geneExpAtlas:exp_json' %}",
       "columns": [
         { "data": "pk" },
         { "data": "fields.treated" },

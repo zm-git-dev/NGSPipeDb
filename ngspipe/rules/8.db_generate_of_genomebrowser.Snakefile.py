@@ -13,6 +13,8 @@ rule merge_gbrowse:
         merged_gbrowse = join(gbrowse_outdir, 'merged_gbrowse.ok')
     shell:
         '''
+        cp fasta to gbrowse;
+        samtools faidx chr19.fa
         '''
 
 rule igv_annotation_gtf:

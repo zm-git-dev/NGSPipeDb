@@ -38,7 +38,7 @@ rule makeblastdb_genomefasta_by_blast:
         makeblastdb -in {input.genomeFasta} -dbtype nucl -out {genomedb_outdir}/{params.genomedb_prefix} 1>{log} 2>&1;
         '''
 
-"""
+
 rule makeblastdb_transcriptfasta_by_blast:
     message:
         '''
@@ -47,22 +47,24 @@ rule makeblastdb_transcriptfasta_by_blast:
         ------------------------------
         '''
     input:
-        genomeFasta = config['genomeFasta']
+        genomeFasta = config['genomeFasta'],
+        genomeAnno = config['gff'],
     output:
-        genomeFastaDb = touch(join(blastdb_outdir, "nucl", "transcriptfasta_blastdb.ok"))
+        transcriptFastaDb = touch(join(transcriptdb_outdir, "nucl", "transcriptfasta_blastdb.ok"))
     log:
-        join(blastdb_outdir, "run.log")
+        join(transcriptdb_outdir, "run.log")
     benchmark:
-        join(blastdb_outdir, "benchmark.txt")
+        join(transcriptdb_outdir, "benchmark.txt")
     conda:
         '../envs/blast.yaml'
     params:
         genomedb_prefix = 'genome'
     shell:
         '''
-        makeblastdb -in {input.genomeFasta} -dbtype nucl -o {blastdb_outdir}/{params.genomedb_prefix} 1>{log} 2>&1;
+        gffread {input.genomeAnno} -g {input.genomeFasta} -w {output.transcriptdb_outdir}/nucl/transcript.fa
+        makeblastdb -in {output.transcriptdb_outdir}/nucl/transcript.fa -dbtype nucl -o {blastdb_outdir}/{params.genomedb_prefix} 1>{log} 2>&1;
         '''
-
+"""
 rule makeblastdb_proteinfasta_by_blast:
     message:
         '''

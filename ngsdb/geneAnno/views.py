@@ -38,3 +38,9 @@ def gff2json(request):
     }
     
     return JsonResponse(response, content_type='application/json')
+
+def anno_public_database(request):
+    return render(request, 'geneAnno/public_database.html')
+
+def anno_blast_genefamily(request):
+    return render(request, 'geneAnno/blast2gene_family.html')

@@ -1,5 +1,0 @@
-The flag 'touch' used in rule all is only valid for outputs, not inputs.
-CreateRuleException in line 1 of /Users/zhangxuan/Documents/NGSPipeDb/ngspipe/rules/8.db_generate_of_gff.Snakefile.py:
-The name sqlite3_auto_by_expression_data is already used by another rule
-  File "/Users/zhangxuan/Documents/NGSPipeDb/ngspipe/db_generate.Snakefile.py", line 67, in <module>
-  File "/Users/zhangxuan/Documents/NGSPipeDb/ngspipe/rules/8.db_generate_of_gff.Snakefile.py", line 1, in <module>

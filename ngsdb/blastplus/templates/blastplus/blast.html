@@ -29,15 +29,7 @@
                 <button type="button" id="loadSampleData" data-loading-text="Loading..." autocomplete="off">
                     Use sample sequence
                 </button>
-                <script>
-                    $('#loadSampleData').on('click', function () {
-                        var $btn = $(this).button('loading');
-
-                        $("#id_sequence_in_form").val('{{ sequence_sample_in_fasta|escapejs }}');
-
-                        $btn.button('reset');
-                    });
-                </script>
+                
 
             </div>
         </td>
@@ -77,4 +69,16 @@
 </table>
 
 
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $('#loadSampleData').on('click', function () {
+        var $btn = $(this).button('loading');
+
+        $("#id_sequence_in_form").val('{{ sequence_sample_in_fasta|escapejs }}');
+
+        $btn.button('reset');
+    });
+</script>
 {% endblock %}

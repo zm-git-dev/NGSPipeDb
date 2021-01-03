@@ -2,6 +2,8 @@ from django.urls import path
 
 from blastplus.views import blastn, tblastn, blastn, blastp, blastx
 
+app_name = 'blastplus'
+
 urlpatterns = [
     path('blastn/', blastn, name='blastn'),
     path('tblastn/', tblastn, name='tblastn'),

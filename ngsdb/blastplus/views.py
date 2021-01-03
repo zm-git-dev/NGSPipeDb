@@ -51,7 +51,6 @@ def blast(request, blast_form, template_init, template_result, blast_commandline
                 blast_records__file_xml, blast_error = utils.run_blast_commands(blast_commandline,
                                                                                 **dict(standard_opt_dic,
                                                                                        **sensitivity_opt_dic))
-
                 if len(blast_error) > 0:
                     return render(request=request, template_name=template_result,
                                   context={"blast_record": '', blast_error: BLAST_CORRECT_PARAMS})

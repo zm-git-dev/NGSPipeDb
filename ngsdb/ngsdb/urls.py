@@ -20,10 +20,12 @@ from django.urls import include # Add a URL to urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'', include('home.urls')), # home page
-    path(r'blastplus/', include('blastplus.urls')), # blast page
-    path(r'geneAnno/', include('geneAnno.urls')), # gborwse page
-    path(r'geneExpAtlas/', include('geneExpAtlas.urls')), # exp
-    path(r'igv/', include('igv.urls')), # exp
-    path(r'tools/', include('wooey.urls')),
+    path(r'', include('home.urls'), name='home'), # home page
+    path(r'blastplus/', include('blastplus.urls'), name='blastplus'), # blast page
+    path(r'geneAnno/', include('geneAnno.urls'), name='geneAnno'), # gborwse page
+    path(r'geneExpAtlas/', include('geneExpAtlas.urls'), name='geneExpAtlas'), # exp
+    path(r'igv/', include('igv.urls'), name='igv'), # exp
+    path(r'tools/', include('tools.urls'), name='tools'),
+    path(r'wooey/', include('wooey.urls'), name='wooey'),
+    path(r'search/', include('search.urls'), name='search'),
 ]

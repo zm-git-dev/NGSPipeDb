@@ -5,16 +5,18 @@ user defined blastplus app settings file
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+workdir = os.getcwd()
 
 # path to nucleotide blastplus database
 # BLAST_DB_NUCL = os.path.join(BASE_DIR, 'blastplus/sampledata/sample_db')
 SAMPLE_DIR = os.path.join(BASE_DIR, 'blastplus/sampledata/')
+REAL_SAMPLE_DIR = os.path.join(workdir, "results", "sqlite3", "blastdb")
 
 BLAST_DB_NUCL_LIST = [
     {
-        "name": "sample1",
-        "path": 'blastplus/sampledata/sample_db1/sample_db',
-        "desc": "Sample database 1",
+        "name": "genome",
+        "path": os.path.join(REAL_SAMPLE_DIR, "nucl_genomedb", "genome"),
+        "desc": "genome",
         "annotated": False, },
     {
         "name": "sample2",

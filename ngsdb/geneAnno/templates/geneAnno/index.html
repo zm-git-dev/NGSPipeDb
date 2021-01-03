@@ -15,9 +15,9 @@
 <h2>Sample description</h2>
 <hr>
 <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">GFF</a></li>
-    <li role="presentation"><a href="#">annotation</a></li>
-    <li role="presentation"><a href="#">blast</a></li>
+    <li role="presentation" class="active"><a href="{% url 'geneAnno:index' %}">GFF</a></li>
+    <li role="presentation"><a href="{% url 'geneAnno:anno_public_database' %}">blast_public_database</a></li>
+    <li role="presentation"><a href="{% url 'geneAnno:anno_blast_genefamily' %}">blast_gene_family</a></li>
 </ul>
 
 

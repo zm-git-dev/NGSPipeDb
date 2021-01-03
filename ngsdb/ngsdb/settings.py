@@ -64,6 +64,8 @@ INSTALLED_APPS = [
     'blastplus', # blast tool
     'igv',
     'wooey',
+    'tools',
+    'search',
 ]
 
 MIDDLEWARE = [
@@ -171,7 +173,11 @@ import os
 # 如下为了关闭开发模式的时候还能找到静态文件
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "commonstatic"),
+    os.path.join(workdir, "results"),
 )
 # 如下为了关闭开发模式的时候还能找到静态文件
-STATIC_ROOT = os.path.join(BASE_DIR,'collectstatic')
+STATIC_ROOT = os.path.join(workdir,'collectstatic')
 # ----------------------------------------------------
+
+# allow iframe
+X_FRAME_OPTIONS = 'SAMEORIGIN'

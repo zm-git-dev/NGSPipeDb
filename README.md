@@ -325,42 +325,20 @@ igv          | genome browse | [IGV](https://github.com/igvteam/igv.js/wiki)
 blastplus    | ncbi blast +  | NCBI
 ngstools     | wooey         |
 efp          | efp browse    |
+clustergrammer-js https://clustergrammer.readthedocs.io/clustergrammer_js.html
 
 
 ### 1. 安装环境 <a name="DatabaseRequirement"></a>
 
 ```shell
-pip install django
-cd NGSDjangoCode
-django-admin.py startproject fresh
+django
+wooey
+clustergrammer
+sklearn
+pandas=0.25.3
 ```
 
-查看目录`tree fresh`
-
-```shell
-fresh/
-├── fresh
-│   ├── __init__.py
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-└── manage.py
-
-```
-django-admin.py startproject jatrophaDb
-cd jatrophaDb
-python manage.py startapp home
-python manage.py startapp geneExpAtlas
-python manage.py startapp blast
-python manage.py startapp geneAnno
-python manage.py runserver
-```
-
-1 directory, 6 files
-```
-
-### 2. data to sqlite3 <a name="Table2Sqlite3"></a>
+### 2. convert analysis result to sqlite3 file <a name="Table2Sqlite3"></a>
 
 modify model.py
 ```
@@ -390,16 +368,18 @@ INSTALLED_APPS = [
 
 ### 4. start server <a name="RunServer"></a>
 
-```shell
-# cd project (same foder as manage.py)
-celery -A ProjectName worker -c 1 --beat -l info
-python manage.py runserver
+Starting server by run `python ngsdb/manage.py runserver`, visit sebsite on http://127.0.0.1:8000.
+
+### 5. add your custome data
+
+1. table data in a page
+2. custome script in wooey
+
 python manage.py makemigrations
 python manage.py migrate
 python manage.py addscript ../ngsdb/tools/test1.py
-```
-0.0.0.0:8000
-127.0.0.0:8000
+
+If you want use wooey tools on a task model `celery -A ProjectName worker -c 1 --beat -l info` optional.
 
 ## 8. reproducibility <a name="Reproducibility"></a>
 
