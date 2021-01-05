@@ -2,12 +2,15 @@ __author__ = 'chris'
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
+import os
+workdir = os.getcwd()
+print(workdir)
 
 def get(key, default):
     return getattr(settings, key, default)
 
 # AUTH based settings
-WOOEY_ALLOW_ANONYMOUS = get('WOOEY_ALLOW_ANONYMOUS', False)
+WOOEY_ALLOW_ANONYMOUS = get('WOOEY_ALLOW_ANONYMOUS', True)
 WOOEY_AUTH = get('WOOEY_AUTH', True)
 WOOEY_LOGIN_URL = get('WOOEY_LOGIN_URL', settings.LOGIN_URL)
 WOOEY_REGISTER_URL = get('WOOEY_REGISTER_URL', '/accounts/register/')
@@ -20,10 +23,11 @@ WOOEY_CELERY_STOPPABLE_JOBS = 'amqp' in get('CELERY_BROKER_URL', '')
 # Site setup settings
 WOOEY_DEFAULT_SCRIPT_GROUP = get('WOOEY_DEFAULT_SCRIPT_GROUP', _('Scripts'))
 WOOEY_EPHEMERAL_FILES = get('WOOEY_EPHEMERAL_FILES', False)
-WOOEY_FILE_DIR = get('WOOEY_FILE_DIR', 'wooey_files')
+WOOEY_FILE_DIR = get('WOOEY_FILE_DIR', os.path.join(workdir, 'ngsdb', 'wooey_files'))
 WOOEY_JOB_EXPIRATION = get('WOOEY_JOB_EXPIRATION', {'anonymous': None, 'users': None})
 WOOEY_REALTIME_CACHE = get('WOOEY_REALTIME_CACHE', None)
-WOOEY_SCRIPT_DIR = get('WOOEY_SCRIPT_DIR', 'wooey_scripts')
+WOOEY_SCRIPT_DIR = get('WOOEY_SCRIPT_DIR', os.path.join(workdir, 'ngsdb', 'wooey_scripts'))
+print(WOOEY_SCRIPT_DIR)
 
 # User interface settings
 WOOEY_SHOW_LOCKED_SCRIPTS = get('WOOEY_SHOW_LOCKED_SCRIPTS', True)

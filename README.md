@@ -302,7 +302,7 @@ input和output，log都是相对于你的执行目录
 其他的如env，include的路径都是相对于snakefile的路径
 
 ## 7. rgenerate report <a name="Report"></a>
-
+不支持ie浏览器
 ```shell
 # generate report 
 # need run step 7 first
