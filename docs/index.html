@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Home";
+    var mkdocs_page_name = "NGSPipeDb usage";
     var mkdocs_page_input_path = "index.md";
     var mkdocs_page_url = "/NGSPipeDb/";
   </script>
@@ -48,7 +48,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href=".">NGSPipeDb usage</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#introduction-to-ngspipedb">Introduction to NGSPipeDb </a>
     </li>
@@ -60,9 +60,9 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#step-by-step-rna-seq-workflow">Step-by-step RNA-seq workflow </a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#step-1-installing-wget-and-git">step #1. Installing wget and git </a>
+    <li class="toctree-l3"><a class="reference internal" href="#1-installing-wget-and-git">1. Installing wget and git </a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#step-2-installing-miniconda3">step #2. Installing Miniconda3 </a>
+    <li class="toctree-l3"><a class="reference internal" href="#2-installing-miniconda3">2. Installing Miniconda3 </a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#3-downloading-the-ngspipedb-project">3. Downloading the NGSPipeDb project </a>
     </li>
@@ -102,11 +102,11 @@
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="linux/">Linux</a>
+                    <li class="toctree-l1"><a class="reference internal" href="linux/">Linux basic</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="rnaseq/">RNA-seq</a>
+                    <li class="toctree-l1"><a class="reference internal" href="rnaseq/">RNA-seq best practice</a>
                     </li>
                 </ul>
       </div>
@@ -130,10 +130,10 @@
     
       
     
-    <li>Home</li>
+    <li>NGSPipeDb usage</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/xuanblo/NGSPipeDb/mkdocs/docs/edit/master/docs/index.md"
+        <a href="https://github.com/xuanblo/NGSPipeDb/mkdocs/edit/master/docs/index.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -176,18 +176,17 @@
 <li><a href="#Troubleshooting">Troubleshooting</a></li>
 </ol>
 <h2 id="introduction-to-ngspipedb">Introduction to NGSPipeDb <a name="Intro"></a></h2>
-<p>AQUAMIS is a pipeline for routine assembly and quality assessment of microbial isolate sequencing experiments. It is based on snakemake and includes the following tools:
+<p><strong>NGSPipeDb</strong> is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation using <a href="https://snakemake.readthedocs.io/en/stable/index.html">snakemake workflow</a> which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users. It can be further divided into <code>NGSPipe</code> and <code>NGSDb</code> for individual usage. </p>
+<p><strong>NGSPipe</strong> consists of a <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html">Snakefile</a> (<code>ngspipe/rnaseq.snakefile.py</code>, it includes some basic rules <code>ngspipe/rule/*.snakefile.py</code>), <a href="https://conda.io/docs/">conda</a> environment files (<code>ngspipe/envs/*.yaml</code>), a configuration file (<code>ngspipe/config/rnaseq.config.yaml</code>), a set of <a href="#">python</a>, <a href="#">R</a>, <a href="#">Shell</a> and <a href="#">Perl</a> scripts (<code>ngspipe/scripts/*.py</code>), and a set of <a href="#">reStructuretext</a> reports (<code>reports/*.rst</code>). It combines the use of several dozen omic-seq tools, suites, and packages to create a complete pipeline that takes <a href="">RNA-seq analysis</a>, <a href="">resequcing analysis</a> etc. from raw sequencing data all the way through alignment, quality control, unsupervised analyses, differential expression, and downstream pathway analysis. It is implemented such that alternative or similar analysis can be added or removed. The results are compiled in a simple and highly visual <a href="ngspipe/metadata/report.html">report</a> containing the key figures to explain the analysis, and then compiles all of the relevant files, tables, and pictures into an easy to navigate folder. Table file such as csv, tsv, xlsx etc. </p>
+<p>It is based on snakemake and includes the following tools:
 * shovill (based on Spades)
 * QUAST v.5 (including BUSCO)
 * mash
 * fastp</p>
 <p>It will read untrimmed raw data from your illumina sequencing experiments as paired .fastq.gz-files. These are then trimmed, assembled and polished. Besides generating ready-for-use contigs, AQUAMIS will select the closest reference genome from NCBI RefSeq and produce an intuitive, detailed report on your data and assemblies to evaluate its reliability for further analyses. It relies on reference-based and reference-free measures such as coverage depth, gene content, genome completeness and contamination, assembly length and many more. Based on the experience from thousands of sequencing experiments, threshold sets for different species have been defined to detect potentially poor results.</p>
-<p>snakePipes are flexible and powerful workflows built using <code>snakemake &lt;snakemake.readthedocs.io&gt;</code>__ that simplify the analysis of NGS data.</p>
-<p><strong>NGSPipeDb</strong> is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation using <a href="https://snakemake.readthedocs.io/en/stable/index.html">snakemake workflow</a> which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users. It can be further divided into <code>NGSPipe</code> and <code>NGSDb</code> for individual usage. </p>
-<p><strong>NGSPipe</strong> consists of a <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html">Snakefile</a> (<code>ngspipe/rnaseq.snakefile.py</code>, it includes some basic rules <code>ngspipe/rule/*.snakefile.py</code>), <a href="https://conda.io/docs/">conda</a> environment files (<code>ngspipe/envs/*.yaml</code>), a configuration file (<code>ngspipe/config/rnaseq.config.yaml</code>), a set of <a href="#">python</a>, <a href="#">R</a>, <a href="#">Shell</a> and <a href="#">Perl</a> scripts (<code>ngspipe/scripts/*.py</code>), and a set of <a href="#">reStructuretext</a> reports (<code>reports/*.rst</code>). It combines the use of several dozen omic-seq tools, suites, and packages to create a complete pipeline that takes <a href="">RNA-seq analysis</a>, <a href="">resequcing analysis</a> etc. from raw sequencing data all the way through alignment, quality control, unsupervised analyses, differential expression, and downstream pathway analysis. It is implemented such that alternative or similar analysis can be added or removed. The results are compiled in a simple and highly visual <a href="ngspipe/metadata/report.html">report</a> containing the key figures to explain the analysis, and then compiles all of the relevant files, tables, and pictures into an easy to navigate folder. Table file such as csv, tsv, xlsx etc. </p>
 <p>In addition, <strong>NGSDb</strong> has been outfitted with several recently published tools that allow for visualize and data share.can be convert to <a href="#">Sqlite3</a> format. The <a href="#">Django</a> project and apps can be orgined by user defined. It is easy to share your data with a web inteface. a set of <code>apps</code> (such as <code>home</code>, <code>igv</code>, <code>geneExpAtlas</code>, <code>efp brwose</code>).</p>
 <p>By default, the <strong>NGSPipeDb</strong> performs all the steps shown in the <a href="img/report_2019_03_14_salmonAlignment_visualization.png">diagram</a> below. However, advanced user, you can easily modify the <code>Snakefile</code> and the <code>config.yaml</code> and/or add "custom rules" to enable additional functions.</p>
-<p><img alt="img" src="ngspipe/imgs/workflow.png" /></p>
+<p><img alt="img" src="imgs/workflow.png" /></p>
 <p>Currently, transcript quantification with <code>Salmon</code> at the read-level or gene quantification by <a href="http://subread.sourceforge.net"><code>featureCounts</code></a> can be activated.
 The first version handles <a href="#">RNA-Seq</a> workflow.</p>
 <p>Workflows available:
@@ -203,7 +202,7 @@ The first version handles <a href="#">RNA-Seq</a> workflow.</p>
 </ol>
 </li>
 <li>NGSdb<ol>
-<li>efp browse</li>
+<li>efp browser</li>
 </ol>
 </li>
 </ul>
@@ -258,10 +257,10 @@ bash ngspipe/scripts/one_step_runtest.sh
 <p>If you have more time, then we recommend you configure ngspipedb according to your needs. For more details, please see <a href="#step-by-step">step by step</a> bellow.</p>
 <h2 id="step-by-step-rna-seq-workflow">Step-by-step RNA-seq workflow <a href="Step-by-Step-RNASeq"></a></h2>
 <p>Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the <a href="https://en.wikipedia.org/wiki/Command-line_interface">nix command line interface</a>. Also, best practice RNA-seq analysis is plus</p>
-<h3 id="step-1-installing-wget-and-git">step #1. Installing wget and git <a name="BasicLinux"></a></h3>
+<h3 id="1-installing-wget-and-git">1. Installing wget and git <a name="BasicLinux"></a></h3>
 <p>To get some of the required software packages, we will use the command line tools called <a href="http://www.gnu.org/software/wget/">wget</a> and <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git</a>.  <em>wget</em> is a popular tool for downloading things off of the internet.  <em>git</em> is a distributed version control system which we will use to checkout the NGSPipeDb code.</p>
 <p><strong>Note</strong>: These tools are already pre-installed in most systems, but if you are unsure whether or not you have <em>wget</em> enter <code>wget</code> and if the return is <code>wget: command not found</code>, then you will have to install <em>wget</em>.  Do likewise for <em>git</em>.</p>
-<h3 id="step-2-installing-miniconda3">step #2. Installing Miniconda3 <a name="Miniconda"></a></h3>
+<h3 id="2-installing-miniconda3">2. Installing Miniconda3 <a name="Miniconda"></a></h3>
 <p>NGSPipeDb relies on the conda package manager for installation and dependency resolution, so you will need to install <a href="https://conda.io/docs/user-guide/install/index.html">conda</a> first.</p>
 <p>We will be using the <a href="http://conda.pydata.org/miniconda.html">Miniconda3</a> package management system (aka <strong>CONDA</strong>) to manage all of the software packages that <strong>NGSPipeDb</strong> is dependent on. </p>
 <p>Use following commands to retrieve and then run the Minicoda3 installation script:
@@ -621,7 +620,7 @@ repository.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="linux/" class="btn btn-neutral float-right" title="Linux">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="linux/" class="btn btn-neutral float-right" title="Linux basic">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -631,6 +630,8 @@ repository.</p>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
+    
+      <p>Bioinformatics Group, XTBG, 2021</p>
     
   </div>
 
@@ -647,7 +648,7 @@ repository.</p>
   <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/xuanblo/NGSPipeDb/mkdocs/docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/xuanblo/NGSPipeDb/mkdocs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
       
@@ -669,5 +670,5 @@ repository.</p>
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-20 10:59:06.908012+00:00
+Build Date UTC : 2021-01-20 11:30:55.644045+00:00
 -->

@@ -1,8 +1,9 @@
 site_name: My Docs
 site_name: NGSPipeDb Document
-repo_url: https://github.com/xuanblo/NGSPipeDb/mkdocs/docs
+repo_url: https://github.com/xuanblo/NGSPipeDb/mkdocs
 site_url: https://xuanblo.github.io/NGSPipeDb/
 site_description: NGSPipeDb is a pipeline
+copyright: Bioinformatics Group, XTBG, 2021
 docs_dir: markdowns
 site_dir: docs
 lang: en
@@ -10,8 +11,8 @@ plugins:
     - search:
 
 nav:
-    - Home: index.md
-    - Linux: linux.md
-    - RNA-seq: rnaseq.md
+    - NGSPipeDb usage: index.md
+    - Linux basic: linux.md
+    - RNA-seq best practice: rnaseq.md
 
 theme: readthedocs
