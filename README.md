@@ -1,9 +1,9 @@
 
 # NGSPipeDb - NGS pipeline and database
 
-*__Author:__ Dr. Xuan Zhang* <sup>[![github](https://img.icons8.com/ios/15/000000/github.png)](https://github.com/xuanblo)</sup> <sup>[![google scholar](https://img.icons8.com/material/17/000000/google-scholar--v2.png)](https://scholar.google.com/citations?user=omUk0vUAAAAJ)</sup>  
-*__Last update:__ 2021-01-20*  
-*__Citation:__ NGSPipeDb: An automated pipeline for parallel processing of huge NGS data and database generation.
+__Author:__ Dr. Xuan Zhang* <sup>[![github](https://img.icons8.com/ios/15/000000/github.png)](https://github.com/xuanblo)</sup> <sup>[![google scholar](https://img.icons8.com/material/17/000000/google-scholar--v2.png)](https://scholar.google.com/citations?user=omUk0vUAAAAJ)</sup>  
+__Last update:__ 2021-01-20*  
+__Citation:__ NGSPipeDb: An automated pipeline for parallel processing of huge NGS data and database generation.
 
 __Table of Contents:__
 
