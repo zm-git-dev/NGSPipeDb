@@ -369,7 +369,7 @@ snakemake -p --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.y
 __Note__: Input, output and log are relative to your execution directory. Other paths, such as Env and include, are relative to the snapfile path
 
 
-## 7. Step-by-step database generate <a name="Step-by-Step-Database"></a>
+## Step-by-step database generate <a name="Step-by-Step-Database"></a>
 
 We use django project to constructed our NGSDb. We have pareparied many apps for you. 嵌入. Please have a look:
 
@@ -443,7 +443,7 @@ python manage.py addscript ../ngsdb/tools/test1.py
 
 If you want use wooey tools on a task model `celery -A ProjectName worker -c 1 --beat -l info` optional.
 
-## 8. reproducibility <a name="Reproducibility"></a>
+## reproducibility <a name="Reproducibility"></a>
 
 conda环境克隆conda create -n ngspipedb_py38_conda_env --clone ./ngspipedb_py38_conda_env/
 
@@ -519,13 +519,15 @@ Simplest is just abandon the --use-conda flag, as suggested in the answer. Alter
 snakemake 如何运行单个程序？这个也很有用
 基因的命令，像dkango这样的命令在很多rules中都有，所有比如有个顶层的环境中安装了django
 
-## 9. Troubleshooting <a name="Troubleshooting"></a>
+## Troubleshooting <a name="Troubleshooting"></a>
+
 Ngsdb.yaml+wooey
 Python=3.8 samtools clustergrammer
 Pip install wooey
 pip install pandas==0.25.3
 
 ## Contributing
+
 Please [submit an issue](https://github.com/xuanblo/NGSPipeDb/issues) to report bugs or ask questions.
 
 Please contribute bug fixes or new features with a [pull request](https://github.com/xuanblo/NGSPipeDb/pulls) to this

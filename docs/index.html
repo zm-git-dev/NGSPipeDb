@@ -78,7 +78,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#7-step-by-step-database-generate">7. Step-by-step database generate </a>
+    <li class="toctree-l2"><a class="reference internal" href="#step-by-step-database-generate">Step-by-step database generate </a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#1">1. 安装环境 </a>
     </li>
@@ -92,9 +92,9 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#8-reproducibility">8. reproducibility </a>
+    <li class="toctree-l2"><a class="reference internal" href="#reproducibility">reproducibility </a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#9-troubleshooting">9. Troubleshooting </a>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting </a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a>
     </li>
@@ -426,7 +426,7 @@ snakemake -p --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.y
 
 </code></pre>
 <p><strong>Note</strong>: Input, output and log are relative to your execution directory. Other paths, such as Env and include, are relative to the snapfile path</p>
-<h2 id="7-step-by-step-database-generate">7. Step-by-step database generate <a name="Step-by-Step-Database"></a></h2>
+<h2 id="step-by-step-database-generate">Step-by-step database generate <a name="Step-by-Step-Database"></a></h2>
 <p>We use django project to constructed our NGSDb. We have pareparied many apps for you. 嵌入. Please have a look:</p>
 <table>
 <thead>
@@ -525,7 +525,7 @@ INSTALLED_APPS = [
 python manage.py migrate
 python manage.py addscript ../ngsdb/tools/test1.py</p>
 <p>If you want use wooey tools on a task model <code>celery -A ProjectName worker -c 1 --beat -l info</code> optional.</p>
-<h2 id="8-reproducibility">8. reproducibility <a name="Reproducibility"></a></h2>
+<h2 id="reproducibility">reproducibility <a name="Reproducibility"></a></h2>
 <p>conda环境克隆conda create -n ngspipedb_py38_conda_env --clone ./ngspipedb_py38_conda_env/</p>
 <ol>
 <li>use conda env export</li>
@@ -601,7 +601,7 @@ snakemake -s ngspipe/db_generate.Snakefile.py --use-conda --conda-prefix condaEn
 <p>Simplest is just abandon the --use-conda flag, as suggested in the answer. Alternatively, you could make a container that has the env pre-created and configured, then use --use-singularity. Or, if the post-installation can be automated, one could build a custom Conda package that runs some post-linking scripts. Sorry I seem to have missed your comment!</p>
 <p>snakemake 如何运行单个程序？这个也很有用
 基因的命令，像dkango这样的命令在很多rules中都有，所有比如有个顶层的环境中安装了django</p>
-<h2 id="9-troubleshooting">9. Troubleshooting <a name="Troubleshooting"></a></h2>
+<h2 id="troubleshooting">Troubleshooting <a name="Troubleshooting"></a></h2>
 <p>Ngsdb.yaml+wooey
 Python=3.8 samtools clustergrammer
 Pip install wooey
@@ -670,5 +670,5 @@ repository.</p>
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-20 11:30:55.644045+00:00
+Build Date UTC : 2021-01-20 11:32:46.878957+00:00
 -->
