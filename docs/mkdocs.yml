@@ -1,0 +1,17 @@
+site_name: My Docs
+site_name: NGSPipeDb Document
+repo_url: https://github.com/xuanblo/NGSPipeDb
+site_url: https://xuanblo.github.io/NGSPipeDb/
+site_description: NGSPipeDb is a pipeline
+docs_dir: mkdocs
+site_dir: docs
+lang: en
+plugins:
+    - search:
+
+nav:
+    - Home: index.md
+    - Linux: linux.md
+    - RNA-seq: rnaseq.md
+
+theme: readthedocs
