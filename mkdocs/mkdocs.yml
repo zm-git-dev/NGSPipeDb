@@ -1,9 +1,9 @@
 site_name: My Docs
 site_name: NGSPipeDb Document
-repo_url: https://github.com/xuanblo/NGSPipeDb
+repo_url: https://github.com/xuanblo/NGSPipeDb/mkdocs/docs
 site_url: https://xuanblo.github.io/NGSPipeDb/
 site_description: NGSPipeDb is a pipeline
-docs_dir: mkdocs
+docs_dir: markdowns
 site_dir: docs
 lang: en
 plugins:
