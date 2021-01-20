@@ -149,7 +149,7 @@
 <strong>Last update:</strong> 2021-01-20</em><br />
 <strong>Citation:</strong> NGSPipeDb: An automated pipeline for parallel processing of huge NGS data and database generation.</p>
 <p><strong>Table of Contents:</strong></p>
-<ol>
+<ul>
 <li><a href="#Intro">Introduction to NGSPipeDb</a></li>
 <li><a href="#Require">System requirements</a></li>
 <li><a href="#Anatomy">Anatomy of a NGSPipeDb project</a></li>
@@ -161,10 +161,10 @@
 <li><a href="#NGSPipeDbSource">Downloading the NGSPipeDb source code</a>  </li>
 <li><a href="#Testdata">Downloading the NGSPipeDb test files</a>  </li>
 <li><a href="#RunTest">Run test data</a></li>
+<li><a href="#Report">Generate report</a></li>
 <li><a href="#RunRawdata">Run your custome data</a></li>
 </ol>
 </li>
-<li><a href="#Report">Generate report</a></li>
 <li><a href="#Step-by-Step-Database">Step-by-Step database generate</a><ol>
 <li><a href="#DatabaseRequirement">Installing requirement</a></li>
 <li><a href="#Table2Sqlite3">Convert table file to sqlite3</a></li>
@@ -174,7 +174,7 @@
 </li>
 <li><a href="#Reproducibility">Reproducibility</a></li>
 <li><a href="#Troubleshooting">Troubleshooting</a></li>
-</ol>
+</ul>
 <h2 id="introduction-to-ngspipedb">Introduction to NGSPipeDb <a name="Intro"></a></h2>
 <p><strong>NGSPipeDb</strong> is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation using <a href="https://snakemake.readthedocs.io/en/stable/index.html">snakemake workflow</a> which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users. It can be further divided into <code>NGSPipe</code> and <code>NGSDb</code> for individual usage. </p>
 <p><strong>NGSPipe</strong> consists of a <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html">Snakefile</a> (<code>ngspipe/rnaseq.snakefile.py</code>, it includes some basic rules <code>ngspipe/rule/*.snakefile.py</code>), <a href="https://conda.io/docs/">conda</a> environment files (<code>ngspipe/envs/*.yaml</code>), a configuration file (<code>ngspipe/config/rnaseq.config.yaml</code>), a set of <a href="#">python</a>, <a href="#">R</a>, <a href="#">Shell</a> and <a href="#">Perl</a> scripts (<code>ngspipe/scripts/*.py</code>), and a set of <a href="#">reStructuretext</a> reports (<code>reports/*.rst</code>). It combines the use of several dozen omic-seq tools, suites, and packages to create a complete pipeline that takes <a href="">RNA-seq analysis</a>, <a href="">resequcing analysis</a> etc. from raw sequencing data all the way through alignment, quality control, unsupervised analyses, differential expression, and downstream pathway analysis. It is implemented such that alternative or similar analysis can be added or removed. The results are compiled in a simple and highly visual <a href="ngspipe/metadata/report.html">report</a> containing the key figures to explain the analysis, and then compiles all of the relevant files, tables, and pictures into an easy to navigate folder. Table file such as csv, tsv, xlsx etc. </p>
@@ -670,5 +670,5 @@ repository.</p>
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-20 11:32:46.878957+00:00
+Build Date UTC : 2021-01-20 11:35:20.418993+00:00
 -->

@@ -7,26 +7,26 @@ __Citation:__ NGSPipeDb: An automated pipeline for parallel processing of huge N
 
 __Table of Contents:__
 
-1. [Introduction to NGSPipeDb](#Intro)
-2. [System requirements](#Require)
-3. [Anatomy of a NGSPipeDb project](#Anatomy)
-4. [Quick Start (5+6+7) - One time installation of components necessary and run test for typical application scenarios](#QuickStarted)
-5. [Step-by-Step RNA-seq analysis](#Step-by-Step-RNASeq)
+- [Introduction to NGSPipeDb](#Intro)
+- [System requirements](#Require)
+- [Anatomy of a NGSPipeDb project](#Anatomy)
+- [Quick Start (5+6+7) - One time installation of components necessary and run test for typical application scenarios](#QuickStarted)
+- [Step-by-Step RNA-seq analysis](#Step-by-Step-RNASeq)
     1. [Installing wget and git](#BasicLinux)
     2. [Installing Miniconda3](#Miniconda)
     3. [Installing the NGSPipeDb conda environments](#NGSPipeDbEnv)
     4. [Downloading the NGSPipeDb source code](#NGSPipeDbSource)  
     5. [Downloading the NGSPipeDb test files](#Testdata)  
     6. [Run test data](#RunTest)
-    7. [Run your custome data](#RunRawdata)
-6. [Generate report](#Report)
-7. [Step-by-Step database generate](#Step-by-Step-Database)
+    7. [Generate report](#Report)
+    8. [Run your custome data](#RunRawdata)
+- [Step-by-Step database generate](#Step-by-Step-Database)
     1. [Installing requirement](#DatabaseRequirement)
     2. [Convert table file to sqlite3](#Table2Sqlite3)
     3. [Database config](#DatabaseConfig)
     4. [Start server](#RunServer)
-8. [Reproducibility](#Reproducibility)
-9. [Troubleshooting](#Troubleshooting)
+- [Reproducibility](#Reproducibility)
+- [Troubleshooting](#Troubleshooting)
 
 ## Introduction to NGSPipeDb <a name="Intro"></a>
 
