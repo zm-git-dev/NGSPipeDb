@@ -8,6 +8,9 @@ import pandas as pd
 snake_dir = workflow.basedir # all configfile, scripts, restructuretext, ens are relative to snakefile (this file)
 working_dir = os.getcwd() # input and output path are relative to current working directory
 
+# get notice
+receiver_email = 'zhangxuan@xtbg.ac.cn'
+
 # configfile
 configfile: join(snake_dir, "config", "rnaseq.config.yaml")
 
@@ -17,6 +20,7 @@ configfile: join(snake_dir, "config", "rnaseq.config.yaml")
 smpList = pd.read_csv(config["samplesList"], index_col=0, header=None)
 SAMPLES = list(smpList.index)[0:]
 # ----------------------------------------------------------------------- #
+
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # detail parameters in pipe #
@@ -34,6 +38,7 @@ qc_outdir = join(config["resultsDir"], "rawReads_qc", "rawReads_qc_by_{}".format
 junction_align_method = 'hisat2' # star
 junction_align_outdir = join(config["resultsDir"], "junction_align", "junction_align_by_{}".format(junction_align_method))
 genome_index_prefix = "genome"
+# rna-seq sequencing type, can be fr-firststrand, none, fr-secondstrand
 rna_library = "" # "--rna-strandness RF"(fr-firststrand) or "--rna-strandness FR"(fr-secondstrand)
 
 # 4. transcript assembly
@@ -70,8 +75,7 @@ statistic_data_choose = [
                   ]
 stat_outdir = join(config["resultsDir"], "statistic")
 
-# 7. generate report
-receiver_email = 'zhangxuan@xtbg.ac.cn'
+# 7. diff gene discovery
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
@@ -99,6 +103,7 @@ rule all:
         quantify                           = join(quantify_outdir, "gene.csv"),
         #
         # 6. statistic #
+        # if raw data doesn't exists, "Failed to solve scheduling problem with ILP solver" error will ocurrs.
         statistic_result                   = expand(join(stat_outdir, "statistic_data_of_{statistic_data}", 'statistic.completed'), statistic_data=statistic_data_choose),
         #
         # 7. report #

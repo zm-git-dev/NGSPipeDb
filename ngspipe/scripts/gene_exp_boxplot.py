@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
+import matplotlib
+matplotlib.use('Agg')
+
 gene_exp_matrix_file = sys.argv[1]
 
 out_pic_file = sys.argv[2]
@@ -15,8 +18,8 @@ exp_df = exp_df.loc[~(exp_df==0).all(axis=1), :]  # 删了它
 
 
 plt.figure()
-plt.boxplot([np.log2(exp_df.treated+1),np.log2(exp_df.control+1)])
-plt.xticks([1,2],["treated","control"])
+plt.boxplot(np.log2(np.array(exp_df.values)+1))
+plt.xticks(range(len(exp_df.columns)),exp_df.columns)
 plt.ylabel("log2 FPKM+1")
 plt.savefig(out_pic_file, format='pdf', bbox_inches='tight')
 #plt.show()

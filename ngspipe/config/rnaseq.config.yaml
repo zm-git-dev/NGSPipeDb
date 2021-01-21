@@ -18,8 +18,7 @@ samplesDir: "testdata"
 # fastq suffix, read1
 read1Suffix: "_R1.fq.gz"
 read2Suffix: "_R2.fq.gz"
-
-# rna-seq sequencing type, can be fr-firststrand, none, fr-secondstrand
-rna_library: "fr-firststrand"
-# for test the pipe, you can choose to the part of the input file, can be whole,head:40000,tail:40000,random:0.5,random:40000
-preRun: "random:"
+# replict can by 1,2,3
+replict_num: 3
+# condition for differential expression by deseq2
+conditionPath: "testdata/condition.csv"

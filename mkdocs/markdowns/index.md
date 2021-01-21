@@ -185,7 +185,7 @@ We are now ready to use conda to install the software packages which NGSPipeDb i
 
 First, you will need to create the conda environments needed by the various workflows. The following command will create a new conda environment containing Snakemake and python called "ngspipedb" into which conda is installed, the default environment path is `~/miniconda/conda/env/ngspipedb`.
 
-    mamba create -c conda-forge --name ngspipedb snakemake=5 python=3.8
+    mamba create -c conda-forge -c bioconda --name ngspipedb snakemake python=3.8
 
 Next, to analysis NGS data some bioinformatics tools need to be installed.
 
