@@ -158,8 +158,8 @@
 <li><a href="#BasicLinux">Installing wget and git</a></li>
 <li><a href="#Miniconda">Installing Miniconda3</a></li>
 <li><a href="#NGSPipeDbEnv">Installing the NGSPipeDb conda environments</a></li>
-<li><a href="#NGSPipeDbSource">Downloading the NGSPipeDb source code</a>  </li>
-<li><a href="#Testdata">Downloading the NGSPipeDb test files</a>  </li>
+<li><a href="#NGSPipeDbSource">Downloading the NGSPipeDb source code</a></li>
+<li><a href="#Testdata">Downloading the NGSPipeDb test files</a></li>
 <li><a href="#RunTest">Run test data</a></li>
 <li><a href="#Report">Generate report</a></li>
 <li><a href="#RunRawdata">Run your custome data</a></li>
@@ -291,7 +291,7 @@ tar -xf NGSPipeDb_xxx.tar.gz
 <h3 id="4-installing-the-ngspipedb-conda-environments">4. Installing the NGSPipeDb conda environments <a name="NGSPipeDbEnv"></a></h3>
 <p>We are now ready to use conda to install the software packages which NGSPipeDb is dependent on.</p>
 <p>First, you will need to create the conda environments needed by the various workflows. The following command will create a new conda environment containing Snakemake and python called "ngspipedb" into which conda is installed, the default environment path is <code>~/miniconda/conda/env/ngspipedb</code>.</p>
-<pre><code>mamba create -c conda-forge --name ngspipedb snakemake=5 python=3.8
+<pre><code>mamba create -c conda-forge -c bioconda --name ngspipedb snakemake python=3.8
 </code></pre>
 <p>Next, to analysis NGS data some bioinformatics tools need to be installed.</p>
 <pre><code>mamba env update -n ngspipedb --file ngspipe/envs/requirement.yaml --prune
@@ -670,5 +670,5 @@ repository.</p>
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-20 11:35:20.418993+00:00
+Build Date UTC : 2021-01-21 09:58:37.337965+00:00
 -->
