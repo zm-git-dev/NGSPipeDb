@@ -21,4 +21,4 @@ read2Suffix: "_R2.fq.gz"
 # replict can by 1,2,3
 replict_num: 3
 # condition for differential expression by deseq2
-conditionPath: "testdata/condition.xls"
+conditionPath: "testdata/condition.csv"

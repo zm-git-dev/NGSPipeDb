@@ -10,4 +10,4 @@ dependencies:
   - blast
   - seaborn
   - pandas=0.25.3
-wooey
+  - wooey=pip

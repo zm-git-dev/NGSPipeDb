@@ -27,7 +27,7 @@ SAMPLES = list(smpList.index)[0:]
 #
 # 1. sampling data
 # for test the pipe, you can choose to the part of the input file, can be whole,head:40000,tail:40000,random:0.5,random:40000
-sampling_method = 'tail' # tail, seqkit_number, seqkit_proportion, head, tail
+sampling_method = 'links' # tail, seqkit_number, seqkit_proportion, head, tail
 sampling_data_outdir = join(config["resultsDir"], "sampling_data", "sampling_data_by_{}".format(sampling_method))
 
 # 2. raw reads qc
@@ -76,7 +76,7 @@ statistic_data_choose = [
 stat_outdir = join(config["resultsDir"], "statistic")
 
 # 7. diff gene discovery
-
+diff_outdir = join(config["resultsDir"], "diff", "diff_by_{}".format('deseq2'))
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
 # ------------------------------
@@ -108,6 +108,9 @@ rule all:
         #
         # 7. report #
         report_result    = join(config['reportsDir'], "report.ok"),
+        #
+        # 9. differential expression
+        diff_outputok = join(diff_outdir, "diff.ok"),
 
 
 onsuccess:
@@ -158,3 +161,4 @@ include: join("rules", "6.statistic_data_of_bam.Snakefile.py")
 include: join("rules", "6.statistic_data_of_rawReads.Snakefile.py")
 include: join("rules", "6.statistic_data_of_cleanReads.Snakefile.py")
 include: join("rules", "7.report.Snakefile.py")
+include: join("rules", "9.differential_expression.deseq2.Snakefile.py")

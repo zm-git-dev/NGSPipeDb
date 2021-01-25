@@ -1,0 +1,12 @@
+name: null
+channels:
+  - bioconda
+  - conda-forge
+  - default
+dependencies:
+  - snakemake=5.30.1
+  - cutadapt
+  - bwa
+  - samtools
+  - picard
+  - macs2
