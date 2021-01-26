@@ -8,7 +8,7 @@ snake_dir = workflow.basedir # all configfile, scripts, restructuretext, ens are
 working_dir = os.getcwd() # input and output path are relative to current working directory
 
 # configfile
-configfile: join(snake_dir, "config", "rnaseq.config.yaml")
+
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # detail parameters in pipe #
@@ -36,6 +36,7 @@ gffdb_outdir = join(config["dbDir"], "gff_sqlite3")
 
 # 4. genomebrowse
 gbrowse_outdir = join(config["dbDir"], "gbrowse")
+annotation_gbrowse_outdir = join(gbrowse_outdir, 'annotation')
 
 rule all:
     input:
@@ -51,7 +52,8 @@ rule all:
         gffdjango_model         = join(config["djangoCode"], "geneAnno", "models.py"),
 
         # 4. genome browse
-        merged_gbrowse = join(gbrowse_outdir, 'merged_gbrowse.ok'),
+        gtfgzip = join(annotation_gbrowse_outdir, 'annotation.sorted.bgzip'),
+        genome = join(annotation_gbrowse_outdir, "genome.fa")
 
         
 

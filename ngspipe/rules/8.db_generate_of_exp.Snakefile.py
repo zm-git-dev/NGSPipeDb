@@ -6,7 +6,7 @@ rule sqlite3_auto_by_expression_data:
         ------------------------------
         '''
     input:
-        gene_fpkm = join(quantify_outdir, "gene_fpkm_all_samples.tsv")
+        gene_fpkm = config['exp_data']
     output:
         exp_sqlite3 = join(exp_db_outdir, "exp.sqlite3")
     log:
@@ -38,6 +38,7 @@ rule sqlite3ForModel_auto_by_django:
         '''
         # inspectdb数据模型反向生成
         # make sure the right db name in ngsdb/ngsdb/setting.py
+        pip install wooey clustergrammer sklearn pandas==0.25.3;
         python {config[djangoCode]}/manage.py inspectdb --database expDb|perl -ne 'if(/primary_key/){{s/null=True/null=False/}};print "$_"' > {output.exp_django_model} 2>{log};
         # 使用makemigrations创建迁移
         python {config[djangoCode]}/manage.py makemigrations geneExpAtlas 1>{log} 2>&1;

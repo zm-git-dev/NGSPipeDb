@@ -1,10 +1,13 @@
 ## nature protocol
 
+for liangliang test
 ```shell
-conda create -n exp_r_env mamba -c conda-forge
-conda activate exp_r_env
-mamba env update --file ngspipe/envs/requirements_exp_r_env.yaml --prune
-
+conda create -n ngsdb mamba=0.1.2 python=3.8 -c conda-forge
+conda activate ngsdb
+mamba env update --file ngspipe/envs/requirements_ngsdb.yaml --prune
+snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -j 1
+python ngsdb/manage.py runserver 
+127.0.0.0:8000
 ```
 
 ## Step-by-step database generate <a name="Step-by-Step-Database"></a>

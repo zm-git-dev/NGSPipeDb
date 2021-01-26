@@ -1,6 +1,6 @@
-annotation_gbrowse_outdir = join(gbrowse_outdir, 'annotation')
 
-rule merge_gbrowse:
+
+rule index_genome:
     message:
         '''
         ------------------------------
@@ -8,13 +8,15 @@ rule merge_gbrowse:
         ------------------------------
         '''
     input:
-        gtfgzip = join(annotation_gbrowse_outdir, 'trasncript.gtf.gz')
+        genome = config['genomeFasta']
     output:
-        merged_gbrowse = join(gbrowse_outdir, 'merged_gbrowse.ok')
+        genome = join(annotation_gbrowse_outdir, "genome.fa")
+    log:
+        join(annotation_gbrowse_outdir, "genome.log")
     shell:
         '''
-        cp fasta to gbrowse;
-        samtools faidx chr19.fa
+        cp {input.genome} {output.genome} 2>{log};
+        samtools faidx {output.genome} 2>>{log};
         '''
 
 rule igv_annotation_gtf:
@@ -26,9 +28,9 @@ rule igv_annotation_gtf:
         '''
     input:
         refgtf = config['genomeAnno'],
-        transcript_assembly = join(transcript_assembly_outdir, "merged.gff"),
     output:
-        gtfgzip = join(annotation_gbrowse_outdir, 'trasncript.gff.gz')
+        sortedGtf = join(annotation_gbrowse_outdir, 'annotation.sorted.gtf'),
+        gtfgzip = join(annotation_gbrowse_outdir, 'annotation.sorted.bgzip')
     benchmark:
         join(annotation_gbrowse_outdir, "benchmark.txt")
     log:
@@ -37,12 +39,9 @@ rule igv_annotation_gtf:
         '../envs/agat.yaml'
     shell:
         '''
-        gzip -c {input.transcript_assembly} > {output.gtfgzip} 2>{log};
-        bgzip -c merged.sorted.gff >merged.sorted.gff.bgzip
-        bedtools sort -i merged.gff merged.sorted.gff
-        tabix -p gff merged.sorted.gff.bgzip;
-        tabix -p gff trasncript.gtf.bgzip
-        bgzip -c merged.sorted.gff >merged.sorted.gff.bgzip
+        bedtools sort -i {input.refgtf} >{output.sortedGtf} 2>{log};
+        bgzip -c {output.sortedGtf} >{output.gtfgzip} 2>>{log};
+        tabix -p gff {output.gtfgzip} 2>>{log};
         '''
 
 """

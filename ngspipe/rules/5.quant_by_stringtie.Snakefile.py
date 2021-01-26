@@ -8,7 +8,8 @@ rule reStringtie_by_stringtie:
         '''
     input:
         mergedGtf = join(transcript_assembly_outdir, "merged.gtf"),
-        sorted_bam = join(junction_align_outdir, "{sample}", "{sample}.sorted.bam")
+        sorted_bam = join(junction_align_outdir, "{sample}", "{sample}.sorted.bam"),
+        genomeAnno = config["genomeAnno"]
     output:
         gtf = join(quantify_outdir, "{sample}", "{sample}.gtf"),
         expr = join(quantify_outdir, "{sample}", "{sample}.tab"),
@@ -21,7 +22,7 @@ rule reStringtie_by_stringtie:
         join(quantify_outdir, "{sample}", "run.log")
     shell:
         '''
-        stringtie -p {threads} -G {input.mergedGtf} -o {output.gtf} -A {output.expr} -B -e -l {wildcards.sample} {input.sorted_bam} 1>{log} 2>&1;
+        stringtie -p {threads} -G {input.genomeAnno} -o {output.gtf} -A {output.expr} -B -e -l {wildcards.sample} {input.sorted_bam} 1>{log} 2>&1;
         echo -e {wildcards.sample}\"\\t\"{output.gtf} >{output.gene_count} 2>>{log};
         '''
 

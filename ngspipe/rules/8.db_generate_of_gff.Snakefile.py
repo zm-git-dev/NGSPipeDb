@@ -7,7 +7,7 @@ rule gtfTosqlite3:
         ------------------------------
         '''
     input:
-        transcript_assembly = join(transcript_assembly_outdir, "merged.gtf"),
+        transcript_assembly = config['genomeAnno']
     output:
         gffdb = join(gffdb_outdir, "gtf.sqlite3")
     log:

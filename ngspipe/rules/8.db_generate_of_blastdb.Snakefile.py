@@ -48,7 +48,7 @@ rule makeblastdb_transcriptfasta_by_blast:
         '''
     input:
         genomeFasta = config['genomeFasta'],
-        genomeAnno = config['gff'],
+        genomeAnno = config['genomeAnno'],
     output:
         transcriptFastaDb = touch(join(transcriptdb_outdir, "nucl", "transcriptfasta_blastdb.ok"))
     log:

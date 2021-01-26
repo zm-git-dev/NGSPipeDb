@@ -54,11 +54,13 @@ colnames(cts) <- sub("\\.", "-", colnames(cts))
 
 countData <- as.matrix(cts)
 rownames(countData) <- rownames(cts)
+countData <- countData[,sort(colnames(countData),decreasing = FALSE)]
 
 # 读样本信息文件
 # args$conditionFile="/Users/zhangxuan/Work/Current_work2020-6-21/databasetool/mouse_transcriptome_analysis/testdata/condition.xls"
 coldata <- read.csv(args$conditionFile, row.names=1,sep=",")
 coldata <- coldata[,c("Sample","Tissue")]
+coldata <- coldata[sort(rownames(coldata),decreasing = FALSE),]
 
 if(!all(rownames(coldata) %in% colnames(countData))) q()
 #countData <- countData[,rownames(coldata)]
