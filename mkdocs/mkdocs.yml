@@ -1,4 +1,3 @@
-site_name: My Docs
 site_name: NGSPipeDb Document
 repo_url: https://github.com/xuanblo/NGSPipeDb/mkdocs
 site_url: https://xuanblo.github.io/NGSPipeDb/
@@ -11,8 +10,12 @@ plugins:
     - search:
 
 nav:
-    - NGSPipeDb usage: index.md
-    - Linux basic: linux.md
-    - RNA-seq best practice: rnaseq.md
+    - Getting start: index.md
+    - NGSPipeDb Tutorial: NGSPipeDb.md
+    - NGSPipe RNA-seq: NGSPipe-RNA-seq.md
+    - NGSPipe ChIP-seq: NGSPipe-ChIP-seq.md
+    - NGSPipe resequecing: NGSPipe-resequecing.md
+    - NGSDb: NGSDb.md
+    - Appendix - Linux basic: Linux.md
 
 theme: readthedocs
