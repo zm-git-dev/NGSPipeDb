@@ -13,6 +13,8 @@ rule differential_expression_analysis_by_deseq2:
         condition = config["conditionPath"]
     output:
         diff_outputok = touch(join(diff_outdir, "diff.ok"))
+    conda:
+        '../envs/requirements_exp_r_env.yaml'
     benchmark:
         join(diff_outdir, "benchmark.txt")
     log:
