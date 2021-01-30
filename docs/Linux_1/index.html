@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="canonical" href="https://xuanblo.github.io/NGSPipeDb/Linux_1/">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Shell and Linux - NGSPipeDb Document</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Shell and Linux";
+    var mkdocs_page_input_path = "Linux_1.md";
+    var mkdocs_page_url = "/NGSPipeDb/Linux_1/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> NGSPipeDb Document</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Getting start</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSPipeDb/">NGSPipeDb Tutorial</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSPipe-RNA-seq/">NGSPipe RNA-seq</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSPipe-ChIP-seq/">NGSPipe ChIP-seq</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSPipe-resequecing/">NGSPipe resequecing</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSDb/">NGSDb</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Linux/">Appendix (Linux basic)</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">NGSPipeDb Document</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Shell and Linux</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/xuanblo/NGSPipeDb/mkdocs/edit/master/docs/Linux_1.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="shell-and-linux">Shell and Linux</h1>
+<blockquote>
+<p>Author: Hanrui Bai</p>
+</blockquote>
+<h2 id="about-linux">About Linux</h2>
+<p>The complete Linux operating system includes the kernel and outer layer applications. Different Linux distributions use the same kernel and different outer layer applications. Common Linux distributions are <a href="">Ubuntu</a>, <a href="">red hat</a>, <a href="">SuSE</a>, <a href="">Gentoo</a>, <a href="">CentOS</a> and <a href="">Debian</a>. Shell is the interface between the linux kernel and the user.</p>
+<h2 id="get-linux">Get Linux</h2>
+<h3 id="method-1">Method 1</h3>
+<p>Install Ubuntu in a virtual environment.
+<Font color = red> Method 1 is not suggested to novices.</Font></p>
+<h3 id="method-2">Method 2</h3>
+<p>Buy a Ubuntu.</p>
+<h3 id="method-3">Method 3</h3>
+<p>Apply for an account at the Institute’s Supercomputer Center.
+<Font color = red> Method 3 is the most common method. Linx operting system is installed on sever of Institute’s Supercomputer Center.</Font></p>
+<h4 id="log-into-linux-sever-from-windows">Log into Linux sever from Windows</h4>
+<ol>
+<li>
+<p>Download a Secure Shell (ssh) terminal.
+Common terminal:</p>
+<ul>
+<li>Xshell: <a href="https://www.xshellcn.com/">https://www.xshellcn.com/</a></li>
+<li>PuTTY: <a href="http://www.putty.org/">http://www.putty.org/</a></li>
+</ul>
+</li>
+<li>
+<p>Install the shell terminal.</p>
+</li>
+<li>
+<p>Create a new session.</p>
+</li>
+<li>
+<p>Choose the ssh protocol and enter the host IP ,port ,user ID and password.</p>
+</li>
+<li>
+<p>Click <code>connect</code>.</p>
+</li>
+</ol>
+<h4 id="log-into-linux-sever-from-linux-or-mac">Log into Linux sever from Linux or Mac</h4>
+<p>Type command in terminal: <code>ssh [host IP:port]@[user ID]</code>. Then enter the password.</p>
+<h2 id="basic-knowledge-of-linux">Basic knowledge of Linux</h2>
+<ol>
+<li>
+<p>The absolute path is identified by a forward slash (/), and the structure of directory is tree structure.</p>
+</li>
+<li>
+<p>How to use linux command: enter the command at the shell prompt: <code>$</code>. Command like: <code>[Path]/command [-option parameter]  [file|directory]</code>.
+For example: <code>~/miniconda3/envs/RNA/bin/fastp -i /home/sysbio/SRR8467686.fastq.gz</code></p>
+</li>
+<li>
+<p>Enter a single dot (.) to indicate the current directory, and enter a double dot (..) to indicate the parent directory of the current directory.
+For example: <code>cd ..</code></p>
+</li>
+<li>
+<p>Use the man command to view the operation manual of all required commands. Command like: <code>man [command name]</code>.
+For example: <code>man cp</code></p>
+</li>
+<li>
+<p>Filter:
+The filter refers to the name of the specified file and is used after many commands. Add a filter after the ls command, then only the information of the file will be displayed.
+For example: <code>ls -l my_file</code>
+This command specifies the relevant information of the output file my_file
+<Font color = red> When writing a filter, you can use a question mark (?) to represent a character, an asterisk (*) to represent zero or more characters, and use the tab key (Tab) to quickly complete the file name or directory First name</Font></p>
+</li>
+<li>
+<p>The <code>which</code> command is used to find the path of the command. Command like: <code>which grep</code>
+For example: <code>which fastp</code></p>
+</li>
+</ol>
+<h1 id="about-permission">About permission</h1>
+<h2 id="view-the-file-permission">View the file permission</h2>
+<p>When you use <code>ls -l</code> command, the permissions will be marked at the beginning of the file, like: drwxrwxrwx. The first letter represents the type of file: <code>d</code> means directory, <code>-</code> means file, and <code>l</code> means soft link. The remaining nine letters are grouped into three, representing the permissions for the owner, the owner<code>s group, and other groups.</code>r<code>means read-only.</code>w<code>means allowing user to modify the content of the file.</code>x<code>means allowing user to execute the file as a program.</code>-` means having no such permission.</p>
+<h2 id="modify-permissions-chmod-command">Modify permissions: chmod command</h2>
+<p><Font color = red>You must have the authority to operate files</Font>
+Command like: <code>chmod (user permissions) (group permissions) (other permissions) file</code>
+Permission is expressed in octal code: r=4, w=2, x=1
+For example: <code>chmod 755 test.txt</code>
+The result is <code>-rwxr-xr-x test.txt</code></p>
+<h1 id="command-about-directory">Command about directory</h1>
+<h2 id="check-files-which-are-in-the-directory-list">Check files which are in the directory list</h2>
+<ol>
+<li>
+<p>Basic list function: ls command
+  Command like: ls various parameters directory name</p>
+<ul>
+<li><code>-F</code> Distinguish between files and directories</li>
+<li><code>-R</code> Recursive option to list files in subdirectories contained in the current directory</li>
+<li><code>-l</code> Produces a long list of output results, including information about each file</li>
+<li><code>-d</code> Lists only the information of the directory itself, not its contents</li>
+<li><code>-i</code> The inode number of the file, which is the unique identifier of the file</li>
+<li><code>-a</code> Display both hidden files and ordinary files
+<Font color = red>The parameters can be combined and written. For example: <code>ls -Fd</code>.</Font></li>
+</ul>
+</li>
+<li>
+<p>The way to output the tree list: tree tool
+   The tool needs to be installed by yourself. Command like: <code>tree filter</code>.</p>
+</li>
+</ol>
+<h2 id="create-a-directory-mkdir-command">Create a directory: mkdir command</h2>
+<p>Command like: <code>mkdir [directory name]</code>
+  To create multiple directories and subdirectories, you can use the <code>-p</code> parameter. For example: <code>mkdir -p New_file/work/file1</code>.
+  <Font color = red>The <code>-p</code> parameter in the mkdir command can create missing parent directories as needed.</Font></p>
+<h2 id="delete-directory-rmdir-command">Delete directory: rmdir command</h2>
+<p>Command like: <code>rmdir [-option parameter] [directory name]</code>
+  - <code>-No</code> Parameters after rmdir delete empty directories
+  - <code>-rf</code> Delete all contents in the directory
+  - <code>-i</code> Ask a question before deleting</p>
+<p><Font color = red>Because Linux does not have a recycle bin, you must add the -i parameter when deleting to confirm whether the deleted content is correct.</Font></p>
+<h2 id="switch-the-directory-cd-command">Switch the directory: cd command</h2>
+<p>Command like: <code>cd directory</code>
+For example: <code>cd /usr/bin</code></p>
+<h2 id="view-the-current-absolute-path-of-current-directory">View the current absolute path of current directory</h2>
+<p>Command like: <code>pwd</code></p>
+<h1 id="command-about-file">Command about file</h1>
+<h2 id="create-a-file-touch-command">Create a file: touch command</h2>
+<p>Command like: <code>touch [-option parameter] [file name]</code>
+  - Create a new file without adding parameters after touch, if the file already exists, change the modification time.
+  - <code>-a</code> Change the access time of an existing file</p>
+<h2 id="delete-files-rm-command">Delete files: rm command</h2>
+<p>Command like: <code>rm -i [file name]</code>
+  <Font color = red>Because Linux does not have a recycle bin, you must add the -i parameter to avoid errors when deleting.</Font></p>
+<h2 id="copy-files-cp-command">Copy files: cp command</h2>
+<p>Command like: <code>cp [-option parameter] [file name]</code>
+  - <code>-i</code> Force to ask if you need to overwrite existing files
+  - <code>-R</code> Copy the entire directory recursively
+  <Font color = red>To avoid errors, it is recommended to add the -i parameter</Font></p>
+<h2 id="rename-and-move-files-mv-command">Rename and move files: mv command</h2>
+<ol>
+<li>
+<p>Rename
+  Command like: <code>mv [original file name] [new file name]</code></p>
+</li>
+<li>
+<p>Move
+  Command like: <code>mv [file name in the original path] [target new path]</code></p>
+</li>
+<li>
+<p>Rename and move operations can be performed at the same time
+  For example: <code>mv /home/picture/book /home/file/cook</code>. Move the <code>book</code> file in the <code>picture</code> folder to the <code>file</code> folder, and rename it to <code>cook</code>.</p>
+</li>
+</ol>
+<h2 id="view-files">View files</h2>
+<h3 id="view-file-type-file-command">View file type: file command</h3>
+<p>Command like: <code>file [file name]</code>
+ You can check the file type, character encoding method, whether the file can be run, etc.</p>
+<h3 id="view-the-entire-file-content">View the entire file content</h3>
+<ol>
+<li>
+<p>cat command: display all data in the text file
+Command like: <code>cat [-option parameter] [file name]</code></p>
+<ul>
+<li>No parameters after cat means display content.</li>
+<li><code>-n</code> Display content after adding line number.</li>
+<li><code>-b</code> Displays only after adding line numbers to text content.</li>
+<li><code>-T</code> Does not display tabs, replace tabs with ^T to display.</li>
+</ul>
+</li>
+<li>
+<p>More command: display the content of the text file, but it will stop after each page is displayed.</p>
+</li>
+<li>
+<p>less command: display the content of text files and support more advanced interaction.</p>
+</li>
+</ol>
+<h3 id="view-a-part-of-file-content">View a part of file content</h3>
+<ol>
+<li>
+<p>head command: view the beginning of the file
+Command like: head -n file name
+n is the number of rows displayed</p>
+</li>
+<li>
+<p>tail command: view the end of the file
+Command like: tail -n file name
+n is the number of rows displayed</p>
+</li>
+</ol>
+<h3 id="upload-files-download-files">Upload files, download files</h3>
+<ol>
+<li><code>rz</code>: upload file</li>
+<li><code>sz [file name]</code>: download file</li>
+</ol>
+<h1 id="command-about-process">Command about process</h1>
+<h2 id="probe-the-process">Probe the process</h2>
+<ol>
+<li>
+<p>ps command
+command like: <code>ps [-option parameter]</code>
+Symbol description:</p>
+<ul>
+<li><code>PID</code>: Process ID.</li>
+<li><code>TTY</code>: Terminal device when process starts.</li>
+<li><code>TIME</code>: Cumulative CPU time required by the process.</li>
+<li><code>CMD</code>: The name of the command used.</li>
+</ul>
+</li>
+<li>
+<p>top command
+Command like: <code>top</code>
+Symbol description:</p>
+<ul>
+<li><code>load average</code>: The three values are the average load of the last 1min, 5min, and 15min. The larger the value, the larger the load, and the more than 2 indicates the system is busy.</li>
+<li><code>PR</code>: Process priority</li>
+<li><code>NI</code>: Moderate value of process</li>
+<li><code>VIRT</code>: The total amount of virtual memory occupied by the process</li>
+<li><code>RES</code>: The total amount of physical memory occupied by process.</li>
+<li><code>MEM</code>: The ratio of memory used by the process to available memory.</li>
+<li><code>S</code>: Process state (<code>D</code>: interruptible sleep state; <code>R</code>: running; <code>S</code>: sleeping; <code>T</code>: tracking or stopping state; <code>Z</code>: rigid state).</li>
+</ul>
+</li>
+<li>
+<p>The difference between ps and top command
+The ps command displays information at a specific time point, and the top command displays real-time information.</p>
+</li>
+</ol>
+<h2 id="end-the-process">End the process</h2>
+<ol>
+<li>
+<p>kill command
+command like: <code>kill PID</code> or <code>kill -s [process signal]</code></p>
+</li>
+<li>
+<p>killall command
+Command like: <code>killall [process name]</code>
+<Font color = red>Use wildcards carefully in the killall command</Font></p>
+</li>
+</ol>
+<h1 id="command-about-task">Command about task</h1>
+<h2 id="execute-tasks-to-the-background">Execute tasks to the background</h2>
+<h3 id="method-1_1">Method 1</h3>
+<p><code>[Path]/command [-option parameter] [file|directory] &amp;</code></p>
+<h3 id="method-2_1">Method 2</h3>
+<p><code>nohup [path]/command [-option parameter] [file|directory] &amp;</code></p>
+<h3 id="method-3-screen-command">Method 3: screen command</h3>
+<p>Command like :
+- Create a screen: <code>screen -dmS screen_test</code>
+- View the screen: <code>screen -list</code>
+- Connect to the screen: <code>screen -r screen_test</code></p>
+<h3 id="common-task-management-commands">Common task management commands:</h3>
+<ol>
+<li><code>jobs</code>: View tasks, return task number n and process number</li>
+<li><code>bg %n</code>: Transfer task number n to the background</li>
+<li><code>fg %n</code>: Transfer task number n to the foreground</li>
+<li><code>ctrl+z</code>: Suspend the current task</li>
+<li><code>ctrl+c</code>: Stop the current task</li>
+<li><code>kill -n task</code>: End the task</li>
+</ol>
+<h1 id="command-about-disk-space">Command about disk space</h1>
+<h2 id="mount-the-device-mount-command">Mount the device: mount command</h2>
+<p>command like: mount parameter file device type device to be mounted target location
+File device types are:
+- <code>-vfat</code>: Windows long file system
+- <code>-ntfs</code>: An advanced file system widely used in Windows
+- <code>-iso9660</code>: Standard CD-ROM file system</p>
+<h2 id="uninstall-the-device-umount-command">Uninstall the device: umount command</h2>
+<p>Command like: <code>umount location/target device</code></p>
+<h2 id="explore-the-disk-situation">Explore the disk situation</h2>
+<ol>
+<li>
+<p>df command
+Command like: <code>df [-option parameter] [target disk]</code></p>
+</li>
+<li>
+<p>du command
+Command like: <code>du [-option parameter] [target disk]</code></p>
+</li>
+<li><code>-c</code> Displays the total size of all listed files</li>
+<li><code>-h</code> Display in a user-readable way</li>
+<li>
+<p><code>-s</code> Displays the total of each output parameter</p>
+</li>
+<li>
+<p>The difference between df and du commands
+The df command displays the disk usage, the du command displays the disk usage of each file</p>
+</li>
+<li>
+<p>Disk partition: fdisk command
+Command like: <code>fdisk -l [disk name]</code></p>
+</li>
+<li>
+<p>Disk formatting: mkfs command
+Command like: <code>mksf -t file [system format] [-option parameter] [disk name]</code>
+File system formats are: mkfs.cramfs, mkfs.ext2, mkfs.ext3, mkfs.msdos, mkfs.vfat</p>
+</li>
+<li>
+<p>Disk verification: fsck command
+Command like: <code>fsck -t file [system format] [-option parameter] [disk name]</code>
+File system formats are: fsck.cramfs, fsck.ext2, fsck.ext3, fsck.msdos, fsck.vfat</p>
+</li>
+</ol>
+<h1 id="cases">Cases</h1>
+<h2 id="case-1-install-software">Case 1: install software</h2>
+<ol>
+<li>
+<p>Download software:
+<code>wget –c ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.6.0+-x64-linux.tar.gz</code></p>
+</li>
+<li>
+<p>Unzip file: <code>tar zxvf ncbi-blast-2.6.0+-x64-linux.tar.gz</code></p>
+</li>
+<li>
+<p>Install the software:
+    <code>cd soft</code>
+    <code>./configure</code>
+    <code>make</code>
+    <code>make install</code></p>
+</li>
+<li>
+<p>Update PATH: 
+    Add the <code>./ncbi-blast-2.6.0+/bin</code> directory to the environment variables: <code>vim ~/.bashrc</code>
+    Add the following statement, save and exit: <code>export PATH=./ncbi-blast-2.6.0+/bin:$PATH</code>
+    Update environment variables: <code>source ~/.bashrc</code></p>
+</li>
+</ol>
+<h2 id="case-2-download-data-from-database">case 2: download data from database</h2>
+<h3 id="method-1-wget-command">Method 1: wget command</h3>
+<p>Command like: <code>wget [-option parameter] [URL]</code>
+- <code>-c</code> When connection has been cut off,you can use this parameter to resume the transfer.
+- <code>-i</code> When there are multiple files to download, you can write the URL of each file in a download.txt. Then type command:<code>wget -i download.txt</code>.
+- <code>-r</code> Download all files from this website including all addresses pointed to by the site.
+For example: <code>wget [https://www.ncbi.nlm.nih.gov/sra/SRR8467693](https://www.ncbi.nlm.nih.gov/sra/SRR8467693)</code></p>
+<h3 id="method-2-sratoolkit">Method 2: sratoolkit</h3>
+<ol>
+<li>
+<p>Install sratoolkit</p>
+</li>
+<li>
+<p>Write command like:
+<code>module load sratoolkit
+prefetch SRR8467686</code></p>
+</li>
+</ol>
+<h3 id="method-3-fastq-dump">Method 3: fastq-dump</h3>
+<p>Command like: <code>fastq-dump [-option parameter]</code>
+- <code>--split-spot</code>: Split paired-end sequencing into two copies, but put them in the same file
+- <code>--split-files</code>: Divide paired-end sequencing into two copies and put them in different files, but discard the reads that one party has but one does not.
+- <code>--split-3</code>: Divide the paired-end sequencing into two copies and put them in different files, but the reads that one party has and the other does not will be put in a separate folder
+- <code>-o</code> Output path</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Bioinformatics Group, XTBG, 2021</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/xuanblo/NGSPipeDb/mkdocs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
