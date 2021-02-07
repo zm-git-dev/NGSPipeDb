@@ -16,6 +16,6 @@ nav:
     - NGSPipe ChIP-seq: NGSPipe-ChIP-seq.md
     - NGSPipe resequecing: NGSPipe-resequecing.md
     - NGSDb: NGSDb.md
-    - Linux basic: Linux.md
+    - Linux basic: linux.md
 
 theme: readthedocs
