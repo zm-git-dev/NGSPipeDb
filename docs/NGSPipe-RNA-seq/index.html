@@ -448,6 +448,7 @@ include: join(&quot;rules&quot;, &quot;9.differential_expression.deseq2.Snakefil
 <p><strong>Note</strong>: The script/env/include path is always relative to the Snakefile containing the directive (in contrast to the input, output and log file paths, which are relative to the working directory). </p>
 <h4 id="report">report</h4>
 <p>edit <code>ngspipe/report/*.rst</code> that will be added at the end of the report. For example, edit the <code>ngspipe/report/rawreads_stat.rst</code> file to include a text describing the 'Statistic' of the experiment. This text will be added to the report as static section and is one of the two report sections that can be edited by the end-user.</p>
+<p>NGSPipe will provide you with an interactive, browser-based report, showing the most important measures of your data on the first sight. All tables in the report can be sorted and filtered. The table on the first tab shows the key values for a quick estimation of the success of your sequencing experiment and the assembly. On the second tab, there is a more detailed table, giving many additional measures. Additionally to the tables, many measures are provided as graphical feedback. On the third tab, you see plots which are generated for one complete sequencing experiment. On the fourth tab, there are plots which each show measures on one specific dataset.</p>
 <pre><code class="language-matlab">
 summary of reads produced
 =========================

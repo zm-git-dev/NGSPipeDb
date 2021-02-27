@@ -70,6 +70,24 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">NGSDb</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#one-step-to-view-the-test-database">one step to view the test database</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-by-step-database-generate">Step-by-step database generate </a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1">1. 安装环境 </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-convert-analysis-result-to-sqlite3-file">2. convert analysis result to sqlite3 file </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-config">3. config </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-start-server">4. start server </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-add-your-custome-data">5. add your custome data</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#overview-the-ngsdb-apps">overview the NGSDb apps</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -112,88 +130,93 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="nature-protocol">nature protocol</h2>
-<p>for liangliang test</p>
+                <h1 id="ngsdb">NGSDb</h1>
+<p><strong>Table of Contents:</strong></p>
+<ol>
+<li><a href="#BasicLinux">Installing wget and git</a></li>
+<li><a href="#Miniconda">Installing Miniconda3</a></li>
+<li><a href="#NGSPipeDbEnv">Installing the NGSPipeDb conda environments</a></li>
+<li><a href="#NGSPipeDbSource">Downloading the NGSPipeDb source code</a></li>
+<li><a href="#Testdata">Downloading the NGSPipeDb test files</a></li>
+<li><a href="#RunTest">Run test data</a></li>
+<li><a href="#Report">Generate report</a></li>
+<li><a href="#RunRawdata">Run your custome data</a></li>
+</ol>
+<h2 id="one-step-to-view-the-test-database">one step to view the test database</h2>
+<h2 id="step-by-step-database-generate">Step-by-step database generate <a name="Step-by-Step-Database"></a></h2>
+<h3 id="1">1. 安装环境 <a name="DatabaseRequirement"></a></h3>
 <pre><code class="language-shell">conda create -n ngsdb mamba=0.1.2 python=3.8 -c conda-forge
 conda activate ngsdb
 mamba env update --file ngspipe/envs/requirements_ngsdb.yaml --prune
-snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -j 1
-python ngsdb/manage.py runserver 
-127.0.0.0:8000
-</code></pre>
-<h2 id="step-by-step-database-generate">Step-by-step database generate <a name="Step-by-Step-Database"></a></h2>
-<p>We use django project to constructed our NGSDb. We have pareparied many apps for you. 嵌入. Please have a look:</p>
-<table>
-<thead>
-<tr>
-<th>django apps</th>
-<th>description</th>
-<th>package</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>home</td>
-<td>home page</td>
-<td></td>
-</tr>
-<tr>
-<td>geneExpAtlas</td>
-<td>table</td>
-<td></td>
-</tr>
-<tr>
-<td>network</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>igv</td>
-<td>genome browse</td>
-<td><a href="https://github.com/igvteam/igv.js/wiki">IGV</a></td>
-</tr>
-<tr>
-<td>blastplus</td>
-<td>ncbi blast +</td>
-<td>NCBI</td>
-</tr>
-<tr>
-<td>ngstools</td>
-<td>wooey</td>
-<td></td>
-</tr>
-<tr>
-<td>efp</td>
-<td>efp browse</td>
-<td></td>
-</tr>
-<tr>
-<td>clustergrammer-js https://clustergrammer.readthedocs.io/clustergrammer_js.html</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>AQUAMIS will provide you with an interactive, browser-based report, showing the most important measures of your data on the first sight. 
-All tables in the report can be sorted and filtered.
-The table on the first tab shows the key values for a quick estimation of the success of your sequencing experiment and the assembly. 
-On the second tab, there is a more detailed table, giving many additional measures.
- Additionally to the tables, many measures are provided as graphical feedback. On the third tab, you see plots which are generated for one complete sequencing experiment. On the fourth tab, there are plots which each show measures on one specific dataset. </p>
-<h3 id="1">1. 安装环境 <a name="DatabaseRequirement"></a></h3>
-<pre><code class="language-shell">django
-wooey
-clustergrammer
-sklearn
-pandas=0.25.3
 </code></pre>
 <h3 id="2-convert-analysis-result-to-sqlite3-file">2. convert analysis result to sqlite3 file <a name="Table2Sqlite3"></a></h3>
-<p>modify model.py</p>
-<pre><code>snakemake -s ngspipe/db_generate.Snakefile.py -p -j1 
+<p>First, edit <code>ngspipe/config/ngsdb.config.yaml</code> file:</p>
+<pre><code class="language-yaml"># path relative to where you run snakemake
+
+# gene structure annotation
+genomeAnno: &quot;testdata/GRCm38.83.chr19.gtf&quot; # gene annotation file, can be gtf or gff
+genomeFasta: &quot;testdata/chr19.fa&quot; # genome sequence
+
+# result directory of NGSPipe
+resultsDir: &quot;results/result&quot;
+reportsDir: &quot;results/report&quot;
+dbDir: &quot;results/sqlite3&quot;
+
+djangoCode: &quot;ngsdb&quot;
+exp_data: &quot;results/result/quantify/quantify_by_stringtie/gene_fpkm_all_samples.tsv&quot;
+report_path: &quot;&quot;
+gbrowse_data: &quot;&quot;
+
+# sample list file
+samplesList: &quot;testdata/samples.xls&quot;
+# sample file directory
+samplesDir: &quot;testdata&quot;
+# fastq suffix, read1
+read1Suffix: &quot;_R1.fq.gz&quot;
+read2Suffix: &quot;_R2.fq.gz&quot;
+# replict can by 1,2,3
+replict_num: 3
+# condition for differential expression by deseq2
+</code></pre>
+<p>Second, edit <code>ngspipe/workflow/db_generate.Snakefile.py</code> file:</p>
+<pre><code class="language-python"># detail parameters in pipe #
+
+# 5. quantification
+quantify_method = 'stringtie' # htseqcounts or featurecounts
+quantify_outdir = join(config[&quot;resultsDir&quot;], &quot;quantify&quot;, &quot;quantify_by_{}&quot;.format(quantify_method))
+
+# 4. transcript assembly
+transcript_assembly_method = 'stringtie' # star
+transcript_assembly_outdir = join(config[&quot;resultsDir&quot;], &quot;transcript_assembly&quot;, &quot;transcript_assembly_by_{}&quot;.format(transcript_assembly_method))
+
+
+# blast
+# 1. expression matrix database create
+exp_db_outdir = join(config[&quot;dbDir&quot;], &quot;exp&quot;)
+anno_db_outdir = join(config[&quot;dbDir&quot;], &quot;anno&quot;)
+
+# sqlite3
+# 2. blastdb
+blastdb_outdir = join(config[&quot;dbDir&quot;], &quot;blastdb&quot;)
+
+# 3. gffutils
+gffdb_outdir = join(config[&quot;dbDir&quot;], &quot;gff_sqlite3&quot;)
+
+# 4. genomebrowse
+gbrowse_outdir = join(config[&quot;dbDir&quot;], &quot;gbrowse&quot;)
+annotation_gbrowse_outdir = join(gbrowse_outdir, 'annotation')
+
+# include modules
+include: join(&quot;rules&quot;, &quot;8.db_generate_of_exp.Snakefile.py&quot;)
+include: join(&quot;rules&quot;, &quot;8.db_generate_of_gff.Snakefile.py&quot;)
+include: join(&quot;rules&quot;, &quot;8.db_generate_of_blastdb.Snakefile.py&quot;)
+include: join(&quot;rules&quot;, &quot;8.db_generate_of_genomebrowser.Snakefile.py&quot;)
+</code></pre>
+<p>Then, run db_generate workflow to generate database files.</p>
+<pre><code>snakemake -s ngspipe/workflow/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -j 1
 </code></pre>
 <h3 id="3-config">3. config <a name="DatabaseConfig"></a></h3>
-<ol>
-<li>修改 <code>mysite/mysite/settings.py</code></li>
-</ol>
+<p>edit <code>mysite/mysite/settings.py</code> file</p>
 <pre><code class="language-shell"># Application definition
 
 INSTALLED_APPS = [
@@ -214,12 +237,67 @@ INSTALLED_APPS = [
 <h3 id="5-add-your-custome-data">5. add your custome data</h3>
 <ol>
 <li>table data in a page</li>
-<li>custome script in wooey</li>
-</ol>
+<li>
+<p>custome script in wooey</p>
 <p>python manage.py makemigrations
 python manage.py migrate
 python manage.py addscript ../ngsdb/tools/test1.py</p>
+</li>
+</ol>
 <p>If you want use wooey tools on a task model <code>celery -A ProjectName worker -c 1 --beat -l info</code> optional.</p>
+<h2 id="overview-the-ngsdb-apps">overview the NGSDb apps</h2>
+<p>We use django project to constructed our NGSDb. We have pareparied many apps for you. embeed. Please have a look:</p>
+<table>
+<thead>
+<tr>
+<th>django apps</th>
+<th>description</th>
+<th>package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>report</td>
+<td>ngs analysis report</td>
+<td>snakemake</td>
+</tr>
+<tr>
+<td>geneExpAtlas</td>
+<td>table</td>
+<td>datatable js</td>
+</tr>
+<tr>
+<td>network</td>
+<td>table</td>
+<td>datatable js</td>
+</tr>
+<tr>
+<td>igv</td>
+<td>genome browse</td>
+<td><a href="https://github.com/igvteam/igv.js/wiki">IGV</a></td>
+</tr>
+<tr>
+<td>blastplus</td>
+<td>ncbi blast +</td>
+<td>NCBI</td>
+</tr>
+<tr>
+<td>ngstools</td>
+<td>python script</td>
+<td>wooey</td>
+</tr>
+<tr>
+<td>efp</td>
+<td>efp browse</td>
+<td></td>
+</tr>
+<tr>
+<td>heatmap</td>
+<td>expression</td>
+<td>clustergrammer-js https://clustergrammer.readthedocs.io/clustergrammer_js.html</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
