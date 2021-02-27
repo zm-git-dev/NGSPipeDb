@@ -15,12 +15,12 @@
 
 ## Quick Start - One time installation of components necessary for an individual user <a name="QuickStarted"></a>
 
-Three commands to start analysing test data:
+Three commands to start analysing [test data]():
 ```shell
 # download ngspipedb to anywhere you want
-git clone https://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis
+git clone git://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis
 # download test data and create environment
-bash ngspipe/scripts/one_step_runtest.sh
+bash ngspipe/scripts/one_step_ranseq_test.sh
 ```
 
 Now you can viste your website on http://127.0.0.1:8000. All result are stored in `results`.
@@ -34,7 +34,7 @@ If you have more time, then we recommend you configure ngspipedb according to yo
 
 ## Step-by-step RNA-seq workflow <a href="Step-by-Step-RNASeq"></a>
 
-Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the [nix command line interface](https://en.wikipedia.org/wiki/Command-line_interface). Also, best practice RNA-seq analysis is plus
+Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the [nix command line interface](https://en.wikipedia.org/wiki/Command-line_interface). Also, best practice RNA-seq analysis is plus.
 
 ### 1. Installing wget and git <a name="BasicLinux"></a>
 
@@ -76,7 +76,6 @@ If you want to use specific version, please cleckout the [release](https://githu
     cd /path/to/where_you_want
     wget https://github.com/xuanblo/NGSPipeDb/archive/NGSPipeDb_xxx.tar.gz
     tar -xf NGSPipeDb_xxx.tar.gz
-__Note__: the xxx refers to the latest changeset of NGSPipeDb, so it will differ.
 
 ### 4. Installing the NGSPipeDb conda environments <a name="NGSPipeDbEnv"></a>
 
@@ -92,6 +91,7 @@ Next, to analysis NGS data some bioinformatics tools need to be installed.
 
 __Note__: By default, all dependencies and tools should automatically be installed on the first execution. In case of download problems, please see how to [install conda env local](), [share conda env]() for more detail.
 
+<font color='red'>由于差异表达需要安装的包与前面的环境有不兼容，所以暂时独立了出来。</font>
 ```shell
 conda create -n exp_r_env mamba -c conda-forge
 conda activate exp_r_env
@@ -100,30 +100,32 @@ mamba env update --file ngspipe/envs/requirements_exp_r_env.yaml --prune
 
 ### 5. Downloading the test files <a name="Testdata"></a>
 
-__NGSPipeDb__ is dependent on reference files which can be found for the supported species listed below:  [download link](http://www.liu-lab.com/ngspipedb)
+__NGSPipeDb__ is dependent on reference files which can be found for the supported species listed below: [download link](http://www.liu-lab.com/ngspipedb)
 
 To download RNA-seq test data into `./testdata`, simply run the bash script `download_testdata.sh`:
 
-    cd NGSPipeDb
-    bash ngspipe/scripts/download_testdata.sh testdata`
+```shell
+cd NGSPipeDb
+bash ngspipe/scripts/download_testdata.sh testdata
+```
 
 or you download the reference files that you need and then untarring then in a directory called `testdata`.
 
-    wget http://www.liu-lab.com/ngspipedb/rnaseq_testdata.tar.gz
-    tar -zxvf rnaseq_testdata.tar.gz
+```shell
+wget http://www.liu-lab.com/ngspipedb/rnaseq_testdata.tar.gz
+tar -zxvf rnaseq_testdata.tar.gz
+```
 
 Make sure you have the following directory structure by `tree testdata`:
 
-```
-testdata/
-├── GRCm38.83.chr19.gtf
-├── chr19.fa
-├── control_R1.fq.gz
-├── control_R2.fq.gz
-├── samples.xls
-├── treated_R1.fq.gz
-└── treated_R2.fq.gz
-```
+    testdata/
+    ├── GRCm38.83.chr19.gtf
+    ├── chr19.fa
+    ├── control_R1.fq.gz
+    ├── control_R2.fq.gz
+    ├── samples.xls
+    ├── treated_R1.fq.gz
+    └── treated_R2.fq.gz
 
 ### 6. run RNA-seq analysis on test data <a name="RunTest"></a>
 
@@ -136,19 +138,20 @@ We provied a simple RNA-seq workflow for you to take a glance of NGSPipe. In RNA
 4. transcript assembly
 5. quantification
 6. statistic
+7. diff
 ```
 
-First, we need to check the workflow/path/file. This will not execute anything, but display what would be done.
+First, we need to check the `ngspipe/file`. This will not execute anything, but display what would be done.
 
-    snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -np
+    snakemake -s ngspipe/workflow/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -np
 
 If nothing goes wrong, you can generate a dag plot:
 
-    snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --dag|dot -Tpng > dag.png
+    snakemake -s ngspipe/workflow/rnaseq_analysis.Snakefile.py --dag|dot -Tpng > dag.png
 
-Now you can do RNA-seq analysis by juest one simply command.
+Now you can do RNA-seq analysis by just one simply command.
 
-    snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j 10
+    snakemake -s ngspipe/workflow/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j 10
 
 The final data files are put in the folder `results`. Please check you result file `tree -d -L 2 results/`, it may like this:
 
@@ -178,97 +181,225 @@ __Note__: If you encounter any problem in this step, please turn to `TroubleShoo
 
 If all goes well, the proper analysis will be followed by the making of the html report using Snakemake to a html report file with pictures and tables.
 
-    snakemake --snakefile ngspipe/rnaseq_analysis.Snakefile.py --report results/Report/report.html
+    snakemake --snakefile ngspipe/workflow/rnaseq_analysis.Snakefile.py --report results/Report/report.html
 
-- the final report should appear as `results/Report/report.html`. This report is a single html file with all in it and can be sent to customers/colleagues as a final report. It is nicer than a PDF version because of large tables and figures which would suffer from page breaks and it can be viewed on any device supporting html include smartphones :-).
+The final report should appear as `results/Report/report.html`. This report is a single html file with all in it and can be sent to customers/colleagues as a final report. It is nicer than a PDF version because of large tables and figures which would suffer from page breaks and it can be viewed on any device supporting html include smartphones :-).
 
 __Note__: Internet Explorer is not supported. If you get connected error in this step, you can solve this problem by edit file `ngspipedb_py38_conda_env/lib/python3.8/site-packages/snakemake/report/report.html.jinja2` to change `https://raw.githubusercontent.com/eligrey/FileSaver.js/2.0.0/src/FileSaver.js` to `https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.js`
 
 
 ### 8. run your custome data <a name="RunRawdata"></a>
 
-NGSPipeDb is built to be used routinely. To ensure a maximum comparability of the results, a default config.yaml file is generated when calling the AQUAMIS.py wrapper script. The wrapper itself only allows configuring basic functionalities. The config.yaml can be initialized by starting AQUAMIS with the dry-run flag -n . Then, you can alter it to configure NGSPipeDb in more detail.
+NGSPipe is built to be used routinely. To ensure a maximum comparability of the results, you can copy default `ngspipe/config/rnaseq.config.yaml` and `ngspipe/workflow/rnaseq_analysis.Snakefile.py` file from the ngspipe source directory:
 
-Running this code requires:
-
-- installing **miniconda** and all required dependencies from the provided **environment.yaml** (```conda env create --name pinfish_3.6 --file=environment.yaml```)
-- editing the **config.yaml** file to match your own machine, reference genome, and data
-- adding the required data files in due locations (matching the yaml)
-- edit the **Preamble.md** file to include a text describing the 'Aim' of the experiment. This text will be added to the report as first section and is one of the two report sections that can be edited by the end-user.
-- edit `ngspipe/report/*.rst` that will be added at the end of the report.
-
-- run Snakemake with ```snakemake --use-conda -j <thread number>```
-
-
-[view the report hosted here](http://htmlpreview.github.io/?https://github.com/Nucleomics-VIB/Nanopore_Pinfish_Analysis/blob/master/Nanopore_Pinfish_Analysis.html)
-
-rem: when something breaks the snake, or if you add more text/comments in the initial Rmd report, you can regenerate the report manually with ```R --slave -e 'rmarkdown::render("Nanopore_Pinfish_Analysis.Rmd", "html_document")'``` within the base project folder.
-
-edit file `NGSPipeCode/config.yaml` for general data path or something. edit file `snakefile` for general data path or something.
-Configuring the META files: config.yaml <a name="config"></a>
-The config.yaml file has three main sections. __PATHS__, __PARAMS__, __SAMPLES__:
-
-edit file `NGSPipeCode/Snakefile` for advance setting, such as sampling method, mapping tool, email address to receive run log.
-
-
-
-3. create samples.xls, for example, if you have two samples named "control" and "treated", just create a text file (maybe named sample.xls) with one column and two rows.
-
-resources/testdata/sample.info.xls:
-```
-control
-treated
+```shell
+cp ngspipe/config/rnaseq.config.yaml ngspipe/workflow/rnaseq_analysis.Snakefile.py ./
 ```
 
-Raw data files can either be fastq, fastq.gz, or bam formated files. If your raw data are located in __somewhere else__, you can copy them to `rawdata`, or create soft links like `cd rawdata && ln -s yoursamplepath/*.fq.gz ./`.
+We will explain how to edit and configure these files shortly below.
 
-As recommended above, if all of your raw data are located in __rawdata__, then create a `samples.xls` file like:
+#### Rawdata sequence data
+
+Raw data files can either be fastq, fastq.gz formated files. If your raw data are located in __somewhere else__, you can copy them to `rawdata`, or create soft links like `ln -s ../yoursamplepath/*.fq.gz rawdata/`.
+
+    rawdata/
+    ├── lung-rep1_R1.fq.gz
+    ├── lung-rep1_R2.fq.gz
+    ├── lung-rep2_R1.fq.gz
+    ├── lung-rep2_R2.fq.gz
+    ├── lung-rep3_R1.fq.gz
+    ├── lung-rep3_R2.fq.gz
+    ├── liver-rep1_R1.fq.gz
+    ├── liver-rep1_R2.fq.gz
+    ├── liver-rep2_R1.fq.gz
+    ├── liver-rep2_R2.fq.gz
+    ├── liver-rep3_R1.fq.gz
+    ├── liver-rep3_R2.fq.gz
+
+As recommended above, if all of your raw data are located in __rawdata__, then create a `rawdata/samples.xls` file like:
+
+    lung-rep1
+    lung-rep2
+    lung-rep3
+    liver.rep1
+    liver.rep2
+    liver.rep3
+
+__Note__: You cannot mix Paired-end and Single-end samples within the same NGSPipe run as this will cause an ERROR. NGSPipe only support Paired-end samples.
+
+#### reference data
+
+You can download reference data from NCBI, Ensembl, or anywhere else to `Genomedata`. The most import file is genome in Fasta formant and gene annotation in GFF/GTF format.
+
+    testdata/
+    ├── GRCm38.83.chr19.gtf
+    └── chr19.fa
+
+#### edit config file
+
+In this section, you will need to specify every term to match your own machine, reference genome, and data.
+
+```yaml
+# path relative to where you run snakemake
+
+## reference ##
+genomeAnno: "testdata/GRCm38.83.chr19.gtf" # gene annotation file, can be gtf or gff
+genomeFasta: "testdata/chr19.fa" # genome sequence
+
+## output directory ##
+resultsDir: "results/result"
+reportsDir: "results/report"
+dbDir: "results/sqlite3"
+
+## input ##
+samplesList: "testdata/samples.xls" # sample file
+samplesDir: "testdata" # sample file directory
+read1Suffix: "_R1.fq.gz" # fastq suffix, read1
+read2Suffix: "_R2.fq.gz"
+replict_num: 3 # replict can by 1,2,3
+# condition for differential expression by deseq2
+```
+
+#### condition for sample compare
+
+To compare each sample, a group information is needed.
+
+    sample_id,Sample,Tissue
+    control-0,control,normal
+    control-1,control,normal
+    control-2,control,normal
+    treated-0,treated,tumor
+    treated-1,treated,tumor
+    treated-2,treated,tumor
+
+#### edit snakefile
+
+edit file `ngspipe/workflow/rnaseq_analysis.Snakefile.py` for advance setting, such as sampling data method, mapping tool, and email address to receive run log.
+
+```python
+# relative path
+snake_dir = workflow.basedir # all configfile, scripts, restructuretext, ens are relative to snakefile (this file)
+working_dir = os.getcwd() # input and output path are relative to current working directory
+
+# get notice
+receiver_email = 'youemailaddress'
+
+# ----------------------------------------------------------------------- #
+# sample information #
+#
+smpList = pd.read_csv(config["samplesList"], index_col=0, header=None)
+SAMPLES = list(smpList.index)[0:] # how many sample you want to run.
+# ----------------------------------------------------------------------- #
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+# detail parameters in pipe #
+#
+# 1. sampling data
+# for test the pipe, you can choose to the part of the input file, can be whole,head:40000,tail:40000,random:0.5,random:40000
+sampling_method = 'links' # tail, seqkit_number, seqkit_proportion, head, tail
+sampling_data_outdir = join(config["resultsDir"], "sampling_data", "sampling_data_by_{}".format(sampling_method))
+
+# 2. raw reads qc
+qc_method = 'trim-galore' # trimomatic
+qc_outdir = join(config["resultsDir"], "rawReads_qc", "rawReads_qc_by_{}".format(qc_method))
+
+# 3. junction alignmnet
+junction_align_method = 'hisat2' # star
+junction_align_outdir = join(config["resultsDir"], "junction_align", "junction_align_by_{}".format(junction_align_method))
+genome_index_prefix = "genome"
+# rna-seq sequencing type, can be fr-firststrand, none, fr-secondstrand
+rna_library = "" # "--rna-strandness RF"(fr-firststrand) or "--rna-strandness FR"(fr-secondstrand)
+
+# 4. transcript assembly
+transcript_assembly_method = 'stringtie' # star
+transcript_assembly_outdir = join(config["resultsDir"], "transcript_assembly", "transcript_assembly_by_{}".format(transcript_assembly_method))
+
+# 5. quantification
+quantify_method = 'stringtie' # htseqcounts or featurecounts
+quantify_outdir = join(config["resultsDir"], "quantify", "quantify_by_{}".format(quantify_method))
+
+# 6. statistic
+statistic_data_all = [
+                  '0.genomeFa', 
+                  '0.genomeAnno', 
+                  '1.rawReads', 
+                  '2.cleanReads', 
+                  '2.multiqc', 
+                  '3.bam', 
+                  '4.mergedGtf', 
+                  '5.exp',
+                  ]
+genomeFa_outdir, genomeAnno_outdir, rawReads_outdir, cleanReads_outdir, multiqc_outdir, bam_outdir, mergedGtf_outdir, exp_outdir \
+  = [join(config["resultsDir"], "statistic", "statistic_data_of_{}".format(i)) for i in statistic_data_all]
+
+statistic_data_choose = [
+                  #'0.genomeFa', 
+                  #'0.genomeAnno', 
+                  '1.rawReads', 
+                  '2.cleanReads', 
+                  #'2.multiqc', 
+                  '3.bam', 
+                  #'4.mergedGtf', 
+                  #'5.exp',
+                  ]
+stat_outdir = join(config["resultsDir"], "statistic")
+
+# 7. diff gene discovery
+diff_outdir = join(config["resultsDir"], "diff", "diff_by_{}".format('deseq2'))
+# -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+
+# ------------------------------
+#report: "report/workflow.rst"
+report_outdir = join(config["reportsDir"], "report.html")
+# ------------------------------
+
+# include modules
+include: join("rules", "1.sampling_data_by_{}.Snakefile.py".format(sampling_method))
+include: join("rules", "2.rawReads_qc_by_{}.Snakefile.py".format(qc_method))
+include: join("rules", "3.junction_align_by_{}.Snakefile.py".format(junction_align_method))
+include: join("rules", "4.transcript_assembly_by_{}.Snakefile.py".format(transcript_assembly_method))
+include: join("rules", "5.quant_by_{}.Snakefile.py".format(quantify_method))
+include: join("rules", "6.statistic_data_of_bam.Snakefile.py")
+include: join("rules", "6.statistic_data_of_rawReads.Snakefile.py")
+include: join("rules", "6.statistic_data_of_cleanReads.Snakefile.py")
+include: join("rules", "7.report.Snakefile.py")
+include: join("rules", "9.differential_expression.deseq2.Snakefile.py")
 
 ```
-lung.rep1
-lung.rep2
-lung.rep3
-liver.rep1
-liver.rep2
-liver.rep3
+
+__Note__: The script/env/include path is always relative to the Snakefile containing the directive (in contrast to the input, output and log file paths, which are relative to the working directory). 
+
+#### report
+
+edit `ngspipe/report/*.rst` that will be added at the end of the report. For example, edit the `ngspipe/report/rawreads_stat.rst` file to include a text describing the 'Statistic' of the experiment. This text will be added to the report as static section and is one of the two report sections that can be edited by the end-user.
+
+```matlab
+
+summary of reads produced
+=========================
+
+The details of the data quality are as follows:
+
+#. Sample name: Sample name
+#. Raw reads: Count raw sequence data, with four rows in a unit, count the number of sequencing sequences in each file
+#. Clean reads: The calculation method is the same as that of Raw reads, except that the statistical files are filtered sequencing data, and subsequent bioinformatics analysis is based on Clean reads
+#. Clean bases: Multiply the number of sequencing sequences by the length of the sequencing sequence and convert it to G as the unit
+#. Error rate: base sequencing error rate
+#. Q20, Q30: respectively represent the percentage of bases whose Phred value is greater than 20 and 30 to the total bases
+#. GC content: the percentage of the total number of bases G and C to the total number of bases
 ```
 
-__If you did not follow the recommended best practice__ then you will have to specify the full paths here.
+#### run snakemake
 
-Each sample should be given a __NAME__ (arbitrary text) and a __PATH__
-
-
-__IMPORTANT__: __You cannot mix Paired-end and Single-end samples within the same VIPER run as this will cause an ERROR__. If necessary, run all of one type of data first, followed by the net type of data after.
-
-__*2. Copying over the META files:*__
-
-The __META__ files (*config.yaml* and *metasheet.csv*) allow you to configure each run.  They are explained in much more detail below.  For now, we simply copy them from the viper source directory:
-```
-    cd PROJECT
-    cp viper/config.yaml .
-    cp viper/metasheet.csv .
-```
-__We will explain how to edit and configure these files shortly below__
-
-
-In this section, you will need to specify the location of the following static reference files.
-
-__The script path is always relative to the Snakefile containing the directive (in contrast to the input and output file paths, which are relative to the working directory).__
-
-All paths in the snakefile are interpreted relative to the directory snakemake is executed in. 
-
-__*3. custom your snakefile*__
-
-__*4. run*__
 
 ```shell
 # dry run, use -n parameter only print task plan, -p print commands
-snakemake -np --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml
+snakemake -s ngspipe/workflow/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -np
 
 # run pipe
-snakemake -p --snakefile NGSPipeCode/Snakefile --configfile NGSPipeCode/config.yaml -j1
+snakemake -s ngspipe/workflow/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <thread number>
 
-
+# after run pipe successfully, report can be generated.
+snakemake --snakefile ngspipe/workflow/rnaseq_analysis.Snakefile.py --report results/Report/report.html
 ```
-
-__Note__: Input, output and log are relative to your execution directory. Other paths, such as Env and include, are relative to the snapfile path
