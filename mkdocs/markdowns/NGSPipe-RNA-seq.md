@@ -1,21 +1,20 @@
-## RNA-seq analysis
+# RNA-seq analysis
 
-    1. [Installing wget and git](#BasicLinux)
-    2. [Installing Miniconda3](#Miniconda)
-    3. [Installing the NGSPipeDb conda environments](#NGSPipeDbEnv)
-    4. [Downloading the NGSPipeDb source code](#NGSPipeDbSource)
-    5. [Downloading the NGSPipeDb test files](#Testdata)
-    6. [Run test data](#RunTest)
-    7. [Generate report](#Report)
-    8. [Run your custome data](#RunRawdata)
-    1. [Installing requirement](#DatabaseRequirement)
-    2. [Convert table file to sqlite3](#Table2Sqlite3)
-    3. [Database config](#DatabaseConfig)
-    4. [Start server](#RunServer)
+__Table of Contents:__
+
+1. [Installing wget and git](#BasicLinux)
+2. [Installing Miniconda3](#Miniconda)
+3. [Installing the NGSPipeDb conda environments](#NGSPipeDbEnv)
+4. [Downloading the NGSPipeDb source code](#NGSPipeDbSource)
+5. [Downloading the NGSPipeDb test files](#Testdata)
+6. [Run test data](#RunTest)
+7. [Generate report](#Report)
+8. [Run your custome data](#RunRawdata)
 
 ## Quick Start - One time installation of components necessary for an individual user <a name="QuickStarted"></a>
 
 Three commands to start analysing [test data]():
+
 ```shell
 # download ngspipedb to anywhere you want
 git clone git://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis

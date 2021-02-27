@@ -58,6 +58,44 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">NGSPipe RNA-seq</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#quick-start-one-time-installation-of-components-necessary-for-an-individual-user">Quick Start - One time installation of components necessary for an individual user </a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-by-step-rna-seq-workflow">Step-by-step RNA-seq workflow </a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-installing-wget-and-git">1. Installing wget and git </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-installing-miniconda3">2. Installing Miniconda3 </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-downloading-the-ngspipedb-project">3. Downloading the NGSPipeDb project </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-installing-the-ngspipedb-conda-environments">4. Installing the NGSPipeDb conda environments </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-downloading-the-test-files">5. Downloading the test files </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-run-rna-seq-analysis-on-test-data">6. run RNA-seq analysis on test data </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7-rgenerate-report">7. rgenerate report </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#8-run-your-custome-data">8. run your custome data </a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#rawdata-sequence-data">Rawdata sequence data</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#reference-data">reference data</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#edit-config-file">edit config file</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#condition-for-sample-compare">condition for sample compare</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#edit-snakefile">edit snakefile</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#report">report</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#run-snakemake">run snakemake</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -112,20 +150,18 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="rna-seq-analysis">RNA-seq analysis</h2>
-<pre><code>1. [Installing wget and git](#BasicLinux)
-2. [Installing Miniconda3](#Miniconda)
-3. [Installing the NGSPipeDb conda environments](#NGSPipeDbEnv)
-4. [Downloading the NGSPipeDb source code](#NGSPipeDbSource)
-5. [Downloading the NGSPipeDb test files](#Testdata)
-6. [Run test data](#RunTest)
-7. [Generate report](#Report)
-8. [Run your custome data](#RunRawdata)
-1. [Installing requirement](#DatabaseRequirement)
-2. [Convert table file to sqlite3](#Table2Sqlite3)
-3. [Database config](#DatabaseConfig)
-4. [Start server](#RunServer)
-</code></pre>
+                <h1 id="rna-seq-analysis">RNA-seq analysis</h1>
+<p><strong>Table of Contents:</strong></p>
+<ol>
+<li><a href="#BasicLinux">Installing wget and git</a></li>
+<li><a href="#Miniconda">Installing Miniconda3</a></li>
+<li><a href="#NGSPipeDbEnv">Installing the NGSPipeDb conda environments</a></li>
+<li><a href="#NGSPipeDbSource">Downloading the NGSPipeDb source code</a></li>
+<li><a href="#Testdata">Downloading the NGSPipeDb test files</a></li>
+<li><a href="#RunTest">Run test data</a></li>
+<li><a href="#Report">Generate report</a></li>
+<li><a href="#RunRawdata">Run your custome data</a></li>
+</ol>
 <h2 id="quick-start-one-time-installation-of-components-necessary-for-an-individual-user">Quick Start - One time installation of components necessary for an individual user <a name="QuickStarted"></a></h2>
 <p>Three commands to start analysing <a href="">test data</a>:</p>
 <pre><code class="language-shell"># download ngspipedb to anywhere you want
