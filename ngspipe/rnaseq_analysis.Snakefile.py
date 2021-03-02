@@ -11,9 +11,6 @@ working_dir = os.getcwd() # input and output path are relative to current workin
 # get notice
 receiver_email = 'zhangxuan@xtbg.ac.cn'
 
-# configfile
-configfile: join(snake_dir, "config", "rnaseq.config.yaml")
-
 # ----------------------------------------------------------------------- #
 # sample information #
 #
@@ -129,8 +126,8 @@ onsuccess:
  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ 
                                                                                            
     """)
-    shell("python ngspipe/scripts/sendmail.py {}".format(receiver_email))
-    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -a {}".format("zhangxuan@xtbg.ac.cn,296373256@qq.com", "success", ".snakemake/log/"))
+    #shell("python ngspipe/scripts/sendmail.py {}".format(receiver_email))
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("zhangxuan@xtbg.ac.cn,296373256@qq.com", "success", join(working_dir, ".snakemake/log/")))
     # NGSPipeDB_source_code/.snakemake/log/
 
 
@@ -151,15 +148,15 @@ onerror:
  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀ 
                                                                  
     """)
-    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -a {}".format("zhangxuan@xtbg.ac.cn,296373256@qq.com", "error", ".snakemake/log/"))
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("zhangxuan@xtbg.ac.cn,296373256@qq.com", "error", join(working_dir, ".snakemake/log/")))
 
-include: join("rules", "1.sampling_data_by_{}.Snakefile.py".format(sampling_method))
-include: join("rules", "2.rawReads_qc_by_{}.Snakefile.py".format(qc_method))
-include: join("rules", "3.junction_align_by_{}.Snakefile.py".format(junction_align_method))
-include: join("rules", "4.transcript_assembly_by_{}.Snakefile.py".format(transcript_assembly_method))
-include: join("rules", "5.quant_by_{}.Snakefile.py".format(quantify_method))
-include: join("rules", "6.statistic_data_of_bam.Snakefile.py")
-include: join("rules", "6.statistic_data_of_rawReads.Snakefile.py")
-include: join("rules", "6.statistic_data_of_cleanReads.Snakefile.py")
-include: join("rules", "7.report.Snakefile.py")
-include: join("rules", "9.differential_expression.deseq2.Snakefile.py")
+include: join("../rules", "1.sampling_data_by_{}.Snakefile.py".format(sampling_method))
+include: join("../rules", "2.rawReads_qc_by_{}.Snakefile.py".format(qc_method))
+include: join("../rules", "3.junction_align_by_{}.Snakefile.py".format(junction_align_method))
+include: join("../rules", "4.transcript_assembly_by_{}.Snakefile.py".format(transcript_assembly_method))
+include: join("../rules", "5.quant_by_{}.Snakefile.py".format(quantify_method))
+include: join("../rules", "6.statistic_data_of_bam.Snakefile.py")
+include: join("../rules", "6.statistic_data_of_rawReads.Snakefile.py")
+include: join("../rules", "6.statistic_data_of_cleanReads.Snakefile.py")
+include: join("../rules", "7.report.Snakefile.py")
+include: join("../rules", "9.differential_expression.deseq2.Snakefile.py")

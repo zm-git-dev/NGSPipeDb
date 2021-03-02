@@ -13,6 +13,8 @@ dependencies:
   - rseqc=4.0.0
   - matplotlib
   - seaborn
+  - blast
   - gffread
   - gffutils
+  - agat
   - r-getopt

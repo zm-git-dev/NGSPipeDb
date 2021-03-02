@@ -39,6 +39,7 @@ rule report_all:
         touch(join(config['reportsDir'], "report.ok"))
     shell:
         '''
+
         '''
 
 rule workflow_report:
@@ -54,7 +55,8 @@ rule workflow_report:
         workflow_report = join(config['reportsDir'], 'workflow', "workflow.png")
     shell:
         '''
-        cp {input.workflow_report} {output.workflow_report};
+        #cp {input.workflow_report} {output.workflow_report};
+        mv {working_dir}/dag.png {output.workflow_report};
         '''
 
 rule rawreads_stat_report:
