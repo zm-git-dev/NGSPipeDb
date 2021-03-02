@@ -7,17 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
-  
-  <link rel="shortcut icon" href="./img/favicon.ico">
-  <title>NGSPipeDb Document</title>
+  <link rel="canonical" href="https://xuanblo.github.io/NGSPipeDb/ngs/">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>NGS analysis - NGSPipeDb Document</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="./css/theme.css" />
-  <link rel="stylesheet" href="./css/theme_extra.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
-  <script src="./js/jquery-2.1.1.min.js" defer></script>
-  <script src="./js/modernizr-2.8.3.min.js" defer></script>
+  <script>
+    // Current page data
+    var mkdocs_page_name = "NGS analysis";
+    var mkdocs_page_input_path = "ngs.md";
+    var mkdocs_page_url = "/NGSPipeDb/ngs/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
@@ -31,9 +38,9 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="./." class="icon icon-home"> NGSPipeDb Document</a>
+        <a href=".." class="icon icon-home"> NGSPipeDb Document</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
@@ -41,35 +48,41 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="./.">Getting start</a>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Getting start</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="./NGSPipeDb/">NGSPipeDb Tutorial</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSPipeDb/">NGSPipeDb Tutorial</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="./NGSPipe-RNA-seq/">NGSPipe RNA-seq</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSPipe-RNA-seq/">NGSPipe RNA-seq</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="./NGSPipe-ChIP-seq/">NGSPipe ChIP-seq</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSPipe-ChIP-seq/">NGSPipe ChIP-seq</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="./NGSPipe-resequecing/">NGSPipe resequecing</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSPipe-resequecing/">NGSPipe resequecing</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="./NGSDb/">NGSDb</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../NGSDb/">NGSDb</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="./linux/">Linux & shell basic</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../linux/">Linux & shell basic</a>
                     </li>
                 </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="./ngs/">NGS analysis</a>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">NGS analysis</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#rna-seq-analysis">RNA-Seq analysis </a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chip-seq-analysis">Chip-Seq analysis </a>
+    </li>
+    </ul>
                     </li>
                 </ul>
       </div>
@@ -81,7 +94,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="./.">NGSPipeDb Document</a>
+        <a href="..">NGSPipeDb Document</a>
       </nav>
 
       
@@ -89,10 +102,15 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="./.">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
+      
     
+    <li>NGS analysis</li>
     <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/xuanblo/NGSPipeDb/mkdocs/edit/master/docs/ngs.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -102,22 +120,27 @@
           <div role="main">
             <div class="section">
               
-
-  <h1 id="search">Search Results</h1>
-
-  <form id="content_search" action="search.html">
-    <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off" autofocus title="Type search term here">
-  </form>
-
-  <div id="mkdocs-search-results" class="search-results">
-    Searching...
-  </div>
-
-
+                <h1 id="ngs-analysis">NGS analysis</h1>
+<p><strong>Table of Contents:</strong></p>
+<ol>
+<li><a href="#rnaseq">RNASeq</a></li>
+<li><a href="#chipseq">ChipSeq</a></li>
+</ol>
+<h2 id="rna-seq-analysis">RNA-Seq analysis <a name="ranseq"></a></h2>
+<p><img alt="workflow" src="" /></p>
+<h2 id="chip-seq-analysis">Chip-Seq analysis <a name="chipseq"></a></h2>
+<p><img alt="workflow" src="" /></p>
+              
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../linux/" class="btn btn-neutral" title="Linux & shell basic"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -145,12 +168,14 @@
           <a href="https://github.com/xuanblo/NGSPipeDb/mkdocs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
+        <span><a href="../linux/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
       
     </span>
 </div>
-    <script>var base_url = '.';</script>
-    <script src="./js/theme.js" defer></script>
-      <script src="./search/main.js" defer></script>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
     <script defer>
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
