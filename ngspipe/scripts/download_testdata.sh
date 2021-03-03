@@ -27,6 +27,12 @@ curl -C - http://www.liu-lab.com/ngspipedb/Testdata/GRCm38.83.chr19.gtf.gz | gun
 echo -e "\033[32m Downloading sample list file... \033[0m"
 wget --no-clobber http://www.liu-lab.com/ngspipedb/Testdata/samples.xls
 
+echo -e "\033[32m Downloading condition list file... \033[0m"
+wget --no-clobber http://www.liu-lab.com/ngspipedb/Testdata/condition.xls
+
+`python ../ngspipe/scripts/generate_replicat.py control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz`
+`rm -f control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz`
+
 # cd back
 cd -
 

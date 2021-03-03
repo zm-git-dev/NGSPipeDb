@@ -27,10 +27,7 @@ Now you can viste your website on http://127.0.0.1:8000. All result are stored i
 - Example of report <sub>[![html](https://img.icons8.com/ios/20/000000/html-filetype.png)](http://www.liu-lab.com)</sub>.
 - Example of database <sub>[![html](https://img.icons8.com/dotty/25/000000/copy-link.png)](http://www.liu-lab.com)</sub>.
 
-
 If you have more time, then we recommend you configure ngspipedb according to your needs. For more details, please see [step by step](#step-by-step) bellow.
-
-
 
 ## Step-by-step RNA-seq workflow <a href="Step-by-Step-RNASeq"></a>
 
@@ -82,13 +79,13 @@ or
 
 Enter directory `cd species_sample_transcript_analysis_by_NGSPipeDb` for further setps.
 
-### 4. Installing the NGSPipeDb conda environments <a name="NGSPipeDbEnv"></a>
+### 4. Installing the NGSPipe RNA-Seq conda environments <a name="NGSPipeDbEnv"></a>
 
 We are now ready to use conda to install the [dependencies](https://github.com/xuanblo/NGSPipeDb/blob/master/ngspipe/envs/requirements_rnaseq.yaml) of which NGSPipe RNA-Seq analysis is required.
 
 First, you will need to create a conda environments. For details, see [manage envirement](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) with conda. [Snakemake]() and [Python]() is the basic tool of ngspipedb.
 
-    mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8
+    mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0
 
 Next, to analysis NGS data some bioinformatics tools need to be installed.
 
@@ -117,23 +114,39 @@ To download the mouse RNA-seq test data into `./testdata`:
 
     bash ngspipe/scripts/download_testdata.sh testdata
 
-or download the reference files that you need and then untarring then in a directory called `testdata`.
+or download the test files (160M) that you need and then untarring then in a directory called `testdata`.
 
     wget http://www.liu-lab.com/ngspipedb/rnaseq_testdata.tar.gz
     tar -zxvf rnaseq_testdata.tar.gz
+
+Generate replicated samples:
+
+    cd testdata
+    python ../ngspipe/scripts/generate_replicat.py control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
+    rm -f control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
+    cd ..
 
 Make sure you have the following directory structure by command `tree testdata`:
 
     testdata/
     ├── GRCm38.83.chr19.gtf
     ├── chr19.fa
-    ├── control_R1.fq.gz
-    ├── control_R2.fq.gz
+    ├── condition.xls
+    ├── control-0_R1.fq.gz
+    ├── control-0_R2.fq.gz
+    ├── control-1_R1.fq.gz
+    ├── control-1_R2.fq.gz
+    ├── control-2_R1.fq.gz
+    ├── control-2_R2.fq.gz
     ├── samples.xls
-    ├── treated_R1.fq.gz
-    └── treated_R2.fq.gz
+    ├── treated-0_R1.fq.gz
+    ├── treated-0_R2.fq.gz
+    ├── treated-1_R1.fq.gz
+    ├── treated-1_R2.fq.gz
+    ├── treated-2_R1.fq.gz
+    └── treated-2_R2.fq.gz
 
-测试数据中没有conditionx.xls
+__Note__: This data is only used to test the analysis process, and the analysis results have no biological significance.
 
 ### 6. run RNA-seq analysis on test data <a name="RunTest"></a>
 
