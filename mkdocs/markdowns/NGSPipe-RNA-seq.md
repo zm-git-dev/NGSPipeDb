@@ -185,6 +185,7 @@ The final data files are put in the folder `results`. Please check you result fi
     │   ├── 4.exp_stat
     │   └── workflow
     └── result
+        ├── diff
         ├── junction_align
         ├── quantify
         ├── rawReads_qc
@@ -204,8 +205,7 @@ The final report should appear as `results/report/report.html`. This report is a
 
 __Note__: Internet Explorer is not supported.
 
-发邮件的程序还有个bug，不能同时给多个地址发邮件。
-差异表达还没有测试。
+生成报告的时候add pdf 时间无限长！
 
 ### 8. run your custome data <a name="RunRawdata"></a>
 
@@ -239,9 +239,9 @@ As recommended above, if all of your raw data are located in __rawdata__, then c
     lung-rep1
     lung-rep2
     lung-rep3
-    liver.rep1
-    liver.rep2
-    liver.rep3
+    liver-rep1
+    liver-rep2
+    liver-rep3
 
 __Note__: You cannot mix Paired-end and Single-end samples within the same NGSPipe run as this will cause an ERROR. NGSPipe only support Paired-end samples.
 
@@ -285,12 +285,12 @@ __Note__: The input, output file paths are relative to the working directory.
 To perform gene differential analysis, please create a `rawdata/condition.xls` file.
 
     sample_id,Sample,Tissue
-    control-0,control,normal
-    control-1,control,normal
-    control-2,control,normal
-    treated-0,treated,tumor
-    treated-1,treated,tumor
-    treated-2,treated,tumor
+    lung-rep1,lung,normal
+    lung-rep2,lung,normal
+    lung-rep3,lung,normal
+    liver-rep1,liver,tumor
+    liver-rep2,liver,tumor
+    liver-rep3,liver,tumor
 
 #### 5. edit snakefile
 
@@ -388,7 +388,7 @@ include: join("rules", "9.differential_expression.deseq2.Snakefile.py")
 
 ```
 
-__Note__: The script/env/include path is always relative to the Snakefile containing the directive (in contrast to the input, output and log file paths, which are relative to the working directory). 
+__Note__: The `script/env/include` path is always relative to the Snakefile containing the directive (in contrast to the input, output and log file paths, which are relative to the working directory). 
 
 #### 6. custome report
 

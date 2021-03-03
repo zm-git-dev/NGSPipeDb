@@ -1,4 +1,4 @@
-name: null
+name: rnaseq
 channels:
   - bioconda
   - conda-forge

@@ -72,7 +72,7 @@ if __name__ == "__main__":
         smtp.connect(args.smtpserver)
         smtp.login(sender, password)
         smtp.sendmail(from_addr=sender, 
-                        to_addrs=receiver, 
+                        to_addrs=receiver.split(','), 
                         msg=msg.as_string())
         smtp.quit() 
     except Exception:
