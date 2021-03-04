@@ -127,7 +127,7 @@ onsuccess:
                                                                                            
     """)
     #shell("python ngspipe/scripts/sendmail.py {}".format(receiver_email))
-    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("zhangxuan@xtbg.ac.cn,296373256@qq.com", "success", join(working_dir, ".snakemake/log/")))
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("", "success", join(working_dir, ".snakemake/log/")))
     # NGSPipeDB_source_code/.snakemake/log/
 
 
