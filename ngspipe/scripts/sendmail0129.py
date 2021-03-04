@@ -55,6 +55,10 @@ if __name__ == "__main__":
     password = args.password
     receiver = args.receiver
 
+    if receiver == "":
+        sys.stderr.write('No email address is provided, please try again this later!\n')
+        sys.exit(0)
+
     subject = "Inform from ngsPipe![{}]".format(args.status)
     msg = MIMEMultipart("related")
     msg["Subject"]=Header(subject,"utf-8")

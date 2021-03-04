@@ -2,10 +2,14 @@
 # git clone git://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis
 
 # 2. install conda for your platform
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/Miniconda3-latest-Linux-x86_64.sh && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/Miniconda3-latest-Linux-x86_64.sh && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -f -p ~/miniconda3
 
-# 3. create conda environment
-mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0
+# conda init
+~/miniconda3/bin/conda init && source ~/.bashrc && conda update conda -y && conda install mamba -c conda-forge -y
+source ~/miniconda3/bin/activate your_env
+
+# 3. create conda environment # 如果已经存在的话会询问
+mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0 -y 
 
 # 4. update ensential packages
 mamba env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
@@ -25,3 +29,7 @@ snakemake --snakefile ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/
 
 # 9. exit env
 conda deactivate
+
+# rm -rf ~/miniconda
+# tac ~/.bashrc|sed "1,15{d}"|tac > /tmp/bashrc && mv /tmp/bashrc ~/.bashrc
+# sed -i "$(($(wc -l < ~/.bashrc) - 15)),\$d" ~/.bashrc
