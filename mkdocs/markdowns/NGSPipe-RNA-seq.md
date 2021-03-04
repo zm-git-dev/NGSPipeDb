@@ -11,9 +11,8 @@ __Table of Contents:__
 7. [Generate report](#Report)
 8. [Run your custome data](#RunRawdata)
 
-## Quick Start - One time installation of components necessary for an individual user <a name="QuickStarted"></a>
+## Quick Start - One time installation of components necessary for RNA-Seq analysis <a name="QuickStarted"></a>
 
-这个地方要重写！
 Three commands to start analysing [test data]():
 
 ```shell
@@ -25,7 +24,6 @@ bash ngspipe/scripts/one_step_ranseq_test.sh
 
 Now you can viste your website on http://127.0.0.1:8000. All result are stored in `results`.
 - Example of report <sub>[![html](https://img.icons8.com/ios/20/000000/html-filetype.png)](http://www.liu-lab.com)</sub>.
-- Example of database <sub>[![html](https://img.icons8.com/dotty/25/000000/copy-link.png)](http://www.liu-lab.com)</sub>.
 
 If you have more time, then we recommend you configure ngspipedb according to your needs. For more details, please see [step by step](#step-by-step) bellow.
 
@@ -204,8 +202,6 @@ If all goes well, the proper analysis will be followed by the making of the html
 The final report should appear as `results/report/report.html`. This report is a single html file with all in it and can be sent to customers/colleagues as a final report. It is nicer than a PDF version because of large tables and figures which would suffer from page breaks and it can be viewed on any device supporting html include smartphones :-).
 
 __Note__: Internet Explorer is not supported.
-
-生成报告的时候add pdf 时间无限长！
 
 ### 8. run your custome data <a name="RunRawdata"></a>
 
