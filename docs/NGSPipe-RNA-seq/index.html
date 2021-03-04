@@ -58,7 +58,7 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">NGSPipe RNA-seq</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#quick-start-one-time-installation-of-components-necessary-for-an-individual-user">Quick Start - One time installation of components necessary for an individual user </a>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-start-one-time-installation-of-components-necessary-for-rna-seq-analysis">Quick Start - One time installation of components necessary for RNA-Seq analysis </a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#step-by-step-rna-seq-workflow">Step-by-step RNA-seq workflow </a>
         <ul>
@@ -166,17 +166,15 @@
 <li><a href="#Report">Generate report</a></li>
 <li><a href="#RunRawdata">Run your custome data</a></li>
 </ol>
-<h2 id="quick-start-one-time-installation-of-components-necessary-for-an-individual-user">Quick Start - One time installation of components necessary for an individual user <a name="QuickStarted"></a></h2>
-<p>这个地方要重写！
-Three commands to start analysing <a href="">test data</a>:</p>
+<h2 id="quick-start-one-time-installation-of-components-necessary-for-rna-seq-analysis">Quick Start - One time installation of components necessary for RNA-Seq analysis <a name="QuickStarted"></a></h2>
+<p>Three commands to start analysing <a href="">test data</a>:</p>
 <pre><code class="language-shell"># download ngspipedb to anywhere you want
 git clone git://github.com/xuanblo/NGSPipeDb.git &amp;&amp; mv NGSPipeDb mouse_transcriptome_analysis &amp;&amp; cd mouse_transcriptome_analysis
 # download test data and create environment
 bash ngspipe/scripts/one_step_ranseq_test.sh
 </code></pre>
 <p>Now you can viste your website on http://127.0.0.1:8000. All result are stored in <code>results</code>.
-- Example of report <sub><a href="http://www.liu-lab.com"><img alt="html" src="https://img.icons8.com/ios/20/000000/html-filetype.png" /></a></sub>.
-- Example of database <sub><a href="http://www.liu-lab.com"><img alt="html" src="https://img.icons8.com/dotty/25/000000/copy-link.png" /></a></sub>.</p>
+- Example of report <sub><a href="http://www.liu-lab.com"><img alt="html" src="https://img.icons8.com/ios/20/000000/html-filetype.png" /></a></sub>.</p>
 <p>If you have more time, then we recommend you configure ngspipedb according to your needs. For more details, please see <a href="#step-by-step">step by step</a> bellow.</p>
 <h2 id="step-by-step-rna-seq-workflow">Step-by-step RNA-seq workflow <a href="Step-by-Step-RNASeq"></a></h2>
 <p>Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the <a href="https://en.wikipedia.org/wiki/Command-line_interface">nix command line interface</a>. Also, best practice RNA-seq analysis is plus. Please find the easy learn matieral in <a href="../linux">linux &amp; shell</a> and <a href="../ngs#rnaseq">RNASeq background</a>.</p>
@@ -310,7 +308,6 @@ snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rn
 </code></pre>
 <p>The final report should appear as <code>results/report/report.html</code>. This report is a single html file with all in it and can be sent to customers/colleagues as a final report. It is nicer than a PDF version because of large tables and figures which would suffer from page breaks and it can be viewed on any device supporting html include smartphones :-).</p>
 <p><strong>Note</strong>: Internet Explorer is not supported.</p>
-<p>生成报告的时候add pdf 时间无限长！</p>
 <h3 id="8-run-your-custome-data">8. run your custome data <a name="RunRawdata"></a></h3>
 <p>NGSPipe is built to be used routinely. To ensure a maximum comparability of the results, you can copy default <code>ngspipe/config/rnaseq.config.yaml</code> and <code>ngspipe/rnaseq_analysis.Snakefile.py</code> file to the same directory:</p>
 <pre><code>cp ngspipe/config/rnaseq.config.yaml ngspipe/config/my_own_rnaseq.config.yaml 
