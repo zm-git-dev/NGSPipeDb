@@ -1,2 +1,2 @@
 language: shell
-script: ngspipe/scripts/one_step_ranseq_test.sh
+script: bash ngspipe/scripts/one_step_ranseq_test.sh
