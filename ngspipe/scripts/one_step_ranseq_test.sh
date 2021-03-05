@@ -2,7 +2,7 @@
 # git clone git://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis
 
 # 2. install conda for your platform
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/Miniconda3-latest-Linux-x86_64.sh && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -f -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/`whoami`_Miniconda3-latest-Linux-x86_64.sh -O /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -f -p ~/miniconda3
 
 # conda init
 ~/miniconda3/bin/conda init && source ~/miniconda3/etc/profile.d/conda.sh  && conda update conda -y && conda install mamba -c conda-forge -y

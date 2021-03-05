@@ -2,14 +2,23 @@
 
 __Table of Contents:__
 
-1. [Install wget and git](#BasicLinux)
-2. [Install Miniconda3](#Miniconda)
-3. [Install NGSPipeDb conda environments](#NGSPipeDbEnv)
-4. [Download NGSPipeDb source code](#NGSPipeDbSource)
-5. [Download NGSPipeDb test files](#Testdata)
-6. [Run test data](#RunTest)
-7. [Generate report](#Report)
-8. [Run your custome data](#RunRawdata)
+- Quick Start - One time installation of components necessary for RNA-Seq analysis
+- Step-by-step RNA-seq workflow
+    1. [Install wget and git](#BasicLinux)
+    2. [Install Miniconda3](#Miniconda)
+    3. [Download NGSPipeDb source code](#NGSPipeDbSource)
+    4. [Install NGSPipeDb conda environments](#NGSPipeDbEnv)
+    5. [Download NGSPipeDb test files](#Testdata)
+    6. [Run RNA-seq analysis on test data](#RunTest)
+    7. [Generate report](#Report)
+    8. [Run your custome data](#RunRawdata)
+        1. [Rawdata sequence data](#download_raw_data)
+        2. [Reference data](#download_ref_data)
+        3. [Edit config file](#edit_config)
+        4. [Condition for sample compare](#edit_condition)
+        5. [Edit snakefile](#edit_snakefile)
+        6. [Custome report](#custom_report)
+        7. [Run snakemake](#custom_run)
 
 ## Quick Start - One time installation of components necessary for RNA-Seq analysis <a name="QuickStarted"></a>
 
@@ -96,13 +105,6 @@ Activate conda environment:
 If the conda downloading encounters any problems, you can refer to how to [install pre-build ngspipe-ranseq env]().
 
 __Note__: By default, environments are installed into the envs directory in your conda directory (`~/miniconda/conda/env/ngspipedb`).
-
-<font color='red'>由于差异表达需要安装的包与前面的环境有不兼容，所以暂时独立了出来。</font>
-```shell
-conda create -n exp_r_env mamba -c conda-forge
-conda activate exp_r_env
-mamba env update --file ngspipe/envs/requirements_exp_r_env.yaml --prune
-```
 
 ### 5. Downloading the test files <a name="Testdata"></a>
 
@@ -212,7 +214,7 @@ NGSPipe is built to be used routinely. To ensure a maximum comparability of the 
 
 We will explain how to edit and configure these files shortly below.
 
-#### 1. Rawdata sequence data
+#### 1. Rawdata sequence data <a name="download_raw_data"></a>
 
 Raw data files can either be fastq, fastq.gz formated files. `makedir rawdata` and upload your own data to this directory. If your raw data are located in __somewhere else__, you can copy them to `rawdata`, or create soft links like `ln -s ../yoursamplepath/*.fq.gz rawdata/`.
 
@@ -241,7 +243,7 @@ As recommended above, if all of your raw data are located in __rawdata__, then c
 
 __Note__: You cannot mix Paired-end and Single-end samples within the same NGSPipe run as this will cause an ERROR. NGSPipe only support Paired-end samples.
 
-#### 2. reference data
+#### 2. Reference data <a name="download_ref_data"></a>
 
 You can download reference data from NCBI, Ensembl, or anywhere else to `genomedata`. The most import file is genome in Fasta formant and gene annotation in GFF/GTF format. Use the same method as rawdata does:
 
@@ -249,7 +251,7 @@ You can download reference data from NCBI, Ensembl, or anywhere else to `genomed
     ├── GRCm38.83.chr19.gtf
     └── chr19.fa
 
-#### 3. edit config file
+#### 3. Edit config file <a name="edit_config"></a>
 
 In this section, you will need to specify every term to match your own machine, reference genome, and data.
 
@@ -276,7 +278,7 @@ replict_num: 3 # replict can by 1,2,3
 
 __Note__: The input, output file paths are relative to the working directory. 
 
-#### 4. condition for sample compare
+#### 4. Condition for sample compare <a name="edit_condition"></a>
 
 To perform gene differential analysis, please create a `rawdata/condition.xls` file.
 
@@ -288,7 +290,7 @@ To perform gene differential analysis, please create a `rawdata/condition.xls` f
     liver-rep2,liver,tumor
     liver-rep3,liver,tumor
 
-#### 5. edit snakefile
+#### 5. edit snakefile <a name="edit_snakefile"></a>
 
 Edit file `ngspipe/workflow/rnaseq_analysis.Snakefile.py` for advance setting, such as sampling data method, mapping tool, and email address to receive run log.
 
@@ -386,7 +388,7 @@ include: join("rules", "9.differential_expression.deseq2.Snakefile.py")
 
 __Note__: The `script/env/include` path is always relative to the Snakefile containing the directive (in contrast to the input, output and log file paths, which are relative to the working directory). 
 
-#### 6. custome report
+#### 6. Custome report <a name="custom_report"></a>
 
 edit `ngspipe/report/*.rst` that will be added at the end of the report. For example, edit the `ngspipe/report/rawreads_stat.rst` file to include a text describing the 'Statistic' of the experiment. This text will be added to the report as static section and is one of the two report sections that can be edited by the end-user.
 
@@ -408,7 +410,7 @@ The details of the data quality are as follows:
 
 NGSPipe will provide you with an interactive, browser-based report, showing the most important measures of your data on the first sight. All tables in the report can be sorted and filtered. The table on the first tab shows the key values for a quick estimation of the success of your sequencing experiment and the assembly. On the second tab, there is a more detailed table, giving many additional measures. Additionally to the tables, many measures are provided as graphical feedback. On the third tab, you see plots which are generated for one complete sequencing experiment. On the fourth tab, there are plots which each show measures on one specific dataset.
 
-#### 7. run snakemake
+#### 7. Run snakemake <a name="custom_run"></a>
 
 Run snakemake in a prebuild environment:
 
