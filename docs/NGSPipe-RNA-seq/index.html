@@ -78,19 +78,19 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#8-run-your-custome-data">8. run your custome data </a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#1-rawdata-sequence-data">1. Rawdata sequence data</a>
+    <li class="toctree-l4"><a class="reference internal" href="#1-rawdata-sequence-data">1. Rawdata sequence data </a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#2-reference-data">2. reference data</a>
+    <li class="toctree-l4"><a class="reference internal" href="#2-reference-data">2. Reference data </a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#3-edit-config-file">3. edit config file</a>
+    <li class="toctree-l4"><a class="reference internal" href="#3-edit-config-file">3. Edit config file </a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#4-condition-for-sample-compare">4. condition for sample compare</a>
+    <li class="toctree-l4"><a class="reference internal" href="#4-condition-for-sample-compare">4. Condition for sample compare </a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#5-edit-snakefile">5. edit snakefile</a>
+    <li class="toctree-l4"><a class="reference internal" href="#5-edit-snakefile">5. edit snakefile </a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#6-custome-report">6. custome report</a>
+    <li class="toctree-l4"><a class="reference internal" href="#6-custome-report">6. Custome report </a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#7-run-snakemake">7. run snakemake</a>
+    <li class="toctree-l4"><a class="reference internal" href="#7-run-snakemake">7. Run snakemake </a>
     </li>
         </ul>
     </li>
@@ -156,16 +156,29 @@
               
                 <h1 id="rna-seq-analysis">RNA-seq analysis</h1>
 <p><strong>Table of Contents:</strong></p>
-<ol>
+<ul>
+<li>Quick Start - One time installation of components necessary for RNA-Seq analysis</li>
+<li>Step-by-step RNA-seq workflow<ol>
 <li><a href="#BasicLinux">Install wget and git</a></li>
 <li><a href="#Miniconda">Install Miniconda3</a></li>
-<li><a href="#NGSPipeDbEnv">Install NGSPipeDb conda environments</a></li>
 <li><a href="#NGSPipeDbSource">Download NGSPipeDb source code</a></li>
+<li><a href="#NGSPipeDbEnv">Install NGSPipeDb conda environments</a></li>
 <li><a href="#Testdata">Download NGSPipeDb test files</a></li>
-<li><a href="#RunTest">Run test data</a></li>
+<li><a href="#RunTest">Run RNA-seq analysis on test data</a></li>
 <li><a href="#Report">Generate report</a></li>
-<li><a href="#RunRawdata">Run your custome data</a></li>
+<li><a href="#RunRawdata">Run your custome data</a><ol>
+<li><a href="#download_raw_data">Rawdata sequence data</a></li>
+<li><a href="#download_ref_data">Reference data</a></li>
+<li><a href="#edit_config">Edit config file</a></li>
+<li><a href="#edit_condition">Condition for sample compare</a></li>
+<li><a href="#edit_snakefile">Edit snakefile</a></li>
+<li><a href="#custom_report">Custome report</a></li>
+<li><a href="#custom_run">Run snakemake</a></li>
 </ol>
+</li>
+</ol>
+</li>
+</ul>
 <h2 id="quick-start-one-time-installation-of-components-necessary-for-rna-seq-analysis">Quick Start - One time installation of components necessary for RNA-Seq analysis <a name="QuickStarted"></a></h2>
 <p>Three commands to start analysing <a href="">test data</a>:</p>
 <pre><code class="language-shell"># download ngspipedb to anywhere you want
@@ -224,11 +237,6 @@ tar -xf NGSPipeDb_v0.0.1.tar.gz
 </code></pre>
 <p>If the conda downloading encounters any problems, you can refer to how to <a href="">install pre-build ngspipe-ranseq env</a>.</p>
 <p><strong>Note</strong>: By default, environments are installed into the envs directory in your conda directory (<code>~/miniconda/conda/env/ngspipedb</code>).</p>
-<p><font color='red'>由于差异表达需要安装的包与前面的环境有不兼容，所以暂时独立了出来。</font></p>
-<pre><code class="language-shell">conda create -n exp_r_env mamba -c conda-forge
-conda activate exp_r_env
-mamba env update --file ngspipe/envs/requirements_exp_r_env.yaml --prune
-</code></pre>
 <h3 id="5-downloading-the-test-files">5. Downloading the test files <a name="Testdata"></a></h3>
 <p><strong>NGSPipe</strong> is dependent on reference files and raw sequence reads which can be found for the supported species listed below: <a href="http://www.liu-lab.com/ngspipedb">download link</a></p>
 <p>To download the mouse RNA-seq test data into <code>./testdata</code>:</p>
@@ -314,7 +322,7 @@ snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rn
 cp ngspipe/rnaseq_analysis.Snakefile.py ngspipe/my_own_rnaseq_analysis.Snakefile.py
 </code></pre>
 <p>We will explain how to edit and configure these files shortly below.</p>
-<h4 id="1-rawdata-sequence-data">1. Rawdata sequence data</h4>
+<h4 id="1-rawdata-sequence-data">1. Rawdata sequence data <a name="download_raw_data"></a></h4>
 <p>Raw data files can either be fastq, fastq.gz formated files. <code>makedir rawdata</code> and upload your own data to this directory. If your raw data are located in <strong>somewhere else</strong>, you can copy them to <code>rawdata</code>, or create soft links like <code>ln -s ../yoursamplepath/*.fq.gz rawdata/</code>.</p>
 <pre><code>rawdata/
 ├── lung-rep1_R1.fq.gz
@@ -339,13 +347,13 @@ liver-rep2
 liver-rep3
 </code></pre>
 <p><strong>Note</strong>: You cannot mix Paired-end and Single-end samples within the same NGSPipe run as this will cause an ERROR. NGSPipe only support Paired-end samples.</p>
-<h4 id="2-reference-data">2. reference data</h4>
+<h4 id="2-reference-data">2. Reference data <a name="download_ref_data"></a></h4>
 <p>You can download reference data from NCBI, Ensembl, or anywhere else to <code>genomedata</code>. The most import file is genome in Fasta formant and gene annotation in GFF/GTF format. Use the same method as rawdata does:</p>
 <pre><code>genomedata/
 ├── GRCm38.83.chr19.gtf
 └── chr19.fa
 </code></pre>
-<h4 id="3-edit-config-file">3. edit config file</h4>
+<h4 id="3-edit-config-file">3. Edit config file <a name="edit_config"></a></h4>
 <p>In this section, you will need to specify every term to match your own machine, reference genome, and data.</p>
 <pre><code class="language-yaml"># path relative to where you run snakemake
 
@@ -367,7 +375,7 @@ replict_num: 3 # replict can by 1,2,3
 # condition for differential expression by deseq2
 </code></pre>
 <p><strong>Note</strong>: The input, output file paths are relative to the working directory. </p>
-<h4 id="4-condition-for-sample-compare">4. condition for sample compare</h4>
+<h4 id="4-condition-for-sample-compare">4. Condition for sample compare <a name="edit_condition"></a></h4>
 <p>To perform gene differential analysis, please create a <code>rawdata/condition.xls</code> file.</p>
 <pre><code>sample_id,Sample,Tissue
 lung-rep1,lung,normal
@@ -377,7 +385,7 @@ liver-rep1,liver,tumor
 liver-rep2,liver,tumor
 liver-rep3,liver,tumor
 </code></pre>
-<h4 id="5-edit-snakefile">5. edit snakefile</h4>
+<h4 id="5-edit-snakefile">5. edit snakefile <a name="edit_snakefile"></a></h4>
 <p>Edit file <code>ngspipe/workflow/rnaseq_analysis.Snakefile.py</code> for advance setting, such as sampling data method, mapping tool, and email address to receive run log.</p>
 <pre><code class="language-python"># relative path
 snake_dir = workflow.basedir # all configfile, scripts, restructuretext, ens are relative to snakefile (this file)
@@ -470,7 +478,7 @@ include: join(&quot;rules&quot;, &quot;9.differential_expression.deseq2.Snakefil
 
 </code></pre>
 <p><strong>Note</strong>: The <code>script/env/include</code> path is always relative to the Snakefile containing the directive (in contrast to the input, output and log file paths, which are relative to the working directory). </p>
-<h4 id="6-custome-report">6. custome report</h4>
+<h4 id="6-custome-report">6. Custome report <a name="custom_report"></a></h4>
 <p>edit <code>ngspipe/report/*.rst</code> that will be added at the end of the report. For example, edit the <code>ngspipe/report/rawreads_stat.rst</code> file to include a text describing the 'Statistic' of the experiment. This text will be added to the report as static section and is one of the two report sections that can be edited by the end-user.</p>
 <pre><code class="language-matlab">
 summary of reads produced
@@ -487,7 +495,7 @@ The details of the data quality are as follows:
 #. GC content: the percentage of the total number of bases G and C to the total number of bases
 </code></pre>
 <p>NGSPipe will provide you with an interactive, browser-based report, showing the most important measures of your data on the first sight. All tables in the report can be sorted and filtered. The table on the first tab shows the key values for a quick estimation of the success of your sequencing experiment and the assembly. On the second tab, there is a more detailed table, giving many additional measures. Additionally to the tables, many measures are provided as graphical feedback. On the third tab, you see plots which are generated for one complete sequencing experiment. On the fourth tab, there are plots which each show measures on one specific dataset.</p>
-<h4 id="7-run-snakemake">7. run snakemake</h4>
+<h4 id="7-run-snakemake">7. Run snakemake <a name="custom_run"></a></h4>
 <p>Run snakemake in a prebuild environment:</p>
 <pre><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j &lt;thread number&gt;
 </code></pre>
