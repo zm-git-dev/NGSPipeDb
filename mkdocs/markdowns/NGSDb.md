@@ -13,7 +13,7 @@ __Table of Contents:__
 
 
 ## one step to view the test database
-
+test
 Now you can viste your website on http://127.0.0.1:8000. All result are stored in `results`.
 - Example of report <sub>[![html](https://img.icons8.com/ios/20/000000/html-filetype.png)](http://www.liu-lab.com)</sub>.
 - Example of database <sub>[![html](https://img.icons8.com/dotty/25/000000/copy-link.png)](http://www.liu-lab.com)</sub>.
