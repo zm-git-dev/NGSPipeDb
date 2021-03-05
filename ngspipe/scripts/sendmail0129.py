@@ -55,7 +55,7 @@ if __name__ == "__main__":
     password = args.password
     receiver = args.receiver
 
-    if receiver == "":
+    if receiver == "nobody":
         sys.stderr.write('No email address is provided, please try again this later!\n')
         sys.exit(0)
 

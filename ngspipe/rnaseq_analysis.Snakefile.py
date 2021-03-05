@@ -127,7 +127,7 @@ onsuccess:
                                                                                            
     """)
     #shell("python ngspipe/scripts/sendmail.py {}".format(receiver_email))
-    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("", "success", join(working_dir, ".snakemake/log/")))
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("nobody", "success", join(working_dir, ".snakemake/log/")))
     # NGSPipeDB_source_code/.snakemake/log/
 
 
@@ -148,7 +148,7 @@ onerror:
  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀ 
                                                                  
     """)
-    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("", "error", join(working_dir, ".snakemake/log/")))
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("nobody", "error", join(working_dir, ".snakemake/log/")))
 
 include: join("rules", "1.sampling_data_by_{}.Snakefile.py".format(sampling_method))
 include: join("rules", "2.rawReads_qc_by_{}.Snakefile.py".format(qc_method))
