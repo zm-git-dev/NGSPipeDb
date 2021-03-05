@@ -1,5 +1,7 @@
 # RNA-seq analysis
 
+[![Build Status](https://travis-ci.com/xuanblo/NGSPipeDb.svg?branch=master)](https://travis-ci.com/xuanblo/NGSPipeDb)
+
 __Table of Contents:__
 
 - Quick Start - One time installation of components necessary for RNA-Seq analysis
