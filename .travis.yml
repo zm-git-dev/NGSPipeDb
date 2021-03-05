@@ -25,7 +25,6 @@ install:
   - mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0
   - mamba env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
   - conda activate ngspipe-rnaseq
-  - python -m pip install .
 
 script:
   - bash ngspipe/scripts/download_testdata.sh testdata
