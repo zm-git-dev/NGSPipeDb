@@ -1,5 +1,9 @@
 # NGSPipeDb
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/xuanblo/NGSPipeDb)
+![license GPL-3.0](https://img.shields.io/github/license/xuanblo/NGSPipeDb)
+![build](https://img.shields.io/travis/com/xuanblo/NGSPipeDb)
+
 ## Introduction
 
 __NGSPipeDb__ is an automated pipeline for parallel processing of huge next generation sequencing (NGS) data and database generation using [snakemake workflow](https://snakemake.readthedocs.io/en/stable/index.html) which allows for ease of use, optimal speed, and a highly modular code that can be further added onto and customized by experienced users. It can be further divided into `NGSPipe` and `NGSDb` for individual usage.
