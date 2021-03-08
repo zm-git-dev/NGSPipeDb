@@ -14,49 +14,45 @@ site_dir: docs
 copyright: Bioinformatics Group, XTBG, 2021
 
 plugins:
-    - search:
-#    - mkdocs-versioning:
-#        version: 0.3.0
-    - mkdocs_pymdownx_material_extras:
+    - search
 
 # Navigation
 nav:
-- Home:
     - Getting start: index.md
     - NGSPipeDb Tutorial: NGSPipeDb.md
-- Modules:
     - NGSPipe RNA-seq: NGSPipe-RNA-seq.md
     - NGSPipe ChIP-seq: NGSPipe-ChIP-seq.md
     - NGSPipe resequecing: NGSPipe-resequecing.md
     - NGSDb: NGSDb.md
-- Appendix:
     - Linux & shell basic: linux.md
     - NGS analysis: ngs.md
 
 # Theme
 theme:
-    name: material
-    palette:
-        scheme: dracula
-        primary: deep purple
-        accent: deep purple
-    font:
-        text: Roboto
-        code: Roboto Mono
-    features:
-        - navigation.tabs
-
-markdown_extensions:
-    - pymdownx.tabbed:
-    - pymdownx.highlight:
-    - pymdownx.superfences:
-    - admonition: # note info
-    - pymdownx.details:
-    - pymdownx.saneheaders:
-    - markdown.extensions.smarty:
-        smart_quotes: false
+    name: ivory
+    highlightjs: true
+    hljs_languages:
+        - reStr
+        - shell
+    nav_style: dark
+    prev_next_buttons_location: both
 
 extra:
-  social:
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/squidfunk
+    version: 1.0
+
+markdown_extensions:
+#    - pymdownx.tabbed
+    - admonition # note info
+#    - pymdownx.details
+#    - pymdownx.superfences
+#    - def_list
+    - pymdownx.tasklist:
+        clickable_checkbox: true
+#    - smarty
+    - toc:
+        permalink: true
+#    - pymdownx.mark
+    - pymdownx.inlinehilite
+    - pymdownx.highlight:
+        use_pygments: true
+#    - attr_list

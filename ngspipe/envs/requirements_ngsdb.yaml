@@ -5,13 +5,13 @@ channels:
   - default
 dependencies:
   - python=3.8
-  - snakemake=5.30.1
+  - snakemake=5.30.2
   - django=3.1.4
   - biopython=1.76
   - blast
   - gffread
   - gffutils
-  - agat
+#  - agat
   - bedtools
   - tabix
   - samtools

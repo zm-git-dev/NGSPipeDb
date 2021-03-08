@@ -1,35 +1,34 @@
+---
+title: 
+date: 2021-03-07 09:51:19
+tags:
+  - Markdown
+  - rnaseq
+categories: module
+
+---
+
 # RNA-seq analysis
-
-__Table of Contents:__
-
-- Quick Start - One time installation of components necessary for RNA-Seq analysis
-- Step-by-step RNA-seq workflow
-    1. [Install wget and git](#BasicLinux)
-    2. [Install Miniconda3](#Miniconda)
-    3. [Download NGSPipeDb source code](#NGSPipeDbSource)
-    4. [Install NGSPipeDb conda environments](#NGSPipeDbEnv)
-    5. [Download NGSPipeDb test files](#Testdata)
-    6. [Run RNA-seq analysis on test data](#RunTest)
-    7. [Generate report](#Report)
-    8. [Run your custome data](#RunRawdata)
-        1. [Rawdata sequence data](#download_raw_data)
-        2. [Reference data](#download_ref_data)
-        3. [Edit config file](#edit_config)
-        4. [Condition for sample compare](#edit_condition)
-        5. [Edit snakefile](#edit_snakefile)
-        6. [Custome report](#custom_report)
-        7. [Run snakemake](#custom_run)
 
 ## Quick Start - One time installation of components necessary for RNA-Seq analysis <a name="QuickStarted"></a>
 
-Three commands to start analysing [test data]():
+=== "Linux & WSL"
 
-```shell
-# download ngspipedb to anywhere you want
-git clone git://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis
-# download test data and create environment
-bash ngspipe/scripts/one_step_ranseq_test.sh
-```
+    ```shell
+    # download ngspipedb to anywhere you want
+    git clone git://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis
+    # download test data and create environment
+    bash ngspipe/scripts/one_step_ranseq_test.sh
+    ```
+
+=== "MacOSX"
+
+    ```shell
+    # download ngspipedb to anywhere you want
+    git clone git://github.com/xuanblo/NGSPipeDb.git && mv NGSPipeDb mouse_transcriptome_analysis && cd mouse_transcriptome_analysis
+    # download test data and create environment
+    bash ngspipe/scripts/one_step_ranseq_test.sh
+    ```
 
 Now you can viste your website on http://127.0.0.1:8000. All result are stored in `results`.
 - Example of report <sub>[![html](https://img.icons8.com/ios/20/000000/html-filetype.png)](http://www.liu-lab.com)</sub>.
@@ -44,7 +43,8 @@ Although included in this section are step-by-step instructions, it is assumed t
 
 To get some of the required software packages, we will use the command line tools called [wget](http://www.gnu.org/software/wget/) and [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).  *wget* is a popular tool for downloading things off of the internet.  *git* is a distributed version control system which we will use to checkout the NGSPipeDb code.
 
-__Note__: These tools are already pre-installed in most systems, but if you are unsure whether or not you have *wget* enter `wget` and if the return is `wget: command not found`, then you will have to install *wget*.  Do likewise for *git*.
+!!! note
+    These tools are already pre-installed in most systems, but if you are unsure whether or not you have *wget* enter `wget` and if the return is `wget: command not found`, then you will have to install *wget*.  Do likewise for *git*.
 
 ### 2. Install Miniconda3 <a name="Miniconda"></a>
 
@@ -54,37 +54,52 @@ We will be using the [Miniconda3](http://conda.pydata.org/miniconda.html) packag
 
 Use following commands to retrieve and then run the Minicoda3 installation script:  
 1. `wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh`  
-2. `bash Miniconda3-latest-Linux-x86_64.sh`. While running the installation script, follow the commands listed on screen, and press the _enter_ key to scroll. __Make sure to answer `yes` when asked if you want to prepend Miniconda3 to PATH.__ After that, close your terminal, open a new one and you should now have Conda working! You could, alternatively, run `source ~/.bashrc` to initiate conda.  
+2. `bash Miniconda3-latest-Linux-x86_64.sh`. While running the installation script, follow the commands listed on screen, and press the _enter_ key to scroll. Make sure to answer `yes` when asked if you want to prepend Miniconda3 to PATH. After that, close your terminal, open a new one and you should now have Conda working! You could, alternatively, run `source ~/.bashrc` to initiate conda.  
 3. Test by entering: `conda update conda`. Press `y` to confirm the conda updates.  
 4. `conda install mamba -c conda-forge`. Mamba is a reimplementation of the conda package manager in C++, the fast conda-alternative.
 
-__Note__: You will only have to install Minicoda3 once.
+!!! Note
+    You will only have to install Minicoda3 once.
 
 ### 3. Download NGSPipeDb source code <a name="NGSPipeDbSource"></a>
 
 To install the latest stable version of NGSPipeDb, please clone the git repository to your system.
 
-    cd /path/to/where_you_want
-    git clone https://www.github.com/xuanblo/NGSPipeDb 
-   or 
+```shell
+cd /path/to/where_you_want
+git clone https://www.github.com/xuanblo/NGSPipeDb
+```
 
-    cd /path/to/where_you_want
-    git clone git://www.github.com/xuanblo/NGSPipeDb
+or
+
+```shell
+cd /path/to/where_you_want
+git clone git://www.github.com/xuanblo/NGSPipeDb
+```
 
 If you want to use specific version, please cleckout the [release](https://github.com/xuanblo/NGSPipeDb/releases) and issue the following commands:
 
-    cd /path/to/where_you_want
-    wget https://github.com/xuanblo/NGSPipeDb/archive/NGSPipeDb_v0.0.1.tar.gz
-    tar -xf NGSPipeDb_v0.0.1.tar.gz
+```shell
+cd /path/to/where_you_want
+wget https://github.com/xuanblo/NGSPipeDb/archive/NGSPipeDb_v0.0.1.tar.gz
+tar -xf NGSPipeDb_v0.0.1.tar.gz
+```
 
 All of analysis will be performed under the source code directory directly. So you can change direcory name by:
 
-    mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
+```shell
+mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
+```
+
 or
 
-    mv NGSPipeDb-NGSPipeDb_v0.0.1 species_sample_transcript_analysis_by_NGSPipeDb
+```shell
+mv NGSPipeDb-NGSPipeDb_v0.0.1 species_sample_transcript_analysis_by_NGSPipeDb
+```
 
 Enter directory `cd species_sample_transcript_analysis_by_NGSPipeDb` for further setps.
+
+This will create the following structure:
 
 ### 4. Installing the NGSPipe RNA-Seq conda environments <a name="NGSPipeDbEnv"></a>
 
@@ -92,11 +107,15 @@ We are now ready to use conda to install the [dependencies](https://github.com/x
 
 First, you will need to create a conda environments. For details, see [manage envirement](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) with conda. [Snakemake]() and [Python]() is the basic tool of ngspipedb.
 
-    mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0
+```shell
+mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0
+```
 
 Next, to analysis NGS data some bioinformatics tools need to be installed.
 
-    mamba env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
+```shell
+mamba env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
+```
 
 Activate conda environment:
 
@@ -104,7 +123,8 @@ Activate conda environment:
 
 If the conda downloading encounters any problems, you can refer to how to [install pre-build ngspipe-ranseq env]().
 
-__Note__: By default, environments are installed into the envs directory in your conda directory (`~/miniconda/conda/env/ngspipedb`).
+!!! Note
+    By default, environments are installed into the envs directory in your conda directory (`~/miniconda/conda/env/ngspipedb`).
 
 ### 5. Downloading the test files <a name="Testdata"></a>
 
@@ -124,6 +144,8 @@ Generate replicated samples:
     cd testdata
     python ../ngspipe/scripts/generate_replicat.py control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
     rm -f control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
+    gunzip chr19.fa.gz
+    gunzip GRCm38.83.chr19.gtf.gz
     cd ..
 
 Make sure you have the following directory structure by command `tree testdata`:
@@ -146,7 +168,8 @@ Make sure you have the following directory structure by command `tree testdata`:
     ├── treated-2_R1.fq.gz
     └── treated-2_R2.fq.gz
 
-__Note__: This data is only used to test the analysis process, and the analysis results have no biological significance.
+!!! Note
+    This data is only used to test the analysis process, and the analysis results have no biological significance.
 
 ### 6. run RNA-seq analysis on test data <a name="RunTest"></a>
 
@@ -193,7 +216,8 @@ The final data files are put in the folder `results`. Please check you result fi
         ├── statistic
         └── transcript_assembly
 
-__Note__: If you encounter any problem in this step, please turn to `TroubleShooting` for help.
+!!! Note
+    If you encounter any problem in this step, please turn to `TroubleShooting` for help.
 
 ### 7. rgenerate report <a name="Report"></a>
 
@@ -203,9 +227,10 @@ If all goes well, the proper analysis will be followed by the making of the html
 
 The final report should appear as `results/report/report.html`. This report is a single html file with all in it and can be sent to customers/colleagues as a final report. It is nicer than a PDF version because of large tables and figures which would suffer from page breaks and it can be viewed on any device supporting html include smartphones :-).
 
-__Note__: Internet Explorer is not supported.
+!!! Note
+    Internet Explorer is not supported.
 
-### 8. run your custome data <a name="RunRawdata"></a>
+## run your custome data <a name="RunRawdata"></a>
 
 NGSPipe is built to be used routinely. To ensure a maximum comparability of the results, you can copy default `ngspipe/config/rnaseq.config.yaml` and `ngspipe/rnaseq_analysis.Snakefile.py` file to the same directory:
 
@@ -214,7 +239,7 @@ NGSPipe is built to be used routinely. To ensure a maximum comparability of the 
 
 We will explain how to edit and configure these files shortly below.
 
-#### 1. Rawdata sequence data <a name="download_raw_data"></a>
+### 1. Rawdata sequence data <a name="download_raw_data"></a>
 
 Raw data files can either be fastq, fastq.gz formated files. `makedir rawdata` and upload your own data to this directory. If your raw data are located in __somewhere else__, you can copy them to `rawdata`, or create soft links like `ln -s ../yoursamplepath/*.fq.gz rawdata/`.
 
@@ -241,9 +266,10 @@ As recommended above, if all of your raw data are located in __rawdata__, then c
     liver-rep2
     liver-rep3
 
-__Note__: You cannot mix Paired-end and Single-end samples within the same NGSPipe run as this will cause an ERROR. NGSPipe only support Paired-end samples.
+!!! Note
+    You cannot mix Paired-end and Single-end samples within the same NGSPipe run as this will cause an ERROR. NGSPipe only support Paired-end samples.
 
-#### 2. Reference data <a name="download_ref_data"></a>
+### 2. Reference data <a name="download_ref_data"></a>
 
 You can download reference data from NCBI, Ensembl, or anywhere else to `genomedata`. The most import file is genome in Fasta formant and gene annotation in GFF/GTF format. Use the same method as rawdata does:
 
@@ -251,7 +277,7 @@ You can download reference data from NCBI, Ensembl, or anywhere else to `genomed
     ├── GRCm38.83.chr19.gtf
     └── chr19.fa
 
-#### 3. Edit config file <a name="edit_config"></a>
+### 3. Edit config file <a name="edit_config"></a>
 
 In this section, you will need to specify every term to match your own machine, reference genome, and data.
 
@@ -276,9 +302,10 @@ replict_num: 3 # replict can by 1,2,3
 # condition for differential expression by deseq2
 ```
 
-__Note__: The input, output file paths are relative to the working directory. 
+!!! Note
+    The input, output file paths are relative to the working directory. 
 
-#### 4. Condition for sample compare <a name="edit_condition"></a>
+### 4. Condition for sample compare <a name="edit_condition"></a>
 
 To perform gene differential analysis, please create a `rawdata/condition.xls` file.
 
@@ -290,11 +317,11 @@ To perform gene differential analysis, please create a `rawdata/condition.xls` f
     liver-rep2,liver,tumor
     liver-rep3,liver,tumor
 
-#### 5. edit snakefile <a name="edit_snakefile"></a>
+### 5. edit snakefile <a name="edit_snakefile"></a>
 
 Edit file `ngspipe/workflow/rnaseq_analysis.Snakefile.py` for advance setting, such as sampling data method, mapping tool, and email address to receive run log.
 
-```python
+``` python
 # relative path
 snake_dir = workflow.basedir # all configfile, scripts, restructuretext, ens are relative to snakefile (this file)
 working_dir = os.getcwd() # input and output path are relative to current working directory
@@ -386,9 +413,10 @@ include: join("rules", "9.differential_expression.deseq2.Snakefile.py")
 
 ```
 
-__Note__: The `script/env/include` path is always relative to the Snakefile containing the directive (in contrast to the input, output and log file paths, which are relative to the working directory). 
+!!! Note
+    The `script/env/include` path is always relative to the Snakefile containing the directive (in contrast to the input, output and log file paths, which are relative to the working directory). 
 
-#### 6. Custome report <a name="custom_report"></a>
+### 6. Custome report <a name="custom_report"></a>
 
 edit `ngspipe/report/*.rst` that will be added at the end of the report. For example, edit the `ngspipe/report/rawreads_stat.rst` file to include a text describing the 'Statistic' of the experiment. This text will be added to the report as static section and is one of the two report sections that can be edited by the end-user.
 
@@ -410,7 +438,7 @@ The details of the data quality are as follows:
 
 NGSPipe will provide you with an interactive, browser-based report, showing the most important measures of your data on the first sight. All tables in the report can be sorted and filtered. The table on the first tab shows the key values for a quick estimation of the success of your sequencing experiment and the assembly. On the second tab, there is a more detailed table, giving many additional measures. Additionally to the tables, many measures are provided as graphical feedback. On the third tab, you see plots which are generated for one complete sequencing experiment. On the fourth tab, there are plots which each show measures on one specific dataset.
 
-#### 7. Run snakemake <a name="custom_run"></a>
+### 7. Run snakemake <a name="custom_run"></a>
 
 Run snakemake in a prebuild environment:
 

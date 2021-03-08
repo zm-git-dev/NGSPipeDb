@@ -1,34 +1,60 @@
+
 # NGSDb
 
 __Table of Contents:__
 
-1. [Installing wget and git](#BasicLinux)
-2. [Installing Miniconda3](#Miniconda)
-3. [Installing the NGSPipeDb conda environments](#NGSPipeDbEnv)
-4. [Downloading the NGSPipeDb source code](#NGSPipeDbSource)
+1. [Pre-prepare](#pre)
+3. [Install the NGSDb conda environments](#NGSPipeDbEnv)
+4. [Downloading the NGSDb source code](#NGSPipeDbSource)
 5. [Downloading the NGSPipeDb test files](#Testdata)
 6. [Run test data](#RunTest)
 7. [Generate report](#Report)
 8. [Run your custome data](#RunRawdata)
 
 
-## one step to view the test database
+## one step to view the NGSPipe RNA-Seq analysis results in a browser
+
+```shell
+bash ngspipe/scripts/one_step_view_database.sh
+```
 test
 Now you can viste your website on http://127.0.0.1:8000. All result are stored in `results`.
 - Example of report <sub>[![html](https://img.icons8.com/ios/20/000000/html-filetype.png)](http://www.liu-lab.com)</sub>.
 - Example of database <sub>[![html](https://img.icons8.com/dotty/25/000000/copy-link.png)](http://www.liu-lab.com)</sub>.
 
-## Step-by-step database generate <a name="Step-by-Step-Database"></a>
+## Step-by-step to generate database with your own data <a name="Step-by-Step-Database"></a>
 
-### 1. 安装环境 <a name="DatabaseRequirement"></a>
+### 1. pre-prepare
+
+Let's assume that you have the data you need to generate the database, such as gene annotation files, gene expression matrix and analysis reports. Before further steps, please [install CONDA](../NGSPipe-RNA-seq/#Miniconda) and [download the latest source code of NGSPipeDb](../NGSPipe-RNA-seq/#NGSPipeDbSource). Modify the project name and enter the project directory.
 
 ```shell
-conda create -n ngsdb mamba=0.1.2 python=3.8 -c conda-forge
-conda activate ngsdb
-mamba env update --file ngspipe/envs/requirements_ngsdb.yaml --prune
+mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
+cd species_sample_transcript_analysis_by_NGSPipeDb
 ```
 
-### 2. convert analysis result to sqlite3 file <a name="Table2Sqlite3"></a>
+### 2. Install the NGSDb conda environments <a name="DatabaseRequirement"></a>
+
+```shell
+#conda create -n ngsdb python=3.8 -c conda-forge
+#conda activate ngsdb
+#conda env update -n ngsdb --file ngspipe/envs/requirements_ngsdb.yaml --prune
+
+mamba create -n ngsdb python=3.8 -c conda-forge -y
+mamba env update -n ngsdb --file ngspipe/envs/requirements_ngsdb.yaml --prune
+conda activate ngsdb
+```
+mac 系统 source ~/.bash_profile
+
+### 3. download test data
+
+```shell
+wget expression
+wget differential
+wget annotation
+```
+
+### 4. convert NGSPipe analysis results to sqlite3 format <a name="Table2Sqlite3"></a>
 
 First, edit `ngspipe/config/ngsdb.config.yaml` file:
 
@@ -40,8 +66,8 @@ genomeAnno: "testdata/GRCm38.83.chr19.gtf" # gene annotation file, can be gtf or
 genomeFasta: "testdata/chr19.fa" # genome sequence
 
 # result directory of NGSPipe
-resultsDir: "results/result"
-reportsDir: "results/report"
+#testdata_resultsDir: "results/result"
+#estdata_reportsDir: "results/report"
 dbDir: "results/sqlite3"
 
 djangoCode: "ngsdb"
@@ -100,8 +126,9 @@ include: join("rules", "8.db_generate_of_genomebrowser.Snakefile.py")
 
 Then, run db_generate workflow to generate database files.
 
-    snakemake -s ngspipe/workflow/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -j 1
-
+```shell
+snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -j 1
+```
 
 ### 3. config <a name="DatabaseConfig"></a>
 

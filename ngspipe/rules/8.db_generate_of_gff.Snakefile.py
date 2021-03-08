@@ -24,7 +24,7 @@ rule gtfTosqlite3ForModel_auto_by_django:
     message:
         '''
         ------------------------------
-        8. generate expression data sqlite3
+        8. gtfTosqlite3ForModel_auto_by_django
         ------------------------------
         '''
     input:
@@ -40,6 +40,7 @@ rule gtfTosqlite3ForModel_auto_by_django:
         '''
         # inspectdb数据模型反向生成
         # make sure the right db name in ngsdb/ngsdb/setting.py
+        pip install wooey clustergrammer sklearn pandas==0.25.3;
         python {config[djangoCode]}/manage.py inspectdb --database {params.db_name}|perl -ne 'if(/\s+id = /){{s/null=True/null=False, primary_key=True/}}print $_' > {output.gffdjango_model} 2>{log};
         # 使用makemigrations创建迁移
         python {config[djangoCode]}/manage.py makemigrations {params.db_app} 1>>{log} 2>&1;
