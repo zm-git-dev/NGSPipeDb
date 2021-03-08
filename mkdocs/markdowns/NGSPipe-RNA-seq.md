@@ -65,41 +65,74 @@ Use following commands to retrieve and then run the Minicoda3 installation scrip
 
 To install the latest stable version of NGSPipeDb, please clone the git repository to your system.
 
-```shell
-cd /path/to/where_you_want
-git clone https://www.github.com/xuanblo/NGSPipeDb
-```
+=== "git method 1"
 
-or
+    ```shell
+    cd /path/to/where_you_want
+    git clone https://www.github.com/xuanblo/NGSPipeDb
+    ```
 
-```shell
-cd /path/to/where_you_want
-git clone git://www.github.com/xuanblo/NGSPipeDb
-```
+=== "git method 2"
 
-If you want to use specific version, please cleckout the [release](https://github.com/xuanblo/NGSPipeDb/releases) and issue the following commands:
+    ```shell
+    cd /path/to/where_you_want
+    git clone git://www.github.com/xuanblo/NGSPipeDb
+    ```
 
-```shell
-cd /path/to/where_you_want
-wget https://github.com/xuanblo/NGSPipeDb/archive/NGSPipeDb_v0.0.1.tar.gz
-tar -xf NGSPipeDb_v0.0.1.tar.gz
-```
+=== "method 3: specific version"
+
+    If you want to use specific version, please cleckout the [release](https://github.com/xuanblo/NGSPipeDb/releases) and issue the following commands:
+
+    ```shell
+    cd /path/to/where_you_want
+    wget https://github.com/xuanblo/NGSPipeDb/archive/NGSPipeDb_v0.0.1.tar.gz
+    tar -xf NGSPipeDb_v0.0.1.tar.gz
+    ```
 
 All of analysis will be performed under the source code directory directly. So you can change direcory name by:
 
-```shell
-mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
-```
+=== "if you use git"
 
-or
+    ```shell
+    mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
+    ```
 
-```shell
-mv NGSPipeDb-NGSPipeDb_v0.0.1 species_sample_transcript_analysis_by_NGSPipeDb
-```
+=== "if you use specific version"
 
-Enter directory `cd species_sample_transcript_analysis_by_NGSPipeDb` for further setps.
+    ```shell
+    mv NGSPipeDb-NGSPipeDb_v0.0.1 species_sample_transcript_analysis_by_NGSPipeDb
+    ```
+
+Enter directory `#!shell cd species_sample_transcript_analysis_by_NGSPipeDb` for further setps.
 
 This will create the following structure:
+
+    ./
+    ├── README.md
+    ├── ngsdb
+    │   ├── blastplus
+    │   ├── db.sqlite3
+    │   ├── geneAnno
+    │   ├── geneExpAtlas
+    │   ├── home
+    │   ├── igv
+    │   ├── manage.py
+    │   └── ngsdb
+    ├── ngspipe
+    │   ├── config
+    │   ├── db_generate.Snakefile.py
+    │   ├── envs
+    │   ├── imgs
+    │   ├── notebooks
+    │   ├── reports
+    │   ├── rnaseq_analysis.Snakefile.py
+    │   ├── rules
+    │   └── scripts
+    ├── results
+    │   ├── report
+    │   ├── resultdata
+    │   └── sqlite3
+    └── testdata
 
 ### 4. Installing the NGSPipe RNA-Seq conda environments <a name="NGSPipeDbEnv"></a>
 
@@ -132,21 +165,30 @@ __NGSPipe__ is dependent on reference files and raw sequence reads which can be 
 
 To download the mouse RNA-seq test data into `./testdata`:
 
+=== "use script"
+
+    ```shell
     bash ngspipe/scripts/download_testdata.sh testdata
+    ```
 
-or download the test files (160M) that you need and then untarring then in a directory called `testdata`.
+=== "use wget"
 
+    or download the test files (160M) that you need and then untarring then in a directory called `testdata`.
+    ```shell
     wget http://www.liu-lab.com/ngspipedb/rnaseq_testdata.tar.gz
     tar -zxvf rnaseq_testdata.tar.gz
+    ```
 
-Generate replicated samples:
+    Generate replicated samples:
 
+    ```shell
     cd testdata
     python ../ngspipe/scripts/generate_replicat.py control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
     rm -f control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
     gunzip chr19.fa.gz
     gunzip GRCm38.83.chr19.gtf.gz
     cd ..
+    ```
 
 Make sure you have the following directory structure by command `tree testdata`:
 
@@ -187,16 +229,22 @@ We provied a simple RNA-seq workflow for you to take a glance of NGSPipe. In RNA
 
 First, we need to check the `ngspipe/file`. This will not execute anything, but display what would be done.
 
-    # dry run, use -n parameter only print task plan, -p print commands
-    snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -np
+```shell
+# dry run, use -n parameter only print task plan, -p print commands
+snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -np
+```
 
 If nothing goes wrong, you can generate a dag plot:
 
-    snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --dag|dot -Tpng > dag.png
+```shell
+snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --dag|dot -Tpng > dag.png
+```
 
 Now you can do RNA-seq analysis by just one simply command.
 
-    snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j 10
+```shell
+snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j 10
+```
 
 The final data files are put in the folder `results`. Please check you result file `tree -d -L 2 results/`, it may like this:
 
@@ -223,7 +271,9 @@ The final data files are put in the folder `results`. Please check you result fi
 
 If all goes well, the proper analysis will be followed by the making of the html report using Snakemake to a html report file with pictures and tables.
 
-    snakemake --snakefile ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --report results/report/report.html
+```shell
+snakemake --snakefile ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --report results/report/report.html
+```
 
 The final report should appear as `results/report/report.html`. This report is a single html file with all in it and can be sent to customers/colleagues as a final report. It is nicer than a PDF version because of large tables and figures which would suffer from page breaks and it can be viewed on any device supporting html include smartphones :-).
 
@@ -234,8 +284,10 @@ The final report should appear as `results/report/report.html`. This report is a
 
 NGSPipe is built to be used routinely. To ensure a maximum comparability of the results, you can copy default `ngspipe/config/rnaseq.config.yaml` and `ngspipe/rnaseq_analysis.Snakefile.py` file to the same directory:
 
-    cp ngspipe/config/rnaseq.config.yaml ngspipe/config/my_own_rnaseq.config.yaml 
-    cp ngspipe/rnaseq_analysis.Snakefile.py ngspipe/my_own_rnaseq_analysis.Snakefile.py
+```shell
+cp ngspipe/config/rnaseq.config.yaml ngspipe/config/my_own_rnaseq.config.yaml 
+cp ngspipe/rnaseq_analysis.Snakefile.py ngspipe/my_own_rnaseq_analysis.Snakefile.py
+```
 
 We will explain how to edit and configure these files shortly below.
 
@@ -442,12 +494,18 @@ NGSPipe will provide you with an interactive, browser-based report, showing the 
 
 Run snakemake in a prebuild environment:
 
-    snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <thread number>
+```shell
+snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <thread number>
+```
 
 Or install dependencies while snakemake run. By default, all dependencies and tools should automatically be installed on the first execution. 
 
-    snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <thread number> --use-conda
+```shell
+snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <thread number> --use-conda
+```
 
 See Specifying a location for an environment or run conda create --help for information on specifying a different path.
 
-    snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <thread number> -p ./ngspipe_rnaseq_macox64
+```shell
+snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <thread number> -p ./ngspipe_rnaseq_macox64
+```

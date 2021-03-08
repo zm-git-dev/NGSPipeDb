@@ -49,6 +49,7 @@ theme:
 markdown_extensions:
     - pymdownx.tabbed:
     - pymdownx.highlight:
+    - pymdownx.inlinehilite:
     - pymdownx.superfences:
     - admonition: # note info
     - pymdownx.details:

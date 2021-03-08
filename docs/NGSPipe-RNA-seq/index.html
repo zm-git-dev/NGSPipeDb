@@ -876,31 +876,69 @@ bash ngspipe/scripts/one_step_ranseq_test.sh
 </div>
 <h3 id="3-download-ngspipedb-source-code">3. Download NGSPipeDb source code <a name="NGSPipeDbSource"></a></h3>
 <p>To install the latest stable version of NGSPipeDb, please clone the git repository to your system.</p>
+<div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">git method 1</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> /path/to/where_you_want
 git clone https://www.github.com/xuanblo/NGSPipeDb
 </code></pre></div>
 
-<p>or</p>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">git method 2</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> /path/to/where_you_want
 git clone git://www.github.com/xuanblo/NGSPipeDb
 </code></pre></div>
 
+</div>
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">method 3: specific version</label><div class="tabbed-content">
 <p>If you want to use specific version, please cleckout the <a href="https://github.com/xuanblo/NGSPipeDb/releases">release</a> and issue the following commands:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> /path/to/where_you_want
 wget https://github.com/xuanblo/NGSPipeDb/archive/NGSPipeDb_v0.0.1.tar.gz
 tar -xf NGSPipeDb_v0.0.1.tar.gz
 </code></pre></div>
 
+</div>
+</div>
 <p>All of analysis will be performed under the source code directory directly. So you can change direcory name by:</p>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">if you use git</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
 </code></pre></div>
 
-<p>or</p>
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">if you use specific version</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>mv NGSPipeDb-NGSPipeDb_v0.0.1 species_sample_transcript_analysis_by_NGSPipeDb
 </code></pre></div>
 
-<p>Enter directory <code>cd species_sample_transcript_analysis_by_NGSPipeDb</code> for further setps.</p>
+</div>
+</div>
+<p>Enter directory <code class="highlight"><span class="nb">cd</span> species_sample_transcript_analysis_by_NGSPipeDb</code> for further setps.</p>
 <p>This will create the following structure:</p>
+<div class="highlight"><pre><span></span><code>./
+├── README.md
+├── ngsdb
+│   ├── blastplus
+│   ├── db.sqlite3
+│   ├── geneAnno
+│   ├── geneExpAtlas
+│   ├── home
+│   ├── igv
+│   ├── manage.py
+│   └── ngsdb
+├── ngspipe
+│   ├── config
+│   ├── db_generate.Snakefile.py
+│   ├── envs
+│   ├── imgs
+│   ├── notebooks
+│   ├── reports
+│   ├── rnaseq_analysis.Snakefile.py
+│   ├── rules
+│   └── scripts
+├── results
+│   ├── report
+│   ├── resultdata
+│   └── sqlite3
+└── testdata
+</code></pre></div>
+
 <h3 id="4-installing-the-ngspipe-rna-seq-conda-environments">4. Installing the NGSPipe RNA-Seq conda environments <a name="NGSPipeDbEnv"></a></h3>
 <p>We are now ready to use conda to install the <a href="https://github.com/xuanblo/NGSPipeDb/blob/master/ngspipe/envs/requirements_rnaseq.yaml">dependencies</a> of which NGSPipe RNA-Seq analysis is required.</p>
 <p>First, you will need to create a conda environments. For details, see <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">manage envirement</a> with conda. <a href="">Snakemake</a> and <a href="">Python</a> is the basic tool of ngspipedb.</p>
@@ -923,23 +961,27 @@ tar -xf NGSPipeDb_v0.0.1.tar.gz
 <h3 id="5-downloading-the-test-files">5. Downloading the test files <a name="Testdata"></a></h3>
 <p><strong>NGSPipe</strong> is dependent on reference files and raw sequence reads which can be found for the supported species listed below: <a href="http://www.liu-lab.com/ngspipedb">download link</a></p>
 <p>To download the mouse RNA-seq test data into <code>./testdata</code>:</p>
+<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">use script</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>bash ngspipe/scripts/download_testdata.sh testdata
 </code></pre></div>
 
-<p>or download the test files (160M) that you need and then untarring then in a directory called <code>testdata</code>.</p>
+</div>
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">use wget</label><div class="tabbed-content">
+<p>or download the test files (160M) that you need and then untarring then in a directory called <code>testdata</code>.
 <div class="highlight"><pre><span></span><code>wget http://www.liu-lab.com/ngspipedb/rnaseq_testdata.tar.gz
 tar -zxvf rnaseq_testdata.tar.gz
-</code></pre></div>
-
+</code></pre></div></p>
 <p>Generate replicated samples:</p>
-<div class="highlight"><pre><span></span><code>cd testdata
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> testdata
 python ../ngspipe/scripts/generate_replicat.py control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
 rm -f control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
 gunzip chr19.fa.gz
 gunzip GRCm38.83.chr19.gtf.gz
-cd ..
+<span class="nb">cd</span> ..
 </code></pre></div>
 
+</div>
+</div>
 <p>Make sure you have the following directory structure by command <code>tree testdata</code>:</p>
 <div class="highlight"><pre><span></span><code>testdata/
 ├── GRCm38.83.chr19.gtf
@@ -976,16 +1018,16 @@ cd ..
 </code></pre></div>
 
 <p>First, we need to check the <code>ngspipe/file</code>. This will not execute anything, but display what would be done.</p>
-<div class="highlight"><pre><span></span><code># dry run, use -n parameter only print task plan, -p print commands
+<div class="highlight"><pre><span></span><code><span class="c1"># dry run, use -n parameter only print task plan, -p print commands</span>
 snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -np
 </code></pre></div>
 
 <p>If nothing goes wrong, you can generate a dag plot:</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --dag|dot -Tpng &gt; dag.png
+<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --dag<span class="p">|</span>dot -Tpng &gt; dag.png
 </code></pre></div>
 
 <p>Now you can do RNA-seq analysis by just one simply command.</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j 10
+<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <span class="m">10</span>
 </code></pre></div>
 
 <p>The final data files are put in the folder <code>results</code>. Please check you result file <code>tree -d -L 2 results/</code>, it may like this:</p>

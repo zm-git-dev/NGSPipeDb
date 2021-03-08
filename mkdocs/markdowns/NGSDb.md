@@ -1,17 +1,6 @@
 
 # NGSDb
 
-__Table of Contents:__
-
-1. [Pre-prepare](#pre)
-3. [Install the NGSDb conda environments](#NGSPipeDbEnv)
-4. [Downloading the NGSDb source code](#NGSPipeDbSource)
-5. [Downloading the NGSPipeDb test files](#Testdata)
-6. [Run test data](#RunTest)
-7. [Generate report](#Report)
-8. [Run your custome data](#RunRawdata)
-
-
 ## one step to view the NGSPipe RNA-Seq analysis results in a browser
 
 ```shell
