@@ -38,9 +38,13 @@ mac 系统 source ~/.bash_profile
 ### 3. download test data
 
 ```shell
-wget expression
-wget differential
-wget annotation
+mkdir -p testdata && cd testdata
+wget http://www.liu-lab.com/ngspipedb/testdata/gene_fpkm_all_samples.tsv ./
+wget http://www.liu-lab.com/ngspipedb/testdata/chr19.fa.gz ./
+gunzip chr19.fa.gz
+wget http://www.liu-lab.com/ngspipedb/testdata/GRCm38.83.chr19.gtf.gz ./
+gunzip GRCm38.83.chr19.gtf.gz
+cd ..
 ```
 
 ### 4. convert NGSPipe analysis results to sqlite3 format <a name="Table2Sqlite3"></a>

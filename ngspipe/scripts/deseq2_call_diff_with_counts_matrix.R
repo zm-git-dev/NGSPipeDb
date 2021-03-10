@@ -49,7 +49,7 @@ library('DESeq2')
 
 # 读表达量矩阵
 # args$countsMatrix="/Users/zhangxuan/Work/Current_work2020-6-21/databasetool/mouse_transcriptome_analysis/results/result/quantify/quantify_by_stringtie/gene.csv"
-cts <- read.csv(args$countsMatrix, sep=",", row.names="gene_id")
+cts <- read.csv(args$countsMatrix, sep=",", row.names="gene_id", check.names=FALSE)
 colnames(cts) <- sub("\\.", "-", colnames(cts))
 
 countData <- as.matrix(cts)
@@ -58,13 +58,21 @@ countData <- countData[,sort(colnames(countData),decreasing = FALSE)]
 
 # 读样本信息文件
 # args$conditionFile="/Users/zhangxuan/Work/Current_work2020-6-21/databasetool/mouse_transcriptome_analysis/testdata/condition.xls"
-coldata <- read.csv(args$conditionFile, row.names=1,sep=",")
+coldata <- read.csv(args$conditionFile, row.names=1, sep=",", check.names=FALSE)
 coldata <- coldata[,c("Sample","Tissue")]
 coldata <- coldata[sort(rownames(coldata),decreasing = FALSE),]
 
-if(!all(rownames(coldata) %in% colnames(countData))) q()
-#countData <- countData[,rownames(coldata)]
-if(!all(rownames(coldata) == colnames(countData))) q()
+# sort rows and columns
+if(!all(rownames(coldata) %in% colnames(countData)))
+{
+  print("error: not all samples in exp matrix and condition are the same\n")
+  q()
+} else {
+  if(!all(rownames(coldata) == colnames(countData)))
+  {
+    countData <- countData[, rownames(coldata)]
+  }
+}
 
 # 创建deseq2对象
 dds <- DESeqDataSetFromMatrix(countData = countData,
@@ -142,19 +150,19 @@ for (i in 1:dim(sample_comb)[2]){
   # the base mean is the mean of normalized counts of all samples, normalizing for sequencing depth.
   resSig_all <- subset(res, padj < 0.05 & abs(log2FoldChange) > 1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
   colnames(resSig_all) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
-  write.table(resSig_all, file= paste(args$resultDir,sample1,"_vs_",sample2,".all.csv", sep=''), quote=F, row.names = FALSE, sep=',')
+  write.table(resSig_all, file= paste(args$resultDir,sample2,"_vs_",sample1,".all.csv", sep=''), quote=F, row.names = FALSE, sep=',')
   
   cat("all:",dim(resSig_all)[1], ";")
   
   resSig_up <- subset(res, padj < 0.05 & log2FoldChange > 1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
   colnames(resSig_up) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
-  write.table(resSig_up, file= paste(args$resultDir,sample1,"_vs_",sample2,".up.csv", sep=''), quote=F, row.names = FALSE, sep=',')
+  write.table(resSig_up, file= paste(args$resultDir,sample2,"_vs_",sample1,".up.csv", sep=''), quote=F, row.names = FALSE, sep=',')
   
   cat("up:", dim(resSig_up)[1], ";")
   
   resSig_down <- subset(res, padj < 0.05 & log2FoldChange < -1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
   colnames(resSig_down) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
-  write.table(resSig_down, file= paste(args$resultDir,sample1,"_vs_",sample2,".down.csv", sep=''), quote=F, row.names = FALSE, sep=',')
+  write.table(resSig_down, file= paste(args$resultDir,sample2,"_vs_",sample1,".down.csv", sep=''), quote=F, row.names = FALSE, sep=',')
   
   cat("down:", dim(resSig_down)[1], '\n')
 }

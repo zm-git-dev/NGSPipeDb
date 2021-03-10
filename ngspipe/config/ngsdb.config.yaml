@@ -10,7 +10,7 @@ reportsDir: "results/report"
 dbDir: "results/sqlite3"
 
 djangoCode: "ngsdb"
-exp_data: "results/result/quantify/quantify_by_stringtie/gene_fpkm_all_samples.tsv"
+exp_data: "testdata/gene_fpkm_all_samples.tsv"
 
 # sample list file
 samplesList: "testdata/samples.xls"
