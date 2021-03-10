@@ -748,9 +748,13 @@ conda activate ngsdb
 </code></pre></div>
 mac 系统 source ~/.bash_profile</p>
 <h3 id="3-download-test-data">3. download test data</h3>
-<div class="highlight"><pre><span></span><code>wget expression
-wget differential
-wget annotation
+<div class="highlight"><pre><span></span><code>mkdir -p testdata <span class="o">&amp;&amp;</span> <span class="nb">cd</span> testdata
+wget http://www.liu-lab.com/ngspipedb/testdata/gene_fpkm_all_samples.tsv ./
+wget http://www.liu-lab.com/ngspipedb/testdata/chr19.fa.gz ./
+gunzip chr19.fa.gz
+wget http://www.liu-lab.com/ngspipedb/testdata/GRCm38.83.chr19.gtf.gz ./
+gunzip GRCm38.83.chr19.gtf.gz
+<span class="nb">cd</span> ..
 </code></pre></div>
 
 <h3 id="4-convert-ngspipe-analysis-results-to-sqlite3-format">4. convert NGSPipe analysis results to sqlite3 format <a name="Table2Sqlite3"></a></h3>
