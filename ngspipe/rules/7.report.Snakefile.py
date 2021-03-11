@@ -55,8 +55,11 @@ rule workflow_report:
         workflow_report = join(config['reportsDir'], 'workflow', "workflow.png")
     shell:
         '''
-        #cp {input.workflow_report} {output.workflow_report};
-        mv {working_dir}/dag.png {output.workflow_report};
+        if [ -e "{working_dir}/dag.png" ]; then
+            mv {working_dir}/dag.png {output.workflow_report};
+        else
+            cp {input.workflow_report} {output.workflow_report};
+        fi
         '''
 
 rule rawreads_stat_report:
