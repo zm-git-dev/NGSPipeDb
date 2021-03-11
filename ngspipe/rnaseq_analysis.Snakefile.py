@@ -74,6 +74,7 @@ stat_outdir = join(config["resultsDir"], "statistic")
 
 # 7. diff gene discovery
 diff_outdir = join(config["resultsDir"], "diff", "diff_by_{}".format('deseq2'))
+diff_anno_outdir = join(config["resultsDir"], "diff", "diff_by_{}".format('deseq2'), "add_gene_note")
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
 # ------------------------------
@@ -107,7 +108,7 @@ rule all:
         report_result    = join(config['reportsDir'], "report.ok"),
         #
         # 9. differential expression
-        diff_outputok = join(diff_outdir, "diff.ok"),
+        diff_outputok = join(diff_anno_outdir, "diff.ok"),
 
 
 onsuccess:

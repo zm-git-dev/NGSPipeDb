@@ -56,7 +56,7 @@ if __name__ == "__main__":
     receiver = args.receiver
 
     if receiver == "nobody":
-        sys.stderr.write('No email address is provided, please try again this later!\n')
+        sys.stderr.write('No email address is provided, please add them in [rnaseq_analysis.Snakefile.py] if you like this function!\n')
         sys.exit(0)
 
     subject = "Inform from ngsPipe![{}]".format(args.status)
