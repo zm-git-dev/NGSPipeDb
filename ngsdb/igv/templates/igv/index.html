@@ -22,7 +22,7 @@
         locus: "chr19:3278807-3280996",
         reference: {
             id: "hg19",
-            fastaURL: "{% static 'sqlite3/gbrowse/annotation/chr19.fa' %}",
+            fastaURL: "{% static 'sqlite3/gbrowse/annotation/genome.fa' %}",
             cytobandURL: "https://s3.amazonaws.com/igv.broadinstitute.org/genomes/seq/b37/b37_cytoband.txt"
         },
         tracks: [
@@ -31,8 +31,8 @@
                 type: "annotation",
                 format: "gtf",
                 sourceType: "file",
-                url: "{% static 'sqlite3/gbrowse/annotation/merged.sorted.gff.bgzip' %}",
-                indexURL: "{% static 'sqlite3/gbrowse/annotation/merged.sorted.gff.bgzip.tbi' %}",
+                url: "{% static 'sqlite3/gbrowse/annotation/annotation.sorted.bgzip' %}",
+                indexURL: "{% static 'sqlite3/gbrowse/annotation/annotation.sorted.bgzip.tbi' %}",
                 displayMode: "EXPANDED",
                 visibilityWindow: 10000000
             },

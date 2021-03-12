@@ -33,8 +33,12 @@
   <table id='myTable' class="table">
     <thead>
       <th>Gene ID</th>
-      <th>control</th>
-      <th>treat</th>
+      <th>control_0</th>
+      <th>control_1</th>
+      <th>control_2</th>
+      <th>treated_0</th>
+      <th>treated_1</th>
+      <th>treated_2</th>
     </thead>
     <tbody></tbody>
   </table>
@@ -53,8 +57,12 @@
       "ajax": "{% url 'geneExpAtlas:exp_json' %}",
       "columns": [
         { "data": "pk" },
-        { "data": "fields.treated" },
-        { "data": "fields.control" },
+        { "data": "fields.control_0" },
+        { "data": "fields.control_1" },
+        { "data": "fields.control_2" },
+        { "data": "fields.treated_0" },
+        { "data": "fields.treated_1" },
+        { "data": "fields.treated_2" },
       ]
     });
   });

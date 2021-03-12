@@ -42,8 +42,8 @@ def exp_json(request):
 def exp_heatmap_json(request):
     import pandas as pd
     from clustergrammer import Network
-    exps = Exp.objects.all().using("expDb").values_list("gene_id", "control", "treated")
-    df = pd.DataFrame(list(exps), columns=["gene_id", "control", "treated"])
+    exps = Exp.objects.all().using("expDb").values_list("gene_id", "control_0", "control_1", "control_2", "treated_0", "treated_1", "treated_2")
+    df = pd.DataFrame(list(exps), columns=["gene_id", "control_0", "control_1", "control_2", "treated_0", "treated_1", "treated_2"])
     df.index = df.gene_id
     df = df.loc[:,df.columns[1:]]
     net = Network()

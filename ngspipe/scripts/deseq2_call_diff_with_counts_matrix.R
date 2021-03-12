@@ -148,7 +148,8 @@ for (i in 1:dim(sample_comb)[2]){
   #head(res)
   
   # the base mean is the mean of normalized counts of all samples, normalizing for sequencing depth.
-  resSig_all <- subset(res, padj < 0.05 & abs(log2FoldChange) > 1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
+  #resSig_all <- subset(res, padj < 0.05 & abs(log2FoldChange) > 1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
+  resSig_all <- subset(res, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
   colnames(resSig_all) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
   write.table(resSig_all, file= paste(args$resultDir,sample2,"_vs_",sample1,".all.csv", sep=''), quote=F, row.names = FALSE, sep=',')
   
@@ -156,15 +157,15 @@ for (i in 1:dim(sample_comb)[2]){
   
   resSig_up <- subset(res, padj < 0.05 & log2FoldChange > 1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
   colnames(resSig_up) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
-  write.table(resSig_up, file= paste(args$resultDir,sample2,"_vs_",sample1,".up.csv", sep=''), quote=F, row.names = FALSE, sep=',')
+  write.table(resSig_up, file= paste(args$resultDir,sample2,"_vs_",sample1,".up.padj.csv", sep=''), quote=F, row.names = FALSE, sep=',')
   
-  cat("up:", dim(resSig_up)[1], ";")
+  cat("up_padj<0.5_fc>2:", dim(resSig_up)[1], ";")
   
   resSig_down <- subset(res, padj < 0.05 & log2FoldChange < -1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
   colnames(resSig_down) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
-  write.table(resSig_down, file= paste(args$resultDir,sample2,"_vs_",sample1,".down.csv", sep=''), quote=F, row.names = FALSE, sep=',')
+  write.table(resSig_down, file= paste(args$resultDir,sample2,"_vs_",sample1,".down.padj.csv", sep=''), quote=F, row.names = FALSE, sep=',')
   
-  cat("down:", dim(resSig_down)[1], '\n')
+  cat("down_padj<0.5_fc>2:", dim(resSig_down)[1], '\n')
 }
 
 

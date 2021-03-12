@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 import math
 from django.http import JsonResponse, HttpResponse
-from .models import Features
+from .models import *
 from django.core import serializers
 import json
 

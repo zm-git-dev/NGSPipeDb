@@ -3,7 +3,8 @@ import re
 import glob
 import os
 import csv
-import pandas as pd 
+import pandas as pd
+from urllib.parse import unquote,quote
 
 gtf_file = sys.argv[1]
 diff_dir = sys.argv[2]
@@ -16,8 +17,8 @@ if gtf_file.endswith('gtf'):
     gtf_transcript_pat_rev = re.compile('transcript_id "([^"]+).*gene_id "([^"]+)')
 else:
     gtf_gene_pat = re.compile('ID=([^;]+)')
-    gtf_transcript_pat = re.compile('ID=([^;]+)')
-    gtf_transcript_pat_rev = re.compile('ID=([^;]+)')
+    gtf_transcript_pat = re.compile('ID=([^;]+).*Parent=([^;]+)')
+    gtf_transcript_pat_rev = re.compile('Parent=([^;]+).*ID=([^;]+)')
 
 gene_anno = dict()
 
@@ -33,7 +34,7 @@ with open(gtf_file, 'r') as f:
             else:
                 sys.stderr.write('ERROR format in {}\n'.format(items[8]))
                 sys.exit(-1)
-            gene_anno[gid] = items[8]
+            gene_anno[gid] = unquote(items[8])
         if '\ttranscript\t' in line or '\tmiRNA\t' in line or '\tmRNA\t' in line or '\tncRNA\t' in line or '\trRNA\t' in line or '\ttRNA\t' in line:
             line = line.rstrip()
             items = line.split('\t')
@@ -41,15 +42,23 @@ with open(gtf_file, 'r') as f:
             matObj_rev = gtf_transcript_pat_rev.match(items[8])
             #print(items[8])
             if matObj:
-                gid = matObj.group(1)
-                tid = matObj.group(2)
+                if gtf_file.endswith('gtf'):
+                    gid = matObj.group(1)
+                    tid = matObj.group(2)
+                else:
+                    gid = matObj.group(2)
+                    tid = matObj.group(1)
             elif matObj_rev:
-                tid = matObj.group(1)
-                gid = matObj.group(2)
+                if gtf_file.endswith('gtf'):
+                    gid = matObj.group(2)
+                    tid = matObj.group(1)
+                else:
+                    gid = matObj.group(1)
+                    tid = matObj.group(2)
             else:
                 sys.stderr.write('ERROR format in {}\n'.format(items[8]))
                 sys.exit(-1)
-            gene_anno[gid] = gene_anno[gid] + ' ^S^ ' + items[8]
+            gene_anno[gid] = gene_anno[gid] + ' ^S^ ' + unquote(items[8])
 
 path = os.path.join(diff_dir, '*.csv')
 
@@ -64,5 +73,5 @@ for diff_res in glob.glob(path):
     diff_df.index = [i.split('|')[0] for i in diff_df.index]
 
     diff_df['gene_anno'] = gene_anno_df.loc[diff_df.index,'anno']
-
-    diff_df.to_csv(outfile,quoting=csv.QUOTE_NONE)
+    print(diff_df)
+    diff_df.to_csv(outfile,quoting=csv.QUOTE_NONE,sep=',',escapechar='|')

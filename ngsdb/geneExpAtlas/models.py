@@ -10,8 +10,12 @@ from django.db import models
 
 class Exp(models.Model):
     gene_id = models.TextField(db_column='Gene_id', primary_key=True, blank=True, null=False)  # Field name made lowercase.
-    treated = models.FloatField(blank=True, null=True)
-    control = models.FloatField(blank=True, null=True)
+    control_1 = models.FloatField(db_column='control-1', blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    control_0 = models.FloatField(db_column='control-0', blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    treated_2 = models.FloatField(db_column='treated-2', blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    control_2 = models.FloatField(db_column='control-2', blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    treated_0 = models.FloatField(db_column='treated-0', blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    treated_1 = models.FloatField(db_column='treated-1', blank=True, null=True)  # Field renamed to remove unsuitable characters.
 
     class Meta:
         managed = False

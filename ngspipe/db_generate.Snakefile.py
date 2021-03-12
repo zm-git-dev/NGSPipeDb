@@ -1,6 +1,6 @@
 import os
-from os.path import join
 import sys
+from os.path import join
 import pandas as pd
 
 # relative path
@@ -38,24 +38,28 @@ gffdb_outdir = join(config["dbDir"], "gff_sqlite3")
 gbrowse_outdir = join(config["dbDir"], "gbrowse")
 annotation_gbrowse_outdir = join(gbrowse_outdir, 'annotation')
 
+# 5. migration
+migration_outdir = join(config["dbDir"], "migration")
+
 rule all:
     input:
         # 1. exp database create #
         sqlite3_exp                     = join(exp_db_outdir, "exp.sqlite3"),
-        exp_django_model        = join(config["djangoCode"], "geneExpAtlas", "models.py"),
+        exp_django_model                = join(config["djangoCode"], "geneExpAtlas", "models.py"),
 
         # 2. makeblastdb
-        merged_db               = join(blastdb_outdir, "merged_blastdb.ok"),
+        merged_db                       = join(blastdb_outdir, "merged_blastdb.ok"),
 
         # 3. gff database create
-        gffdb                   = join(gffdb_outdir, "gtf.sqlite3"),
-        gffdjango_model         = join(config["djangoCode"], "geneAnno", "models.py"),
+        gffdb                           = join(gffdb_outdir, "gtf.sqlite3"),
+        gffdjango_model                 = join(config["djangoCode"], "geneAnno", "models.py"),
 
         # 4. genome browse
-        gtfgzip = join(annotation_gbrowse_outdir, 'annotation.sorted.bgzip'),
-        genome = join(annotation_gbrowse_outdir, "genome.fa")
+        gtfgzip                         = join(annotation_gbrowse_outdir, 'annotation.sorted.bgzip'),
+        genome                          = join(annotation_gbrowse_outdir, "genome.fa"),
 
-        
+        # 5. migration
+        makemigration = join(migration_outdir, "migration.ok"),
 
 onsuccess:
     print("""
@@ -71,18 +75,34 @@ onsuccess:
  ▄▄▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄█░▌ ▄▄▄▄▄▄▄▄▄█░▌
 ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ 
-
+                                                                                           
     """)
-    #shell("python NGSPipe/scripts/sendmail.py {}".format(receiver_email))
+    #shell("python ngspipe/scripts/sendmail.py {}".format(receiver_email))
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("nobody", "success", join(working_dir, ".snakemake/log/")))
     # NGSPipeDB_source_code/.snakemake/log/
-    
-    
+
 
 onerror:
     print("An error occurred")
-    #shell("mail -s 'an error occurred' 296373256@qq.com ")
+    print("""
+>>>>>>>>>>>>>>>>> Workflow finished, no error <<<<<<<<<<<<<<<<<<<<
+ ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌
+▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌
+▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄█░▌
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌
+▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀█░█▀▀ ▐░█▀▀▀▀█░█▀▀ ▐░▌       ▐░▌▐░█▀▀▀▀█░█▀▀ 
+▐░▌          ▐░▌     ▐░▌  ▐░▌     ▐░▌  ▐░▌       ▐░▌▐░▌     ▐░▌  
+▐░█▄▄▄▄▄▄▄▄▄ ▐░▌      ▐░▌ ▐░▌      ▐░▌ ▐░█▄▄▄▄▄▄▄█░▌▐░▌      ▐░▌ 
+▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌
+ ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀ 
+                                                                 
+    """)
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("nobody", "error", join(working_dir, ".snakemake/log/")))
 
 include: join("rules", "8.db_generate_of_exp.Snakefile.py")
 include: join("rules", "8.db_generate_of_gff.Snakefile.py")
 include: join("rules", "8.db_generate_of_blastdb.Snakefile.py")
 include: join("rules", "8.db_generate_of_genomebrowser.Snakefile.py")
+include: join("rules", "8.db_migration.Snakefile.py")

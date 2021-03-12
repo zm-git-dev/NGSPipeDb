@@ -43,7 +43,7 @@ rule gtfTosqlite3ForModel_auto_by_django:
         pip install wooey clustergrammer sklearn pandas==0.25.3;
         python {config[djangoCode]}/manage.py inspectdb --database {params.db_name}|perl -ne 'if(/\s+id = /){{s/null=True/null=False, primary_key=True/}}print $_' > {output.gffdjango_model} 2>{log};
         # 使用makemigrations创建迁移
-        python {config[djangoCode]}/manage.py makemigrations {params.db_app} 1>>{log} 2>&1;
+        #python {config[djangoCode]}/manage.py makemigrations {params.db_app} 1>>{log} 2>&1;
         # 使用migrate执行迁移
-        python {config[djangoCode]}/manage.py migrate 1>>{log} 2>&1;
+        #python {config[djangoCode]}/manage.py migrate 1>>{log} 2>&1;
         '''

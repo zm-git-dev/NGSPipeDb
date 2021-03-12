@@ -32,7 +32,7 @@ rule diff_gene_add_note:
         ------------------------------
         '''
     input:
-        diff_outputok = touch(join(diff_outdir, "diff.ok")),
+        diff_outputok = join(diff_outdir, "diff.ok"),
         gtf = config["genomeAnno"]
     output:
         diff_outputok = touch(join(diff_anno_outdir, "diff.ok"))

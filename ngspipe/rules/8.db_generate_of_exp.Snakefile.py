@@ -41,9 +41,9 @@ rule sqlite3ForModel_auto_by_django:
         pip install wooey clustergrammer sklearn pandas==0.25.3;
         python {config[djangoCode]}/manage.py inspectdb --database expDb|perl -ne 'if(/primary_key/){{s/null=True/null=False/}};print "$_"' > {output.exp_django_model} 2>{log};
         # 使用makemigrations创建迁移
-        python {config[djangoCode]}/manage.py makemigrations geneExpAtlas 1>{log} 2>&1;
+        #python {config[djangoCode]}/manage.py makemigrations geneExpAtlas 1>{log} 2>&1;
         # 使用migrate执行迁移
-        python {config[djangoCode]}/manage.py migrate 1>{log} 2>&1;
+        #python {config[djangoCode]}/manage.py migrate 1>{log} 2>&1;
         '''
 
 rule expression_blast:
