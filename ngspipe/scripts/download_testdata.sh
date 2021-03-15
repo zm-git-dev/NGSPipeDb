@@ -13,22 +13,22 @@ cd $dest_forder
 echo -e "\033[32m Downloading raw reads... \033[0m"
 # --no-clobber 不要重复下载已存在的文件
 for i in control_R1 control_R2 treated_R1 treated_R2;
-  do wget --no-clobber http://www.liu-lab.com/ngspipedb/Testdata/${i}.fq.gz;
+  do wget --no-clobber http://www.liu-lab.com/ngspipedb/testdata/${i}.fq.gz;
 done
 
 # Download chr19 sequence (mm10 version)
 echo -e "\033[32m Downloading reference sequence... \033[0m"
-[[ -e chr19.fa ]] || wget --no-clobber http://www.liu-lab.com/ngspipedb/Testdata/chr19.fa.gz
+[[ -e chr19.fa ]] || wget --no-clobber http://www.liu-lab.com/ngspipedb/testdata/chr19.fa.gz
 [[ -e chr19.fa ]] || gunzip chr19.fa.gz # uncompress the file
 
 echo -e "\033[32m Downloading gff file... \033[0m"
-curl -C - http://www.liu-lab.com/ngspipedb/Testdata/GRCm38.83.chr19.gtf.gz | gunzip -c > GRCm38.83.chr19.gtf
+curl -C - http://www.liu-lab.com/ngspipedb/testdata/GRCm38.83.chr19.gtf.gz | gunzip -c > GRCm38.83.chr19.gtf
 
 echo -e "\033[32m Downloading sample list file... \033[0m"
-wget --no-clobber http://www.liu-lab.com/ngspipedb/Testdata/samples.xls
+wget --no-clobber http://www.liu-lab.com/ngspipedb/testdata/samples.xls
 
 echo -e "\033[32m Downloading condition list file... \033[0m"
-wget --no-clobber http://www.liu-lab.com/ngspipedb/Testdata/condition.xls
+wget --no-clobber http://www.liu-lab.com/ngspipedb/testdata/condition.xls
 
 `python ../ngspipe/scripts/generate_replicat.py control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz`
 `rm -f control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz`
