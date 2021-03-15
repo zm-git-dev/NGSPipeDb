@@ -18,7 +18,7 @@ rule transcript_assembly_by_stringtie:
     threads: 5
     shell:
         '''
-        stringtie -p {threads} -G {input.genomeAnno} -o {output.gtf} {input.sorted_bam} 1>{log} 2>&1;
+        stringtie {stringtie_rna_library} -p {threads} -G {input.genomeAnno} -o {output.gtf} {input.sorted_bam} 1>{log} 2>&1;
         '''
 
 # ----------------------------------------------------------------------------

@@ -40,6 +40,7 @@ rna_library = "" # "--rna-strandness RF"(fr-firststrand) or "--rna-strandness FR
 
 # 4. transcript assembly
 transcript_assembly_method = 'stringtie' # star
+stringtie_rna_library = "" # --rf: Assumes a stranded library fr-firststrand. --fr: Assumes a stranded library fr-secondstrand.
 transcript_assembly_outdir = join(config["resultsDir"], "transcript_assembly", "transcript_assembly_by_{}".format(transcript_assembly_method))
 
 # 5. quantification

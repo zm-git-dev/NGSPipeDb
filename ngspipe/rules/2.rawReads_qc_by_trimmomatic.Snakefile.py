@@ -2,11 +2,11 @@
 # rawReads_qc_by_trim_galore
 
 # ----------------------------------------------------------------------------
-rule rawReads_qc_by_trim_galore:
+rule rawReads_qc_by_trimmomatic:
     message:
         '''
         ------------------------------
-        we need to use clean reads for next step mapping
+        we need to use clean reads for next step mapping use trimmomatic
         ------------------------------
         '''
     input:
@@ -22,7 +22,7 @@ rule rawReads_qc_by_trim_galore:
     threads: 5
     shell:
         '''
-        trim_galore -j {threads} -q 30 --phred33 --gzip --length 36 --basename {wildcards.sample} --fastqc --paired {input.read1} {input.read2} -o {qc_outdir}/{wildcards.sample} 1>{log} 2>&1;
+        trimmomatic 1>{log} 2>&1;
         ln -s {wildcards.sample}_val_1.fq.gz {output.read1} 1>>{log} 2>&1;
         ln -s {wildcards.sample}_val_2.fq.gz {output.read2} 1>>{log} 2>&1;
         '''
