@@ -35,7 +35,7 @@ Now you can viste your website on http://127.0.0.1:8000. All result are stored i
 
 If you have more time, then we recommend you configure ngspipedb according to your needs. For more details, please see [step by step](#step-by-step) bellow.
 
-## Step-by-step RNA-seq workflow <a href="Step-by-Step-RNASeq"></a>
+## Step-by-step RNA-seq workflow on testdata <a href="Step-by-Step-RNASeq"></a>
 
 Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the [nix command line interface](https://en.wikipedia.org/wiki/Command-line_interface). Also, best practice RNA-seq analysis is plus. Please find the easy learn matieral in [linux & shell](../linux) and [RNASeq background](../ngs#rnaseq).
 

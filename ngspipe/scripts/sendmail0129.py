@@ -55,7 +55,7 @@ if __name__ == "__main__":
     password = args.password
     receiver = args.receiver
 
-    if receiver == "nobody":
+    if '@' not in receiver or receiver == "nobody":
         sys.stderr.write('No email address is provided, please add them in [rnaseq_analysis.Snakefile.py] if you like this function!\n')
         sys.exit(0)
 

@@ -15,8 +15,8 @@
       
         <link rel="canonical" href="https://xuanblo.github.io/NGSPipeDb/NGSPipeDb/">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.5">
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.77f3fd56.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2c0c5eaf.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.7fa14f5b.min.css">
@@ -49,7 +49,7 @@
     
     
     
-      <link rel="stylesheet" href="../assets/pymdownx-extras/extra-5ee9fa49a5.css">
+      <link rel="stylesheet" href="../assets/pymdownx-extras/extra-25cd689912.css">
     
     
       
@@ -278,14 +278,12 @@
                   <div class="md-sidebar__inner">
                     
 
-
-
   
 
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://xuanblo.github.io/NGSPipeDb/" title="NGSPipeDb Document" class="md-nav__button md-logo" aria-label="NGSPipeDb Document">
+    <a href=".." title="NGSPipeDb Document" class="md-nav__button md-logo" aria-label="NGSPipeDb Document" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -766,7 +764,6 @@ The first version handles <a href="#">RNA-Seq</a> workflow.</p>
 │   └── sqlite3
 └── testdata
 </code></pre></div>
-
 <p>The workflow code goes into a subfolder <code>ngspipe</code>, while the configuration is stored in a subfolder <code>config</code>. Inside of the workflow subfolder, the central Snakefile marks the entrypoint of the workflow. In addition to the central Snakefile, rules are stored in a modular way, using the optional subfolder <code>ngspipe/rules</code>. Further, scripts are stored in a subfolder <code>workflow/scripts</code> and notebooks in a subfolder <code>workflow/notebooks</code>. Conda environments are stored in a subfolder <code>workflow/envs</code>. Finally, report caption files are stored in <code>workflow/report</code>. </p>
 <p>The database code goes into a subfolder <code>ngsdb</code>, while the <code>manage.py</code> is ngsdb's command-line utility for administrative tasks. A golabl setting file is stored under <code>ngsdb/ngsdb</code>, such as <code>ngsdb/ngsdb/setting.py</code> and <code>ngsdb/ngsdb/urls.py</code>. Many ngsdb function module take a app name. For example, if your INSTALLED_APPS in <code>ngsdb/ngsdb/setting.py</code> contains the string 'igv', the database will contain a page of IGV genome browser.</p>
 <p>All output files generated in the workflow should be stored under <code>results/result</code>, unless they are rather retrieved report, in which case they should be stored under <code>results/report</code>. The latter subfolder <code>results/sqlite3</code> contains Sqlite3 kind file that shall be used by ngsdb.</p>
@@ -781,7 +778,6 @@ The first version handles <a href="#">RNA-Seq</a> workflow.</p>
 <span class="c1"># export to yaml</span>
 conda env <span class="nb">export</span> --no-builds -p ./ngspipedb_py38_conda_env &gt;ngspipedb_py38_conda_env.yaml
 </code></pre></div>
-
 <ol>
 <li>use conda pack</li>
 </ol>
@@ -798,7 +794,6 @@ tar -xzf ngspipedb_py38_conda_env_osx64.tar.gz -C ngspipedb_py38_conda_env
 <span class="nb">source</span> activate ./ngspipedb_py38_conda_env
 conda-unpack
 </code></pre></div>
-
 <p>conda config &ndash;add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config &ndash;add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 conda config &ndash;add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
@@ -975,7 +970,7 @@ repository.</p>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.5cf3e710.min.js"></script>
+      <script src="../assets/javascripts/bundle.a1c7c35e.min.js"></script>
       
         <script src="../assets/pymdownx-extras/extra-uml-51b11a9a.js"></script>
       

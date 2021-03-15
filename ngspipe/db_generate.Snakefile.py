@@ -9,6 +9,7 @@ working_dir = os.getcwd() # input and output path are relative to current workin
 
 # configfile
 
+receiver_email = 'zhangxuan@xtbg.ac.cn'
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # detail parameters in pipe #
@@ -78,7 +79,7 @@ onsuccess:
                                                                                            
     """)
     #shell("python ngspipe/scripts/sendmail.py {}".format(receiver_email))
-    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("nobody", "success", join(working_dir, ".snakemake/log/")))
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format(receiver_email, "success", join(working_dir, ".snakemake/log/")))
     # NGSPipeDB_source_code/.snakemake/log/
 
 
@@ -99,7 +100,7 @@ onerror:
  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀ 
                                                                  
     """)
-    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format("nobody", "error", join(working_dir, ".snakemake/log/")))
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format(receiver_email, "error", join(working_dir, ".snakemake/log/")))
 
 include: join("rules", "8.db_generate_of_exp.Snakefile.py")
 include: join("rules", "8.db_generate_of_gff.Snakefile.py")

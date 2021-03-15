@@ -11,11 +11,15 @@ Now you can viste your website on http://127.0.0.1:8000. All result are stored i
 - Example of report <sub>[![html](https://img.icons8.com/ios/20/000000/html-filetype.png)](http://www.liu-lab.com)</sub>.
 - Example of database <sub>[![html](https://img.icons8.com/dotty/25/000000/copy-link.png)](http://www.liu-lab.com)</sub>.
 
-## Step-by-step to generate database with your own data <a name="Step-by-Step-Database"></a>
+## Step-by-step to generate database with test data <a name="Step-by-Step-Database"></a>
 
 ### 1. pre-prepare
 
-Let's assume that you have the data you need to generate the database, such as gene annotation files, gene expression matrix and analysis reports. Before further steps, please [install CONDA](../NGSPipe-RNA-seq/#Miniconda) and [download the latest source code of NGSPipeDb](../NGSPipe-RNA-seq/#NGSPipeDbSource). Modify the project name and enter the project directory.
+1. [Install wget and git](../NGSPipe-RNA-seq/#BasicLinux)
+2. [Install Miniconda3](../NGSPipe-RNA-seq/#Miniconda)
+3. [Download NGSPipeDb source code](../NGSPipe-RNA-seq/#NGSPipeDbSource)
+
+Modify the project name and enter the project directory.
 
 ```shell
 mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
@@ -25,15 +29,10 @@ cd species_sample_transcript_analysis_by_NGSPipeDb
 ### 2. Install the NGSDb conda environments <a name="DatabaseRequirement"></a>
 
 ```shell
-#conda create -n ngsdb python=3.8 -c conda-forge
-#conda activate ngsdb
-#conda env update -n ngsdb --file ngspipe/envs/requirements_ngsdb.yaml --prune
-
 mamba create -n ngsdb python=3.8 -c conda-forge -y
 mamba env update -n ngsdb --file ngspipe/envs/requirements_ngsdb.yaml --prune
 conda activate ngsdb
 ```
-mac 系统 source ~/.bash_profile
 
 ### 3. download test data
 
@@ -47,7 +46,33 @@ gunzip GRCm38.83.chr19.gtf.gz
 cd ..
 ```
 
-### 4. convert NGSPipe analysis results to sqlite3 format <a name="Table2Sqlite3"></a>
+### 4. run convert testdata to database
+
+cheak task plan:
+
+```shell
+snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -n
+```
+
+build dag plot:
+
+```shell
+snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml --dag|dot -Tpng > dag.png
+```
+
+run snakemake:
+
+```shell
+snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -j 1
+```
+
+### 5. vist website
+
+Starting server by run `python ngsdb/manage.py runserver`, visit sebsite on http://127.0.0.1:8000.
+
+## generate database by you own data
+
+### 1. convert NGSPipe analysis results to sqlite3 format <a name="Table2Sqlite3"></a>
 
 First, edit `ngspipe/config/ngsdb.config.yaml` file:
 
@@ -123,7 +148,7 @@ Then, run db_generate workflow to generate database files.
 snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -j 1
 ```
 
-### 3. config <a name="DatabaseConfig"></a>
+### 2. config <a name="DatabaseConfig"></a>
 
 edit `mysite/mysite/settings.py` file
 
@@ -144,12 +169,19 @@ INSTALLED_APPS = [
 ]
 ```
 
-### 4. start server <a name="RunServer"></a>
+### 3. start server <a name="RunServer"></a>
 
 Starting server by run `python ngsdb/manage.py runserver`, visit sebsite on http://127.0.0.1:8000.
 
 
-### 5. add your custome data
+### 4. add your custome data
+
+Let's assume that you have the data you need to generate the database, such as gene annotation files, gene expression matrix and analysis reports. Before further steps, please [install CONDA](../NGSPipe-RNA-seq/#Miniconda) and [download the latest source code of NGSPipeDb](../NGSPipe-RNA-seq/#NGSPipeDbSource). Modify the project name and enter the project directory.
+
+```shell
+mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
+cd species_sample_transcript_analysis_by_NGSPipeDb
+```
 
 1. table data in a page
 2. custome script in wooey
@@ -161,7 +193,11 @@ Starting server by run `python ngsdb/manage.py runserver`, visit sebsite on http
 
 If you want use wooey tools on a task model `celery -A ProjectName worker -c 1 --beat -l info` optional.
 
-## overview the NGSDb apps
+### 添加script
+
+因为运行script的时候是使用绝对路径，那么addscript的时候和运行script的时候文件路径必须不能变。如何变成相对路径呢？另外在admin管理页面script也不能直接访问的。
+
+### 5. overview the NGSDb apps
 
 We use django project to constructed our NGSDb. We have pareparied many apps for you. embeed. Please have a look:
 

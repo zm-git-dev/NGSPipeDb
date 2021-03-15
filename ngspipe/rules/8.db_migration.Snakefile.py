@@ -17,7 +17,8 @@ rule migration_model:
         join(migration_outdir, "change_model_py.log")
     shell:
         '''
+        pip install wooey clustergrammer sklearn pandas==0.25.3 1>{log} 2>&1;
         python {config[djangoCode]}/manage.py makemigrations 1>>{log} 2>&1;
-        # 使用migrate执行迁移
+        # django makemigrate
         python {config[djangoCode]}/manage.py migrate 1>>{log} 2>&1;
         '''
