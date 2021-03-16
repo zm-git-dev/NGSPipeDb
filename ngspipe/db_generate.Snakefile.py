@@ -9,7 +9,7 @@ working_dir = os.getcwd() # input and output path are relative to current workin
 
 # configfile
 
-receiver_email = 'zhangxuan@xtbg.ac.cn'
+receiver_email = 'nobody'
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # detail parameters in pipe #
@@ -42,6 +42,9 @@ annotation_gbrowse_outdir = join(gbrowse_outdir, 'annotation')
 # 5. migration
 migration_outdir = join(config["dbDir"], "migration")
 
+# 6. addscript
+addscript_outdir = join(config["dbDir"], "addscript")
+
 rule all:
     input:
         # 1. exp database create #
@@ -60,7 +63,12 @@ rule all:
         genome                          = join(annotation_gbrowse_outdir, "genome.fa"),
 
         # 5. migration
-        makemigration = join(migration_outdir, "migration.ok"),
+        makemigration                   = join(migration_outdir, "migration.ok"),
+
+        # 6. add script to wooey
+        addscript                       = join(addscript_outdir, "addscript.ok"),
+        
+
 
 onsuccess:
     print("""
@@ -107,3 +115,4 @@ include: join("rules", "8.db_generate_of_gff.Snakefile.py")
 include: join("rules", "8.db_generate_of_blastdb.Snakefile.py")
 include: join("rules", "8.db_generate_of_genomebrowser.Snakefile.py")
 include: join("rules", "8.db_migration.Snakefile.py")
+include: join("rules", "8.db_generate_addscript.snakefile.py")
