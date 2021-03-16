@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{ config.title }} | geneExpAtlas
+{% endblock %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block content %}
+<h2>Gene expression atlas</h2>
+<hr>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="{% url 'geneExpAtlas:index' %}">expression matrix</a></li>
+  <li role="presentation"><a href="{% url 'geneExpAtlas:heatmap' %}">expression heatmap</a></li>
+</ul>
+
+
+<h3>Experiment1</h3>
+<p>Eight organs, including roots (Ro), stems (St), shoot apexes (SA), mature leaves (ML), male flowers (MF), female
+  flowers
+  (FF), fruits (Fr), and seeds (Se), were harvested in August from the 1-year-old plants of Sacha Inchi grown at the
+  Xishuangbanna Tropical Botanical Garden, Chinese Academy of Sciences, Mengla, Yunnan, China under natural climate
+  conditions. The samples were collected at 60 days after pollination (DAP) when fruits and seeds have reached full
+  size. Three independent biological replicates of each sample were collected from three individual plants. All samples
+  were frozen immediately in liquid nitrogen and then stored at -80 °C for RNA extraction.</p>
+
+<div id='example1'>
+  <table id='myTable' class="table">
+    <thead>
+      <th>Gene ID</th>
+      <th>control_0</th>
+      <th>control_1</th>
+      <th>control_2</th>
+      <th>treated_0</th>
+      <th>treated_1</th>
+      <th>treated_2</th>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#myTable').DataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": "{% url 'geneExpAtlas:exp_json' %}",
+      "columns": [
+        { "data": "pk" },
+        { "data": "fields.control_0" },
+        { "data": "fields.control_1" },
+        { "data": "fields.control_2" },
+        { "data": "fields.treated_0" },
+        { "data": "fields.treated_1" },
+        { "data": "fields.treated_2" },
+      ]
+    });
+  });
+</script>
+{% endblock %}
+
