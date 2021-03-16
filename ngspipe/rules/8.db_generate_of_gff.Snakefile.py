@@ -40,6 +40,6 @@ rule gtfTosqlite3ForModel_auto_by_django:
         '''
         # inspectdb
         # make sure the right db name in ngsdb/ngsdb/setting.py
-        # 
-        python {config[djangoCode]}/manage.py inspectdb --database {params.db_name}|perl -ne 'if(/\s+id = /){{s/null=True/null=False, primary_key=True/}}print $_' > {output.gffdjango_model} 2>{log};
+        pip install wooey clustergrammer sklearn pandas==0.25.3 1>{log} 2>&1;
+        python {config[djangoCode]}/manage.py inspectdb --database {params.db_name}|perl -ne 'if(/\s+id = /){{s/null=True/null=False, primary_key=True/}}print $_' > {output.gffdjango_model} 2>>{log};
         '''
