@@ -14,7 +14,7 @@ rule add_script2wooey:
     benchmark:
         join(addscript_outdir, "benchmark.txt")
     params:
-        dna2rna_path = join('ngsdb', 'wooey', 'wooey_scripts'),
+        dna2rna_path = join('ngsdb', 'wooey', 'wooey_scripts', 'dna2rna.py'),
         dna2rna_name = 'dna2rna_convert',
     shell:
         '''
