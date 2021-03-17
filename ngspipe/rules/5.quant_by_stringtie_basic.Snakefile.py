@@ -7,7 +7,6 @@ rule reStringtie_by_stringtie:
         stringtie was used to assemble transcript
         '''
     input:
-        mergedGtf = join(transcript_assembly_outdir, "merged.gtf"),
         sorted_bam = join(junction_align_outdir, "{sample}", "{sample}.sorted.bam"),
         genomeAnno = config["genomeAnno"]
     output:

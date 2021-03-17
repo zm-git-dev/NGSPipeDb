@@ -156,7 +156,7 @@ include: join("rules", "1.sampling_data_by_{}.Snakefile.py".format(sampling_meth
 include: join("rules", "2.rawReads_qc_by_{}.Snakefile.py".format(qc_method))
 include: join("rules", "3.junction_align_by_{}.Snakefile.py".format(junction_align_method))
 include: join("rules", "4.transcript_assembly_by_{}.Snakefile.py".format(transcript_assembly_method))
-include: join("rules", "5.quant_by_{}.Snakefile.py".format(quantify_method))
+include: join("rules", "5.quant_by_{}_{}.Snakefile.py".format(quantify_method, 'novelrna'))
 include: join("rules", "6.statistic_data_of_bam.Snakefile.py")
 include: join("rules", "6.statistic_data_of_rawReads.Snakefile.py")
 include: join("rules", "6.statistic_data_of_cleanReads.Snakefile.py")

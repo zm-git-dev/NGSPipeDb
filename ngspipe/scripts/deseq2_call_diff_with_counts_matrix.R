@@ -105,7 +105,7 @@ for (i in 1:dim(sample_comb)[2]){
   
   cat(sample1, "vs", sample2, ";")
   
-  res <- results(dds, contrast=c("Sample",sample2,sample1))
+  res <- results(dds, alpha=0.05, contrast=c("Sample",sample2,sample1))
   
   # foldchange = log2(sample1 / sample2)
   # 要把表达量添加进去
