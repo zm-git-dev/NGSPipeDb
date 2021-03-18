@@ -41,3 +41,9 @@ gunzip GRCm38.83.chr19.gtf.gz
 wget http://www.liu-lab.com/ngspipedb/testdata/sample_resequecing.xls
 cd ..
 ```
+
+### 4. run snakemake
+
+```
+snakemake -s ngspipe/2.resequencing_analysis.Snakefile.py --configfile ngspipe/config/resequencing.config.yaml -p -j 1
+```

@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#nature-protocol" class="md-skip">
+        <a href="#resequcing-analysis" class="md-skip">
           Skip to content
         </a>
       
@@ -421,6 +421,8 @@
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           NGSPipe resequecing
@@ -435,6 +437,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -443,9 +447,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#nature-protocol" class="md-nav__link">
-    nature protocol
+  <a href="#step-by-step-run-resequencing-on-testdata" class="md-nav__link">
+    step-by-step run resequencing on testdata
   </a>
+  
+    <nav class="md-nav" aria-label="step-by-step run resequencing on testdata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-pre-prepare-download-source-code" class="md-nav__link">
+    1. pre-prepare download source code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-conda-envirenment" class="md-nav__link">
+    2. create conda envirenment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-download-testdata" class="md-nav__link">
+    3. download testdata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-run-snakemake" class="md-nav__link">
+    4. run snakemake
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -544,6 +582,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -552,9 +592,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#nature-protocol" class="md-nav__link">
-    nature protocol
+  <a href="#step-by-step-run-resequencing-on-testdata" class="md-nav__link">
+    step-by-step run resequencing on testdata
   </a>
+  
+    <nav class="md-nav" aria-label="step-by-step run resequencing on testdata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-pre-prepare-download-source-code" class="md-nav__link">
+    1. pre-prepare download source code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-conda-envirenment" class="md-nav__link">
+    2. create conda envirenment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-download-testdata" class="md-nav__link">
+    3. download testdata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-run-snakemake" class="md-nav__link">
+    4. run snakemake
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -576,12 +650,40 @@
                   </a>
                 
                 
-                  <h1>NGSPipe resequecing</h1>
-                
-                <h2 id="nature-protocol">nature protocol</h2>
-<div class="highlight"><pre><span></span><code>conda create -n exp_r_env mamba -c conda-forge
-conda activate exp_r_env
-mamba env update --file ngspipe/envs/requirements_exp_r_env.yaml --prune
+                <h1 id="resequcing-analysis">resequcing analysis</h1>
+<h2 id="step-by-step-run-resequencing-on-testdata">step-by-step run resequencing on testdata</h2>
+<h3 id="1-pre-prepare-download-source-code">1. pre-prepare download source code</h3>
+<ol>
+<li><a href="../NGSPipe-RNA-seq/#BasicLinux">Install wget and git</a></li>
+<li><a href="../NGSPipe-RNA-seq/#Miniconda">Install Miniconda3</a></li>
+<li><a href="../NGSPipe-RNA-seq/#NGSPipeDbSource">Download NGSPipeDb source code</a></li>
+</ol>
+<p>Modify the project name and enter the project directory.</p>
+<div class="highlight"><pre><span></span><code>mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
+<span class="nb">cd</span> species_sample_transcript_analysis_by_NGSPipeDb
+</code></pre></div>
+<h3 id="2-create-conda-envirenment">2. create conda envirenment</h3>
+<p><div class="highlight"><pre><span></span><code>mamba create -n ngspipe-resequencing <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8 -c conda-forge -y
+mamba env update -n ngspipe-resequencing --file ngspipe/envs/requirements_resequencing.yaml --prune
+conda activate ngspipe-resequecing
+</code></pre></div>
+  - snpeff
+  - gatk</p>
+<h3 id="3-download-testdata">3. download testdata</h3>
+<div class="highlight"><pre><span></span><code>mkdir -p testdata &amp;&amp; cd testdata
+wget http://www.liu-lab.com/ngspipedb/testdata/control_R1.fq.gz
+wget http://www.liu-lab.com/ngspipedb/testdata/treated_R1.fq.gz
+wget http://www.liu-lab.com/ngspipedb/testdata/control_R2.fq.gz
+wget http://www.liu-lab.com/ngspipedb/testdata/treated_R2.fq.gz
+wget http://www.liu-lab.com/ngspipedb/testdata/chr19.fa.gz
+wget http://www.liu-lab.com/ngspipedb/testdata/GRCm38.83.chr19.gtf.gz
+gunzip chr19.fa.gz
+gunzip GRCm38.83.chr19.gtf.gz
+wget http://www.liu-lab.com/ngspipedb/testdata/sample_resequecing.xls
+cd ..
+</code></pre></div>
+<h3 id="4-run-snakemake">4. run snakemake</h3>
+<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/2.resequencing_analysis.Snakefile.py --configfile ngspipe/config/resequencing.config.yaml -p -j 1
 </code></pre></div>
                 
               
