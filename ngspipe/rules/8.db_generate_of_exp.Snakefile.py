@@ -38,6 +38,6 @@ rule sqlite3ForModel_auto_by_django:
         '''
         # inspectdb
         # make sure the right db name in ngsdb/ngsdb/setting.py
-        pip install wooey clustergrammer sklearn pandas==0.25.3 1>{log} 2>&1;
+        pip install wooey clustergrammer sklearn pandas==0.25.3 django-ajax-datatable 1>{log} 2>&1;
         python {config[djangoCode]}/manage.py inspectdb --database expDb|perl -ne 'if(/primary_key/){{s/null=True/null=False/}};print "$_"' > {output.exp_django_model} 2>>{log};
         '''

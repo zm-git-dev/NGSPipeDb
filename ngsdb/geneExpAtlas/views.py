@@ -16,9 +16,14 @@ def exp_json(request):
     # ?start=0&length=10
     exps = Exp.objects.all()
     total = exps.count()
-    
+    columns = [i.name for i in Exp._meta.get_fields()]
+
     _start = request.GET.get('start')
     _length = request.GET.get('length')
+    if not _start:
+        _start = '0'
+    if not _length:
+        _length = '10'
     if _start and _length:
         start = int(_start)
         length = int(_length)
@@ -35,6 +40,8 @@ def exp_json(request):
         'per_page': per_page,  # [opcional]
         'recordsTotal': total,
         'recordsFiltered': total,
+        'columns': columns,
+        'columns_fields': [{'data':'pk'}]+[{'data':'fields.'+i} for i in columns[1:]],
     }
     
     return JsonResponse(response, content_type='application/json')
@@ -42,8 +49,10 @@ def exp_json(request):
 def exp_heatmap_json(request):
     import pandas as pd
     from clustergrammer import Network
-    exps = Exp.objects.all().using("expDb").values_list("gene_id", "control_0", "control_1", "control_2", "treated_0", "treated_1", "treated_2")
-    df = pd.DataFrame(list(exps), columns=["gene_id", "control_0", "control_1", "control_2", "treated_0", "treated_1", "treated_2"])
+    columns = [i.name for i in Exp._meta.get_fields()]
+    #exps = Exp.objects.all().using("expDb").values_list("gene_id", "control_0", "control_1", "control_2", "treated_0", "treated_1", "treated_2")
+    exps = Exp.objects.all().using("expDb").values()
+    df = pd.DataFrame(list(exps), columns=columns)
     df.index = df.gene_id
     df = df.loc[:,df.columns[1:]]
     net = Network()

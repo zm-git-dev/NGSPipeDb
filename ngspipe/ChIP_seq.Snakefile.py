@@ -1,112 +1,124 @@
 # -*- coding: utf-8 -*-
 import os
-import pandas as pd
 from os.path import join
+import sys
+import pandas as pd
+
+# relative path
+snake_dir = workflow.basedir # all configfile, scripts, restructuretext, ens are relative to snakefile (this file)
+working_dir = os.getcwd() # input and output path are relative to current working directory
+
+# get notice
+receiver_email = 'nobody'
 
 # ----------------------------------------------------------------------- #
 # sample information #
 #
 smpList = pd.read_csv(config["samplesList"], index_col=0, header=None)
 SAMPLES = list(smpList.index)[0:]
+sample_control = SAMPLES[0]
+sample_treated = SAMPLES[1]
 # ----------------------------------------------------------------------- #
 
 
-rule all:    #全局关键词，作用整个snakemake文件中的流程
-    input:    #input用于定义整个流程需要输出的文件
-        clean_R1 = expand(join(config['resultsDir'], "chipseq", "clean_fastq", "{sample}"+config["read1Suffix"]),sample=SAMPLES),    #cutadapt输出的R1.fastq
-        clean_R2 = expand(join(config['resultsDir'], "chipseq", "clean_fastq", "{sample}"+config["read2Suffix"]),sample=SAMPLES),     #cutadapt输出的R2.fastq
-        rmdup_bam = expand(join(config['resultsDir'], "chipseq", "picard", "{sample}.sorted_rmdup.bam"),sample=SAMPLES),
-        #expand("bam/{sample}_bwa_mm10_sorted_rmdup.bam",sample=SAMPLES),    #输出比对后bam文件
-        #expand("macs2_result/10-me_peaks.broadPeak")    #输出peaks
+# -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+# detail parameters in pipe #
+#
+# 1. sampling data
+# for test the pipe, you can choose to the part of the input file, can be whole,head:40000,tail:40000,random:0.5,random:40000
+sampling_method = 'links' # tail, seqkit_number, seqkit_proportion, head, tail
+sampling_data_outdir = join(config["resultsDir"], "sampling_data", "sampling_data_by_{}".format(sampling_method))
 
-#expand作用是用于遍历所有SAMPLE中的样本，省略了循环的写法，整个snakemake file里的变量需要在rule all里指出，这样变量才会正常起作用,变量引用方式 {变量name}
+# 2. raw reads qc
+qc_method = 'trim-galore' # trimomatic
+qc_outdir = join(config["resultsDir"], "rawReads_qc", "rawReads_qc_by_{}".format(qc_method))
 
-rule cutadapt:    #cutadapt关键词，定义cutdapt的流程，主要包括input，output，shell三个部分
+# 3. mapping to genome
+mapping_method = 'bwa' # bowtie, bwa, 
+mapping_outdir = join(config["resultsDir"], "mapping", "mapping_by_{}".format(mapping_method))
+genome_index_prefix = 'genome'
+
+# 4. remove_duplication
+rmduplicate_method = 'samtools' # picard or macs2 or samtools, use picard will raise "EOFError: Compressed file ended before the end-of-stream marker was reached", macs2's output is bed format
+remove_duplication_outdir = join(config["resultsDir"], "remove_duplication", "rmduplicate_by_{}".format(rmduplicate_method))
+
+# 5. macs2_call_peak
+call_peak_method = 'macs2' # macs2
+call_peak_outdir = join(config["resultsDir"], "call_peak", "call_peak_by_{}".format(call_peak_method))
+
+# -------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+
+# ------------------------------
+#report: "report/workflow.rst"
+report_outdir = join(config["reportsDir"], "report.html")
+# ------------------------------
+
+rule all:
     input:
-        raw_R1 = join(config['samplesDir'], "{sample}"+config["read1Suffix"]),    #rawdata的R1.fastq
-        raw_R2 = join(config['samplesDir'], "{sample}"+config["read2Suffix"])    #rawdata的R2.fastq
-    output:
-        clean_R1 = join(config['resultsDir'], "chipseq", "clean_fastq", "{sample}"+config["read1Suffix"]),    #cutadapt输出的R1.fastq
-        clean_R2 = join(config['resultsDir'], "chipseq", "clean_fastq", "{sample}"+config["read2Suffix"]),    #cutadapt输出的R2.fastq
-    log:
-        "clean_fastq/{sample}_cutadapt.log"
-    threads: 4    #所需的核心数，与-j保持一致
-    shell:    #cutadapt的代码
-        "cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -u 5 -u -0 -U 5 -U -0 -m 30 -j 4 -o {output.clean_R1} -p {output.clean_R2} {input.raw_R1} {input.raw_R2} 1>{log} 2>&1"
-
-rule bwa_index:
-    input:
-        genomeFa = config['genomeFasta']
-    output:
-        indexOk = touch(join(config['resultsDir'], "chipseq","bwa_index", "index.ok"))
-    log:
-        join(config['resultsDir'], "chipseq","bwa_index", "index.log")
-    threads: 8
-    params:
-        prefix = join(config['resultsDir'], "chipseq","bwa_index", "bwa_genome")
-    shell:
-        "bwa index -p {params.prefix} {input.genomeFa} 1>{log} 2>&1"   #{input[0]}调用input关键字下的第一行，即"clean_fastq/{sample}_R1.fastq.gz"。
-
-rule bwa_mapping:
-    input:
-        clean_R1 = join(config['resultsDir'], "chipseq", "clean_fastq", "{sample}"+config["read1Suffix"]),    #cutadapt输出的R1.fastq
-        clean_R2 = join(config['resultsDir'], "chipseq", "clean_fastq", "{sample}"+config["read2Suffix"]),    #cutadapt输出的R2.fastq
-        indexOk = touch(join(config['resultsDir'], "chipseq","bwa_index", "index.ok"))
-    output:
-        bwa_bam = join(config['resultsDir'], "chipseq", "mapping", "{sample}.sam")
-    log:
-        join(config['resultsDir'], "chipseq","mapping", "{sample}.log")
-    params:
-        prefix = join(config['resultsDir'], "chipseq","bwa_index", "bwa_genome")
-    threads: 8
-    shell:
-        "bwa mem -t 10 -M {params.prefix} \
-        {input.clean_R1} {input.clean_R2} 1>{output.bwa_bam}  2>{log}"   #{input[0]}调用input关键字下的第一行，即"clean_fastq/{sample}_R1.fastq.gz"。
-
-rule bam_sort:
-    input:
-        bwa_bam = join(config['resultsDir'], "chipseq", "mapping", "{sample}.sam")
-    output:
-        bwa_bam_sort = join(config['resultsDir'], "chipseq", "sorted_bam", "{sample}.sorted.bam")
-    log:
-        join(config['resultsDir'], "chipseq", "sorted_bam", "{sample}.log")
-    threads: 4
-    shell:
-        "samtools sort -O BAM -@ 4 {input.bwa_bam} \
-        -o {output.bwa_bam_sort} \
-        -T {output}.tem "    #将output文件以临时文件形式保存，流程结束自动删除以节约服务器空间
-
-rule picard_remove_duplication:
-    input:
-        bwa_bam_sort = join(config['resultsDir'], "chipseq", "sorted_bam", "{sample}.sorted.bam")
-    output:
-        rmdup_bam = join(config['resultsDir'], "chipseq", "picard", "{sample}.sorted_rmdup.bam"),
-        rmdup_matrix = join(config['resultsDir'], "chipseq", "picard", "{sample}.sorted_rmdup.matrix")
-    log:
-        join(config['resultsDir'], "chipseq", "picard", "{sample}.log")
-    threads: 4
-    shell:
-        "picard MarkDuplicates\
-        REMOVE_DUPLICATES=true \
-        I= {input.bwa_bam_sort} \
-        O={output.rmdup_bam} M={output.rmdup_matrix}"
-
-rule macs2_call_peak:    #有control的call peaks
-    input:
-        treat="bam/10-me_bwa_mm10_sorted_rmdup.bam",    #实验组bam
-        control="bam/10-Input_bwa_mm10_sorted_rmdup.bam"    #配对的对照bam
-    output:
-        "macs2_result/10-me_peaks.broadPeak"
-    params:    #params关键词作用，创建局部变量，引用方式 {params.name}
-        outdir="macs2_result",
-        head_outfile="10-me"
-    log:
-        "macs2_result/10-me_peaks.log"
-    threads:4
-    shell:
-        "macs2 callpeak -t {input.treat} -c {input.control} -f BAM  -g hs -n {params.head_outfile}  \
-         --outdir {params.outdir} \
-         --nomodel --extsize 200 \
-         -B --broad --broad-cutoff  0.01 "
+        #
+        # 1. sampling data #
+        sampling_data_result                = expand(join(sampling_data_outdir, "{sample}"+config["read1Suffix"]), sample=SAMPLES),
+        #
+        # 2. raw reads qc #
+        rawReads_qc_result                 = expand(join(qc_outdir, "{sample}", "{sample}.cleanR1.fq.gz"), sample=SAMPLES),
+        #
+        # 3. mapping #
+        mapping_result                     = expand(join(mapping_outdir, "{sample}", "{sample}.sorted.bam"), sample=SAMPLES),
+        #
+        # 4. remove duplication #
+        rmdup_bam                          = expand(join(remove_duplication_outdir, "{sample}", "{sample}.sorted_rmdup.bam"), sample=SAMPLES),
+        #
+        # 5. macs2_call_peak #
+        #
+        callok                             = join(call_peak_outdir, "callpeak.ok"),
+        #
+        # 6. report #
+        #report_result    = join(config['reportsDir'], "report.ok"),
+        #
 
 
+onsuccess:
+    print("""
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Workflow finished, no error <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+▐░█▀▀▀▀▀▀▀▀▀ ▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ 
+▐░▌          ▐░▌       ▐░▌▐░▌          ▐░▌          ▐░▌          ▐░▌          ▐░▌          
+▐░█▄▄▄▄▄▄▄▄▄ ▐░▌       ▐░▌▐░▌          ▐░▌          ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ 
+▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌          ▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+ ▀▀▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌▐░▌          ▐░▌          ▐░█▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀█░▌ ▀▀▀▀▀▀▀▀▀█░▌
+          ▐░▌▐░▌       ▐░▌▐░▌          ▐░▌          ▐░▌                    ▐░▌          ▐░▌
+ ▄▄▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄█░▌ ▄▄▄▄▄▄▄▄▄█░▌
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+ ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀ 
+                                                                                           
+    """)
+    #shell("python ngspipe/scripts/sendmail.py {}".format(receiver_email))
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format(receiver_email, "success", join(working_dir, ".snakemake/log/")))
+    # NGSPipeDB_source_code/.snakemake/log/
+
+
+onerror:
+    print("An error occurred")
+    print("""
+>>>>>>>>>>>>>>>>> Workflow finished, no error <<<<<<<<<<<<<<<<<<<<
+ ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌
+▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌
+▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄█░▌
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌
+▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀█░█▀▀ ▐░█▀▀▀▀█░█▀▀ ▐░▌       ▐░▌▐░█▀▀▀▀█░█▀▀ 
+▐░▌          ▐░▌     ▐░▌  ▐░▌     ▐░▌  ▐░▌       ▐░▌▐░▌     ▐░▌  
+▐░█▄▄▄▄▄▄▄▄▄ ▐░▌      ▐░▌ ▐░▌      ▐░▌ ▐░█▄▄▄▄▄▄▄█░▌▐░▌      ▐░▌ 
+▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌
+ ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀ 
+                                                                 
+    """)
+    shell("python ngspipe/scripts/sendmail0129.py -r {} -t {} -d {}".format(receiver_email, "error", join(working_dir, ".snakemake/log/")))
+
+include: join("rules", "1.sampling_data_by_{}.Snakefile.py".format(sampling_method))
+include: join("rules", "2.rawReads_qc_by_{}.Snakefile.py".format(qc_method))
+include: join("rules", "3.genome_align_by_{}.Snakefile.py".format(mapping_method))
+include: join("rules", "remove_duplicate_by_{}.Snakefile.py".format(rmduplicate_method))
+include: join("rules", "call_peak_by_{}.Snakefile.py".format(call_peak_method))

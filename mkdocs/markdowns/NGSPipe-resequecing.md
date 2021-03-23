@@ -38,7 +38,7 @@ wget http://www.liu-lab.com/ngspipedb/testdata/chr19.fa.gz
 wget http://www.liu-lab.com/ngspipedb/testdata/GRCm38.83.chr19.gtf.gz
 gunzip chr19.fa.gz
 gunzip GRCm38.83.chr19.gtf.gz
-wget http://www.liu-lab.com/ngspipedb/testdata/sample_resequecing.xls
+wget http://www.liu-lab.com/ngspipedb/testdata/samples_resequencing.xls
 cd ..
 ```
 

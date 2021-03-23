@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'home', # first page of website
     'geneAnno', # gene annotation from nr/nt/pfam/go/kegg
     'geneExpAtlas', # gene expression matrix
+    'geneDetail',
     'blastplus', # blast tool
     'igv',
     'wooey',

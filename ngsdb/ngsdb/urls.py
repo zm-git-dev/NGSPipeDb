@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from django.urls import include # Add a URL to urlpatterns
 
@@ -27,7 +27,10 @@ urlpatterns = [
     path(r'igv/', include('igv.urls'), name='igv'), # exp
     path(r'tools/', include('tools.urls'), name='tools'),
     path(r'wooey/', include('wooey.urls'), name='wooey'),
-    path(r'search/', include('search.urls'), name='search'),
+    #re_path(r'^query/(?P<keywords>[^/]+)$', include('search.urls'), name='query'),
+    path(r'query/', include('search.urls'), name='query'),
+    #path(r'query/<slug:slug>', include('search.urls'), name='query'),
+    path(r'detail/', include('geneDetail.urls'), name='detail'),
 ]
 
 from django.conf import settings

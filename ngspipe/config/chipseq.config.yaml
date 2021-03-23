@@ -7,18 +7,11 @@ genomeFasta: "testdata/chr19.fa"
 # result directory of NGSPipe
 resultsDir: "results/result"
 reportsDir: "results/report"
-dbDir: "results/sqlite3"
-
-djangoCode: "ngsdb"
 
 # sample list file
-samplesList: "testdata/samples.xls"
+samplesList: "testdata/samples_chipseq.xls"
 # sample file directory
 samplesDir: "testdata"
 # fastq suffix, read1
 read1Suffix: "_R1.fq.gz"
 read2Suffix: "_R2.fq.gz"
-# replict can by 1,2,3
-replict_num: 3
-# condition for differential expression by deseq2
-conditionPath: "testdata/condition.csv"
