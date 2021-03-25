@@ -50,7 +50,6 @@ Please contribute bug fixes or new features with a [pull request](https://github
 repository.
 
 If this does not help, please feel free to consult:
-* Xuan Zhang ([zhangxuan@xtbg.ac.cn](mailto:zhangxuan@xtbg.ac.cn)) or
-* Changning Liu ([liuchangning@xtbg.ac.cn](mailto:liuchangning@xtbg.ac.cn))
+* Xuan Zhang ([zhangxuan@xtbg.ac.cn](mailto:zhangxuan@xtbg.ac.cn))
 
 ## Resources

@@ -24,14 +24,16 @@ nav:
 - Home:
     - Getting start: index.md
     - NGSPipeDb Tutorial: NGSPipeDb.md
-- Modules:
+- Pipelines:
     - NGSPipe RNA-seq: NGSPipe-RNA-seq.md
     - NGSPipe ChIP-seq: NGSPipe-ChIP-seq.md
     - NGSPipe resequecing: NGSPipe-resequecing.md
     - NGSDb: NGSDb.md
-- Appendix:
+- Learning materials:
     - Linux & shell basic: linux.md
     - NGS analysis: ngs.md
+    - Conda: conda.md
+- Change logs: changelog.md
 
 # Theme
 theme:

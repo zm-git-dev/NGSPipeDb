@@ -241,7 +241,7 @@
   
     <li class="md-tabs__item">
       <a href="./" class="md-tabs__link md-tabs__link--active">
-        Modules
+        Pipelines
       </a>
     </li>
   
@@ -257,10 +257,22 @@
   
     <li class="md-tabs__item">
       <a href="../linux/" class="md-tabs__link">
-        Appendix
+        Learning materials
       </a>
     </li>
   
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../changelog/" class="md-tabs__link">
+      Change logs
+    </a>
+  </li>
 
       
     </ul>
@@ -377,13 +389,13 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       <label class="md-nav__link" for="__nav_2">
-        Modules
+        Pipelines
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Modules" data-md-level="1">
+      <nav class="md-nav" aria-label="Pipelines" data-md-level="1">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
-          Modules
+          Pipelines
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -459,15 +471,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-installing-the-ngspipe-rna-seq-conda-environments" class="md-nav__link">
-    4. Installing the NGSPipe RNA-Seq conda environments 
+  <a href="#4-choose-a-good-project-name" class="md-nav__link">
+    4. Choose a good project name
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-downloading-the-test-files" class="md-nav__link">
-    5. Downloading the test files 
+  <a href="#5-installing-the-ngspipe-rna-seq-conda-environments" class="md-nav__link">
+    5. Installing the NGSPipe RNA-Seq conda environments 
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-download-test-files" class="md-nav__link">
+    6. Download test files 
   </a>
   
 </li>
@@ -617,13 +636,13 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       <label class="md-nav__link" for="__nav_3">
-        Appendix
+        Learning materials
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Appendix" data-md-level="1">
+      <nav class="md-nav" aria-label="Learning materials" data-md-level="1">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
-          Appendix
+          Learning materials
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -651,8 +670,35 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conda/" class="md-nav__link">
+        Conda
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        Change logs
+      </a>
     </li>
   
 
@@ -718,15 +764,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-installing-the-ngspipe-rna-seq-conda-environments" class="md-nav__link">
-    4. Installing the NGSPipe RNA-Seq conda environments 
+  <a href="#4-choose-a-good-project-name" class="md-nav__link">
+    4. Choose a good project name
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-downloading-the-test-files" class="md-nav__link">
-    5. Downloading the test files 
+  <a href="#5-installing-the-ngspipe-rna-seq-conda-environments" class="md-nav__link">
+    5. Installing the NGSPipe RNA-Seq conda environments 
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-download-test-files" class="md-nav__link">
+    6. Download test files 
   </a>
   
 </li>
@@ -833,25 +886,32 @@
                 <h1 id="rna-seq-analysis">RNA-seq analysis</h1>
 <h2 id="quick-start-one-time-installation-of-components-necessary-for-rna-seq-analysis">Quick Start - One time installation of components necessary for RNA-Seq analysis <a name="QuickStarted"></a></h2>
 <div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Linux &amp; WSL</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1"># download ngspipedb to anywhere you want</span>
-git clone git://github.com/xuanblo/NGSPipeDb.git <span class="o">&amp;&amp;</span> mv NGSPipeDb mouse_transcriptome_analysis <span class="o">&amp;&amp;</span> <span class="nb">cd</span> mouse_transcriptome_analysis
-<span class="c1"># download test data and create environment</span>
-bash ngspipe/scripts/one_step_ranseq_test.sh
-</code></pre></div>
+<p>1.download ngspipedb to anywhere you want
+<div class="highlight"><pre><span></span><code>git clone git://github.com/xuanblo/NGSPipeDb.git
+mv NGSPipeDb mouse_transcriptome_analysis
+<span class="nb">cd</span> mouse_transcriptome_analysis
+</code></pre></div></p>
+<p>2.create conda environment, download test data, and run RNA-Seq analysis
+<div class="highlight"><pre><span></span><code>bash ngspipe/scripts/one_step_ranseq_test.sh linux
+</code></pre></div></p>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">MacOSX</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1"># download ngspipedb to anywhere you want</span>
-git clone git://github.com/xuanblo/NGSPipeDb.git <span class="o">&amp;&amp;</span> mv NGSPipeDb mouse_transcriptome_analysis <span class="o">&amp;&amp;</span> <span class="nb">cd</span> mouse_transcriptome_analysis
-<span class="c1"># download test data and create environment</span>
-bash ngspipe/scripts/one_step_ranseq_test.sh
-</code></pre></div>
+<p>1.download ngspipedb to anywhere you want
+<div class="highlight"><pre><span></span><code>git clone git://github.com/xuanblo/NGSPipeDb.git
+mv NGSPipeDb mouse_transcriptome_analysis
+<span class="nb">cd</span> mouse_transcriptome_analysis
+</code></pre></div></p>
+<p>2.create conda environment, download test data, and run RNA-Seq analysis
+<div class="highlight"><pre><span></span><code>bash ngspipe/scripts/one_step_ranseq_test.sh macos
+</code></pre></div></p>
 </div>
 </div>
-<p>Now you can viste your website on http://127.0.0.1:8000. All result are stored in <code>results</code>.
-- Example of report <sub><a href="http://www.liu-lab.com"><img alt="html" src="https://img.icons8.com/ios/20/000000/html-filetype.png" /></a></sub>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>If you have more time, then we recommend you configure ngspipedb according to your needs. For more details, please see <a href="#step-by-step">step by step</a> bellow.</p>
+</div>
 <h2 id="step-by-step-rna-seq-workflow-on-testdata">Step-by-step RNA-seq workflow on testdata <a href="Step-by-Step-RNASeq"></a></h2>
-<p>Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the <a href="https://en.wikipedia.org/wiki/Command-line_interface">nix command line interface</a>. Also, best practice RNA-seq analysis is plus. Please find the easy learn matieral in <a href="../linux">linux &amp; shell</a> and <a href="../ngs#rnaseq">RNASeq background</a>.</p>
+<p>Although included in this section are step-by-step instructions, it is assumed that the user has a basic understanding of the <a href="https://en.wikipedia.org/wiki/Command-line_interface">nix command line interface</a>. Also, it would be better if the user has basic knowledge about <a href="">snakemake</a>, <a href="">conda</a> and <a href="">best practice RNA sequence analysis</a>, but it is not required. You can find some easy-to-learn matierals in <a href="../linux">linux &amp; shell</a> and <a href="../ngs#rnaseq">RNASeq background</a>.</p>
 <h3 id="1-install-wget-and-git">1. Install wget and git <a name="BasicLinux"></a></h3>
 <p>To get some of the required software packages, we will use the command line tools called <a href="http://www.gnu.org/software/wget/">wget</a> and <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git</a>.  <em>wget</em> is a popular tool for downloading things off of the internet.  <em>git</em> is a distributed version control system which we will use to checkout the NGSPipeDb code.</p>
 <div class="admonition note">
@@ -861,115 +921,112 @@ bash ngspipe/scripts/one_step_ranseq_test.sh
 <h3 id="2-install-miniconda3">2. Install Miniconda3 <a name="Miniconda"></a></h3>
 <p>NGSPipeDb relies on the conda package manager for installation and dependency resolution, so you will need to install <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a> first.</p>
 <p>We will be using the <a href="http://conda.pydata.org/miniconda.html">Miniconda3</a> package management system (aka <strong>CONDA</strong>) to manage all of the software packages that <strong>NGSPipeDb</strong> is dependent on. </p>
-<p>Use following commands to retrieve and then run the Minicoda3 installation script:<br />
-1. <code>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</code><br />
-2. <code>bash Miniconda3-latest-Linux-x86_64.sh</code>. While running the installation script, follow the commands listed on screen, and press the <em>enter</em> key to scroll. Make sure to answer <code>yes</code> when asked if you want to prepend Miniconda3 to PATH. After that, close your terminal, open a new one and you should now have Conda working! You could, alternatively, run <code>source ~/.bashrc</code> to initiate conda.<br />
-3. Test by entering: <code>conda update conda</code>. Press <code>y</code> to confirm the conda updates.<br />
-4. <code>conda install mamba -c conda-forge</code>. Mamba is a reimplementation of the conda package manager in C++, the fast conda-alternative.</p>
+<p>Use following commands to retrieve and then run the Minicoda3 installation script:</p>
+<p>1.download miniconda3
+<div class="highlight"><pre><span></span><code>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+</code></pre></div></p>
+<p>2.install miniconda3
+<div class="highlight"><pre><span></span><code>bash Miniconda3-latest-Linux-x86_64.sh
+</code></pre></div></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>While running the installation script, follow the commands listed on screen, and press the <em>enter</em> key to scroll. Make sure to answer <code>yes</code> when asked if you want to prepend Miniconda3 to PATH. After that, close your terminal, open a new one and you should now have Conda working! You could, alternatively, run <code class="highlight"><span class="nb">source</span> ~/.bashrc</code> to initiate conda.  </p>
+</div>
+<p>3.Test by entering: <code>conda update conda</code>. Press <code>y</code> to confirm the conda updates.  </p>
+<p>4.Finally, <code>conda install mamba -c conda-forge</code>. Mamba is a reimplementation of the conda package manager in C++, the fast conda-alternative.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You will only have to install Minicoda3 once.</p>
 </div>
 <h3 id="3-download-ngspipedb-source-code">3. Download NGSPipeDb source code <a name="NGSPipeDbSource"></a></h3>
-<p>To install the latest stable version of NGSPipeDb, please clone the git repository to your system.</p>
-<div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">git method 1</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> /path/to/where_you_want
-git clone https://www.github.com/xuanblo/NGSPipeDb
-</code></pre></div>
+<p>We offer two download options.</p>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">latest stable version</label><div class="tabbed-content">
+<p>To install the latest stable version of NGSPipeDb, please clone the git repository to your system. First, <code>cd /path/to/where_you_want</code>, and then
+<div class="highlight"><pre><span></span><code>git clone https://www.github.com/xuanblo/NGSPipeDb
+</code></pre></div></p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>If you meet problem with network, please try to download the "specific version" or modify the command to <code>git clone git://www.github.com/xuanblo/NGSPipeDb</code>.</p>
 </div>
-<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">git method 2</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> /path/to/where_you_want
-git clone git://www.github.com/xuanblo/NGSPipeDb
-</code></pre></div>
 </div>
-<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">method 3: specific version</label><div class="tabbed-content">
-<p>If you want to use specific version, please cleckout the <a href="https://github.com/xuanblo/NGSPipeDb/releases">release</a> and issue the following commands:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> /path/to/where_you_want
-wget https://github.com/xuanblo/NGSPipeDb/archive/NGSPipeDb_v0.0.1.tar.gz
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">specific version</label><div class="tabbed-content">
+<p>If you want to use specific version, please have a look at the <a href="../changelog">change log</a> and different <a href="https://github.com/xuanblo/NGSPipeDb/releases">release version</a> first.</p>
+<p>Then, <code class="highlight"><span class="nb">cd</span> /path/to/where_you_want</code>
+<div class="highlight"><pre><span></span><code>wget https://github.com/xuanblo/NGSPipeDb/archive/NGSPipeDb_v0.0.1.tar.gz
 tar -xf NGSPipeDb_v0.0.1.tar.gz
-</code></pre></div>
+</code></pre></div></p>
 </div>
 </div>
-<p>All of analysis will be performed under the source code directory directly. So you can change direcory name by:</p>
-<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">if you use git</label><div class="tabbed-content">
+<h3 id="4-choose-a-good-project-name">4. Choose a good project name</h3>
+<p>Because all analysis will be done directly in the source code directory. So you can change the directory name in the following way.</p>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">download by git</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
 </code></pre></div>
 </div>
-<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">if you use specific version</label><div class="tabbed-content">
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">download by wget</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>mv NGSPipeDb-NGSPipeDb_v0.0.1 species_sample_transcript_analysis_by_NGSPipeDb
 </code></pre></div>
 </div>
 </div>
 <p>Enter directory <code class="highlight"><span class="nb">cd</span> species_sample_transcript_analysis_by_NGSPipeDb</code> for further setps.</p>
-<p>This will create the following structure:</p>
-<div class="highlight"><pre><span></span><code>./
-├── README.md
-├── ngsdb
-│   ├── blastplus
-│   ├── db.sqlite3
-│   ├── geneAnno
-│   ├── geneExpAtlas
-│   ├── home
-│   ├── igv
-│   ├── manage.py
-│   └── ngsdb
-├── ngspipe
-│   ├── config
-│   ├── db_generate.Snakefile.py
-│   ├── envs
-│   ├── imgs
-│   ├── notebooks
-│   ├── reports
-│   ├── rnaseq_analysis.Snakefile.py
-│   ├── rules
-│   └── scripts
-├── results
-│   ├── report
-│   ├── resultdata
-│   └── sqlite3
-└── testdata
+<p>You can view the <strong>NGSPipe</strong> code structure with <code class="highlight">tree ./ngspipe/ -d -L <span class="m">2</span></code></p>
+<div class="highlight"><pre><span></span><code>./ngspipe/
+├── config
+├── envs
+├── imgs
+├── metadata
+├── notebooks
+├── reports
+├── rules
+└── scripts
 </code></pre></div>
-<h3 id="4-installing-the-ngspipe-rna-seq-conda-environments">4. Installing the NGSPipe RNA-Seq conda environments <a name="NGSPipeDbEnv"></a></h3>
-<p>We are now ready to use conda to install the <a href="https://github.com/xuanblo/NGSPipeDb/blob/master/ngspipe/envs/requirements_rnaseq.yaml">dependencies</a> of which NGSPipe RNA-Seq analysis is required.</p>
-<p>First, you will need to create a conda environments. For details, see <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">manage envirement</a> with conda. <a href="">Snakemake</a> and <a href="">Python</a> is the basic tool of ngspipedb.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Files other than <code>ngspipe</code> are not required for RNA-Seq analysis.</p>
+</div>
+<h3 id="5-installing-the-ngspipe-rna-seq-conda-environments">5. Installing the NGSPipe RNA-Seq conda environments <a name="NGSPipeDbEnv"></a></h3>
+<p>First, you will need to create a conda environments. For details, see <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">manage envirement</a> with conda.</p>
 <div class="highlight"><pre><span></span><code>mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq <span class="nv">snakemake</span><span class="o">=</span><span class="m">5</span>.30.2 <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8 <span class="nv">seqkit</span><span class="o">=</span><span class="m">0</span>.14.0
 </code></pre></div>
-<p>Next, to analysis NGS data some bioinformatics tools need to be installed.</p>
+<p>Next, to producess and analysis the RNA-Seq sequenceding data, some bioinformatics tools need to be installed. Chick to <a href="https://github.com/xuanblo/NGSPipeDb/blob/master/ngspipe/envs/requirements_rnaseq.yaml">see software we used</a>.</p>
 <div class="highlight"><pre><span></span><code>mamba env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
 </code></pre></div>
 <p>Activate conda environment:</p>
 <div class="highlight"><pre><span></span><code>conda activate ngspipe-rnaseq
 </code></pre></div>
-<p>If the conda downloading encounters any problems, you can refer to how to <a href="">install pre-build ngspipe-ranseq env</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>By default, environments are installed into the envs directory in your conda directory (<code>~/miniconda/conda/env/ngspipedb</code>).</p>
+<p>By default, all softwares and packages are stored under <code>~/miniconda/conda/env/ngspipe-rnaseq</code>.</p>
 </div>
-<h3 id="5-downloading-the-test-files">5. Downloading the test files <a name="Testdata"></a></h3>
-<p><strong>NGSPipe</strong> is dependent on reference files and raw sequence reads which can be found for the supported species listed below: <a href="http://www.liu-lab.com/ngspipedb">download link</a></p>
-<p>To download the mouse RNA-seq test data into <code>./testdata</code>:</p>
-<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">use script</label><div class="tabbed-content">
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>If the conda downloading encounters any problems, you can refer to how to <a href="../conda/#pre-build">download pre-build ngspipe-ranseq env</a>.</p>
+</div>
+<h3 id="6-download-test-files">6. Download test files <a name="Testdata"></a></h3>
+<p><strong>NGSPipe</strong> is dependent on reference files and raw sequence reads which can be found in <a href="http://www.liu-lab.com/ngspipedb/testdata">http://www.liu-lab.com/ngspipedb/testdata</a></p>
+<p>To download the mouse RNA-seq test data into <code>./testdata</code>, you can choose auto download with a script or Manually:</p>
+<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">auto download by a shell script</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>bash ngspipe/scripts/download_testdata.sh testdata
 </code></pre></div>
 </div>
-<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">use wget</label><div class="tabbed-content">
-<p>or download the test files (160M) that you need and then untarring then in a directory called <code>testdata</code>.
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Manually download by wget</label><div class="tabbed-content">
+<p>1.download the test files (160M) that you need and then untarring then in a directory called <code>testdata</code>.
 <div class="highlight"><pre><span></span><code>wget http://www.liu-lab.com/ngspipedb/rnaseq_testdata.tar.gz
 tar -zxvf rnaseq_testdata.tar.gz
 </code></pre></div></p>
-<p>Generate replicated samples:</p>
+<ol>
+<li>generate replicated samples:
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> testdata
 python ../ngspipe/scripts/generate_replicat.py control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
-rm -f control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz
 gunzip chr19.fa.gz
 gunzip GRCm38.83.chr19.gtf.gz
 <span class="nb">cd</span> ..
-</code></pre></div>
+</code></pre></div></li>
+</ol>
 </div>
 </div>
 <p>Make sure you have the following directory structure by command <code>tree testdata</code>:</p>
-<div class="highlight"><pre><span></span><code>testdata/
-├── GRCm38.83.chr19.gtf
+<div class="highlight"><pre><span></span><code>testdata
 ├── chr19.fa
 ├── condition.xls
 ├── control-0_R1.fq.gz
@@ -978,40 +1035,45 @@ gunzip GRCm38.83.chr19.gtf.gz
 ├── control-1_R2.fq.gz
 ├── control-2_R1.fq.gz
 ├── control-2_R2.fq.gz
+├── control_R1.fq.gz
+├── control_R2.fq.gz
+├── GRCm38.83.chr19.gtf
 ├── samples.xls
 ├── treated-0_R1.fq.gz
 ├── treated-0_R2.fq.gz
 ├── treated-1_R1.fq.gz
 ├── treated-1_R2.fq.gz
 ├── treated-2_R1.fq.gz
-└── treated-2_R2.fq.gz
+├── treated-2_R2.fq.gz
+├── treated_R1.fq.gz
+└── treated_R2.fq.gz
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This data is only used to test the analysis process, and the analysis results have no biological significance.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The test data is only used to verify that the analytical process is working properly and the results do not have r biological significance.</p>
 </div>
 <h3 id="6-run-rna-seq-analysis-on-test-data">6. run RNA-seq analysis on test data <a name="RunTest"></a></h3>
 <p>We provied a simple RNA-seq workflow for you to take a glance of NGSPipe. In RNA-seq analysis part, it contains 7 step analysis:</p>
-<div class="highlight"><pre><span></span><code><span class="mf">1.</span> <span class="n">sampling</span> <span class="n">data</span>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span> <span class="n">sampling</span> <span class="n">data</span> <span class="p">(</span><span class="n">choose</span> <span class="n">part</span> <span class="n">of</span> <span class="n">your</span> <span class="n">data</span><span class="p">)</span>
 <span class="mf">2.</span> <span class="n">raw</span> <span class="n">reads</span> <span class="n">qc</span>
-<span class="mf">3.</span> <span class="n">junction</span> <span class="n">alignmnet</span>
+<span class="mf">3.</span> <span class="n">junction</span> <span class="n">align</span> <span class="n">to</span> <span class="n">genome</span>
 <span class="mf">4.</span> <span class="n">transcript</span> <span class="n">assembly</span>
-<span class="mf">5.</span> <span class="n">quantification</span>
+<span class="mf">5.</span> <span class="n">gene</span> <span class="n">quantification</span>
 <span class="mf">6.</span> <span class="n">statistic</span>
-<span class="mf">7.</span> <span class="n">diff</span>
+<span class="mf">7.</span> <span class="n">differential</span> <span class="n">gene</span> <span class="n">analysis</span>
 </code></pre></div>
 <p>First, we need to check the <code>ngspipe/file</code>. This will not execute anything, but display what would be done.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># dry run, use -n parameter only print task plan, -p print commands</span>
-snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -np
+snakemake -s ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -np
 </code></pre></div>
 <p>If nothing goes wrong, you can generate a dag plot:</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --dag<span class="p">|</span>dot -Tpng &gt; dag.png
+<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --dag<span class="p">|</span>dot -Tpng &gt; dag.png
 </code></pre></div>
 <p>Now you can do RNA-seq analysis by just one simply command.</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <span class="m">10</span>
+<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j <span class="m">10</span>
 </code></pre></div>
 <p>The final data files are put in the folder <code>results</code>. Please check you result file <code>tree -d -L 2 results/</code>, it may like this:</p>
-<div class="highlight"><pre><span></span><code>results/
+<div class="highlight"><pre><span></span><code>results/rnaseq
 ├── report
 │   ├── 1.rawreads_stat
 │   ├── 2.cleanreads_stat
@@ -1033,7 +1095,7 @@ snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rn
 </div>
 <h3 id="7-rgenerate-report">7. rgenerate report <a name="Report"></a></h3>
 <p>If all goes well, the proper analysis will be followed by the making of the html report using Snakemake to a html report file with pictures and tables.</p>
-<div class="highlight"><pre><span></span><code>snakemake --snakefile ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --report results/report/report.html
+<div class="highlight"><pre><span></span><code>snakemake --snakefile ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --report results/report/report.html
 </code></pre></div>
 <p>The final report should appear as <code>results/report/report.html</code>. This report is a single html file with all in it and can be sent to customers/colleagues as a final report. It is nicer than a PDF version because of large tables and figures which would suffer from page breaks and it can be viewed on any device supporting html include smartphones :-).</p>
 <div class="admonition note">
@@ -1041,11 +1103,11 @@ snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rn
 <p>Internet Explorer is not supported.</p>
 </div>
 <h2 id="run-your-custome-data">run your custome data <a name="RunRawdata"></a></h2>
-<p>NGSPipe is built to be used routinely. To ensure a maximum comparability of the results, you can copy default <code>ngspipe/config/rnaseq.config.yaml</code> and <code>ngspipe/rnaseq_analysis.Snakefile.py</code> file to the same directory:</p>
-<div class="highlight"><pre><span></span><code>cp ngspipe/config/rnaseq.config.yaml ngspipe/config/my_own_rnaseq.config.yaml 
-cp ngspipe/rnaseq_analysis.Snakefile.py ngspipe/my_own_rnaseq_analysis.Snakefile.py
+<p>NGSPipe is built to be used routinely. To ensure a maximum comparability of the results, you can copy default <code>ngspipe/config/rnaseq.config.yaml</code> and <code>ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py</code> file to the same directory:</p>
+<p><div class="highlight"><pre><span></span><code>cp ngspipe/config/rnaseq.config.yaml ngspipe/config/my_own_rnaseq.config.yaml 
+cp ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py ngspipe/my_own_rnaseq_analysis.Snakefile.py
 </code></pre></div>
-<p>We will explain how to edit and configure these files shortly below.</p>
+We will explain how to edit and configure these files shortly below.</p>
 <h3 id="1-rawdata-sequence-data">1. Rawdata sequence data <a name="download_raw_data"></a></h3>
 <p>Raw data files can either be fastq, fastq.gz formated files. <code>makedir rawdata</code> and upload your own data to this directory. If your raw data are located in <strong>somewhere else</strong>, you can copy them to <code>rawdata</code>, or create soft links like <code>ln -s ../yoursamplepath/*.fq.gz rawdata/</code>.</p>
 <div class="highlight"><pre><span></span><code>rawdata/
@@ -1089,7 +1151,7 @@ liver-rep3
 <span class="nt">genomeFasta</span><span class="p">:</span> <span class="s">&quot;testdata/chr19.fa&quot;</span> <span class="c1"># genome sequence</span>
 
 <span class="c1">## output directory ##</span>
-<span class="nt">resultsDir</span><span class="p">:</span> <span class="s">&quot;results/result&quot;</span>
+<span class="nt">resultsDir</span><span class="p">:</span> <span class="s">&quot;results/rnaseq&quot;</span>
 <span class="nt">reportsDir</span><span class="p">:</span> <span class="s">&quot;results/report&quot;</span>
 <span class="nt">dbDir</span><span class="p">:</span> <span class="s">&quot;results/sqlite3&quot;</span>
 
@@ -1116,7 +1178,7 @@ liver-rep2,liver,tumor
 liver-rep3,liver,tumor
 </code></pre></div>
 <h3 id="5-edit-snakefile">5. edit snakefile <a name="edit_snakefile"></a></h3>
-<p>Edit file <code>ngspipe/workflow/rnaseq_analysis.Snakefile.py</code> for advance setting, such as sampling data method, mapping tool, and email address to receive run log.</p>
+<p>Edit file <code>ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py</code> for advance setting, such as sampling data method, mapping tool, and email address to receive run log.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># relative path</span>
 <span class="n">snake_dir</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">basedir</span> <span class="c1"># all configfile, scripts, restructuretext, ens are relative to snakefile (this file)</span>
 <span class="n">working_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c1"># input and output path are relative to current working directory</span>
@@ -1212,29 +1274,29 @@ liver-rep3,liver,tumor
 </div>
 <h3 id="6-custome-report">6. Custome report <a name="custom_report"></a></h3>
 <p>edit <code>ngspipe/report/*.rst</code> that will be added at the end of the report. For example, edit the <code>ngspipe/report/rawreads_stat.rst</code> file to include a text describing the 'Statistic' of the experiment. This text will be added to the report as static section and is one of the two report sections that can be edited by the end-user.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">summary</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="n">produced</span><span class="w"></span>
-<span class="o">========================</span><span class="p">=</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">summary of reads produced</span>
+<span class="l l-Scalar l-Scalar-Plain">=========================</span>
 
-<span class="n">The</span><span class="w"> </span><span class="s">details</span><span class="w"> </span><span class="s">of</span><span class="w"> </span><span class="s">the</span><span class="w"> </span><span class="s">data</span><span class="w"> </span><span class="s">quality</span><span class="w"> </span><span class="s">are</span><span class="w"> </span><span class="s">as</span><span class="w"> </span><span class="s">follows:</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">The details of the data quality are as follows</span><span class="p p-Indicator">:</span>
 
-#<span class="p">.</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
-#<span class="p">.</span><span class="w"> </span><span class="n">Raw</span><span class="w"> </span><span class="n">reads</span><span class="p">:</span><span class="w"> </span><span class="n">Count</span><span class="w"> </span><span class="n">raw</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">four</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="nb">count</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">sequencing</span><span class="w"> </span><span class="n">sequences</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">file</span><span class="w"></span>
-#<span class="p">.</span><span class="w"> </span><span class="n">Clean</span><span class="w"> </span><span class="n">reads</span><span class="p">:</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">calculation</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Raw</span><span class="w"> </span><span class="n">reads</span><span class="p">,</span><span class="w"> </span><span class="n">except</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">statistical</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">sequencing</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">subsequent</span><span class="w"> </span><span class="n">bioinformatics</span><span class="w"> </span><span class="n">analysis</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">based</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Clean</span><span class="w"> </span><span class="n">reads</span><span class="w"></span>
-#<span class="p">.</span><span class="w"> </span><span class="n">Clean</span><span class="w"> </span><span class="n">bases</span><span class="p">:</span><span class="w"> </span><span class="n">Multiply</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">sequencing</span><span class="w"> </span><span class="n">sequences</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nb">length</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">sequencing</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">convert</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">unit</span><span class="w"></span>
-#<span class="p">.</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">rate</span><span class="p">:</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="n">sequencing</span><span class="w"> </span><span class="nb">error</span><span class="w"> </span><span class="n">rate</span><span class="w"></span>
-#<span class="p">.</span><span class="w"> </span><span class="n">Q20</span><span class="p">,</span><span class="w"> </span><span class="n">Q30</span><span class="p">:</span><span class="w"> </span><span class="n">respectively</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">percentage</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bases</span><span class="w"> </span><span class="n">whose</span><span class="w"> </span><span class="n">Phred</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">greater</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="n">bases</span><span class="w"></span>
-#<span class="p">.</span><span class="w"> </span><span class="n">GC</span><span class="w"> </span><span class="n">content</span><span class="p">:</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">percentage</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bases</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bases</span><span class="w"></span>
+<span class="c1">#. Sample name: Sample name</span>
+<span class="c1">#. Raw reads: Count raw sequence data, with four rows in a unit, count the number of sequencing sequences in each file</span>
+<span class="c1">#. Clean reads: The calculation method is the same as that of Raw reads, except that the statistical files are filtered sequencing data, and subsequent bioinformatics analysis is based on Clean reads</span>
+<span class="c1">#. Clean bases: Multiply the number of sequencing sequences by the length of the sequencing sequence and convert it to G as the unit</span>
+<span class="c1">#. Error rate: base sequencing error rate</span>
+<span class="c1">#. Q20, Q30: respectively represent the percentage of bases whose Phred value is greater than 20 and 30 to the total bases</span>
+<span class="c1">#. GC content: the percentage of the total number of bases G and C to the total number of bases</span>
 </code></pre></div>
 <p>NGSPipe will provide you with an interactive, browser-based report, showing the most important measures of your data on the first sight. All tables in the report can be sorted and filtered. The table on the first tab shows the key values for a quick estimation of the success of your sequencing experiment and the assembly. On the second tab, there is a more detailed table, giving many additional measures. Additionally to the tables, many measures are provided as graphical feedback. On the third tab, you see plots which are generated for one complete sequencing experiment. On the fourth tab, there are plots which each show measures on one specific dataset.</p>
 <h3 id="7-run-snakemake">7. Run snakemake <a name="custom_run"></a></h3>
 <p>Run snakemake in a prebuild environment:</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j &lt;thread number&gt;
+<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j &lt;thread number&gt;
 </code></pre></div>
 <p>Or install dependencies while snakemake run. By default, all dependencies and tools should automatically be installed on the first execution. </p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j &lt;thread number&gt; --use-conda
+<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j &lt;thread number&gt; --use-conda
 </code></pre></div>
 <p>See Specifying a location for an environment or run conda create &ndash;help for information on specifying a different path.</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/rnaseq_analysis.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j &lt;thread number&gt; -p ./ngspipe_rnaseq_macox64
+<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j &lt;thread number&gt; -p ./ngspipe_rnaseq_macox64
 </code></pre></div>
                 
                   

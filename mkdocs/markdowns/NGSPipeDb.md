@@ -200,4 +200,3 @@ repository.
 
 If this does not help, please feel free to consult:
 * Xuan Zhang ([zhangxuan@xtbg.ac.cn](mailto:zhangxuan@xtbg.ac.cn)) or
-* Changning Liu ([liuchangning@xtbg.ac.cn](mailto:liuchangning@xtbg.ac.cn))

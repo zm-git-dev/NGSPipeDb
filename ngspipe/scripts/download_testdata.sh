@@ -13,7 +13,7 @@ cd $dest_forder
 echo -e "\033[32m Downloading raw reads... \033[0m"
 # --no-clobber 不要重复下载已存在的文件
 for i in control_R1 control_R2 treated_R1 treated_R2;
-  do wget --no-clobber http://www.liu-lab.com/ngspipedb/testdata/${i}.fq.gz;
+  do [[ -e ${i}.fq.gz ]] || wget --no-clobber http://www.liu-lab.com/ngspipedb/testdata/${i}.fq.gz;
 done
 
 # Download chr19 sequence (mm10 version)
@@ -31,7 +31,7 @@ echo -e "\033[32m Downloading condition list file... \033[0m"
 wget --no-clobber http://www.liu-lab.com/ngspipedb/testdata/condition.xls
 
 `python ../ngspipe/scripts/generate_replicat.py control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz`
-`rm -f control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz`
+#`rm -f control_R1.fq.gz control_R2.fq.gz treated_R1.fq.gz treated_R2.fq.gz`
 
 # cd back
 cd -

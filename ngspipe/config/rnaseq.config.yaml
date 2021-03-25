@@ -5,7 +5,7 @@ genomeAnno: "testdata/GRCm38.83.chr19.gtf"
 # genome sequence
 genomeFasta: "testdata/chr19.fa"
 # result directory of NGSPipe
-resultsDir: "results/result"
+resultsDir: "results/rnaseq"
 reportsDir: "results/report"
 dbDir: "results/sqlite3"
 

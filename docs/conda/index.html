@@ -13,14 +13,14 @@
         <meta name="author" content="Xuan Zhang">
       
       
-        <link rel="canonical" href="https://xuanblo.github.io/NGSPipeDb/NGSDb/">
+        <link rel="canonical" href="https://xuanblo.github.io/NGSPipeDb/conda/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
     
     
       
-        <title>NGSDb - NGSPipeDb Document</title>
+        <title>Conda - NGSPipeDb Document</title>
       
     
     
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ngsdb" class="md-skip">
+        <a href="#conda-usage" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              NGSDb
+              Conda
             
           </span>
         </div>
@@ -232,15 +232,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../NGSPipe-RNA-seq/" class="md-tabs__link md-tabs__link--active">
+      <a href="../NGSPipe-RNA-seq/" class="md-tabs__link">
         Pipelines
       </a>
     </li>
@@ -250,13 +248,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../linux/" class="md-tabs__link">
+      <a href="../linux/" class="md-tabs__link md-tabs__link--active">
         Learning materials
       </a>
     </li>
@@ -379,14 +379,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       <label class="md-nav__link" for="__nav_2">
         Pipelines
@@ -438,152 +436,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          NGSDb
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../NGSDb/" class="md-nav__link">
         NGSDb
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#one-step-to-view-the-ngspipe-rna-seq-analysis-results-in-a-browser" class="md-nav__link">
-    one step to view the NGSPipe RNA-Seq analysis results in a browser
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-by-step-to-generate-database-with-test-data" class="md-nav__link">
-    Step-by-step to generate database with test data 
-  </a>
-  
-    <nav class="md-nav" aria-label="Step-by-step to generate database with test data ">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-pre-prepare" class="md-nav__link">
-    1. pre-prepare
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-install-the-ngsdb-conda-environments" class="md-nav__link">
-    2. Install the NGSDb conda environments 
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-download-test-data" class="md-nav__link">
-    3. download test data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-run-convert-testdata-to-database" class="md-nav__link">
-    4. run convert testdata to database
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-vist-website" class="md-nav__link">
-    5. vist website
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#generate-database-by-you-own-data" class="md-nav__link">
-    generate database by you own data
-  </a>
-  
-    <nav class="md-nav" aria-label="generate database by you own data">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-convert-ngspipe-analysis-results-to-sqlite3-format" class="md-nav__link">
-    1. convert NGSPipe analysis results to sqlite3 format 
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-config" class="md-nav__link">
-    2. config 
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-start-server" class="md-nav__link">
-    3. start server 
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-add-your-custome-data" class="md-nav__link">
-    4. add your custome data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#script" class="md-nav__link">
-    添加script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-overview-the-ngsdb-apps" class="md-nav__link">
-    5. overview the NGSDb apps
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -600,12 +457,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       <label class="md-nav__link" for="__nav_3">
         Learning materials
@@ -645,11 +504,49 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../conda/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Conda
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Conda
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#download-pre-build-ngspipe-ranseq-env" class="md-nav__link">
+    download pre-build ngspipe-ranseq env 
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -700,112 +597,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#one-step-to-view-the-ngspipe-rna-seq-analysis-results-in-a-browser" class="md-nav__link">
-    one step to view the NGSPipe RNA-Seq analysis results in a browser
+  <a href="#download-pre-build-ngspipe-ranseq-env" class="md-nav__link">
+    download pre-build ngspipe-ranseq env 
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-by-step-to-generate-database-with-test-data" class="md-nav__link">
-    Step-by-step to generate database with test data 
-  </a>
-  
-    <nav class="md-nav" aria-label="Step-by-step to generate database with test data ">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-pre-prepare" class="md-nav__link">
-    1. pre-prepare
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-install-the-ngsdb-conda-environments" class="md-nav__link">
-    2. Install the NGSDb conda environments 
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-download-test-data" class="md-nav__link">
-    3. download test data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-run-convert-testdata-to-database" class="md-nav__link">
-    4. run convert testdata to database
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-vist-website" class="md-nav__link">
-    5. vist website
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#generate-database-by-you-own-data" class="md-nav__link">
-    generate database by you own data
-  </a>
-  
-    <nav class="md-nav" aria-label="generate database by you own data">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-convert-ngspipe-analysis-results-to-sqlite3-format" class="md-nav__link">
-    1. convert NGSPipe analysis results to sqlite3 format 
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-config" class="md-nav__link">
-    2. config 
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-start-server" class="md-nav__link">
-    3. start server 
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-add-your-custome-data" class="md-nav__link">
-    4. add your custome data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#script" class="md-nav__link">
-    添加script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-overview-the-ngsdb-apps" class="md-nav__link">
-    5. overview the NGSDb apps
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -822,212 +616,17 @@
               
   
                 
-                  <a href="https://github.com/xuanblo/NGSPipeDb/edit/master/mkdocs/markdowns/NGSDb.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/xuanblo/NGSPipeDb/edit/master/mkdocs/markdowns/conda.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="ngsdb">NGSDb</h1>
-<h2 id="one-step-to-view-the-ngspipe-rna-seq-analysis-results-in-a-browser">one step to view the NGSPipe RNA-Seq analysis results in a browser</h2>
-<p><div class="highlight"><pre><span></span><code>bash ngspipe/scripts/one_step_view_database.sh
-</code></pre></div>
-test
-Now you can viste your website on http://127.0.0.1:8000. All result are stored in <code>results</code>.
-- Example of report <sub><a href="http://www.liu-lab.com"><img alt="html" src="https://img.icons8.com/ios/20/000000/html-filetype.png" /></a></sub>.
-- Example of database <sub><a href="http://www.liu-lab.com"><img alt="html" src="https://img.icons8.com/dotty/25/000000/copy-link.png" /></a></sub>.</p>
-<h2 id="step-by-step-to-generate-database-with-test-data">Step-by-step to generate database with test data <a name="Step-by-Step-Database"></a></h2>
-<h3 id="1-pre-prepare">1. pre-prepare</h3>
-<ol>
-<li><a href="../NGSPipe-RNA-seq/#BasicLinux">Install wget and git</a></li>
-<li><a href="../NGSPipe-RNA-seq/#Miniconda">Install Miniconda3</a></li>
-<li><a href="../NGSPipe-RNA-seq/#NGSPipeDbSource">Download NGSPipeDb source code</a></li>
-</ol>
-<p>Modify the project name and enter the project directory.</p>
-<div class="highlight"><pre><span></span><code>mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
-<span class="nb">cd</span> species_sample_transcript_analysis_by_NGSPipeDb
-</code></pre></div>
-<h3 id="2-install-the-ngsdb-conda-environments">2. Install the NGSDb conda environments <a name="DatabaseRequirement"></a></h3>
-<div class="highlight"><pre><span></span><code>mamba create -n ngsdb <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8 -c conda-forge -y
-mamba env update -n ngsdb --file ngspipe/envs/requirements_ngsdb.yaml --prune
-conda activate ngsdb
-</code></pre></div>
-<h3 id="3-download-test-data">3. download test data</h3>
-<div class="highlight"><pre><span></span><code>mkdir -p testdata <span class="o">&amp;&amp;</span> <span class="nb">cd</span> testdata
-wget http://www.liu-lab.com/ngspipedb/testdata/gene_fpkm_all_samples.tsv ./
-wget http://www.liu-lab.com/ngspipedb/testdata/chr19.fa.gz ./
-gunzip chr19.fa.gz
-wget http://www.liu-lab.com/ngspipedb/testdata/GRCm38.83.chr19.gtf.gz ./
-gunzip GRCm38.83.chr19.gtf.gz
-<span class="nb">cd</span> ..
-</code></pre></div>
-<h3 id="4-run-convert-testdata-to-database">4. run convert testdata to database</h3>
-<p>cheak task plan:</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -n
-</code></pre></div>
-<p>build dag plot:</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml --dag<span class="p">|</span>dot -Tpng &gt; dag.png
-</code></pre></div>
-<p>run snakemake:</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -j <span class="m">1</span>
-</code></pre></div>
-<h3 id="5-vist-website">5. vist website</h3>
-<p>Starting server by run <code>python ngsdb/manage.py runserver</code>, visit sebsite on http://127.0.0.1:8000.</p>
-<h2 id="generate-database-by-you-own-data">generate database by you own data</h2>
-<h3 id="1-convert-ngspipe-analysis-results-to-sqlite3-format">1. convert NGSPipe analysis results to sqlite3 format <a name="Table2Sqlite3"></a></h3>
-<p>First, edit <code>ngspipe/config/ngsdb.config.yaml</code> file:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># path relative to where you run snakemake</span>
-
-<span class="c1"># gene structure annotation</span>
-<span class="nt">genomeAnno</span><span class="p">:</span> <span class="s">&quot;testdata/GRCm38.83.chr19.gtf&quot;</span> <span class="c1"># gene annotation file, can be gtf or gff</span>
-<span class="nt">genomeFasta</span><span class="p">:</span> <span class="s">&quot;testdata/chr19.fa&quot;</span> <span class="c1"># genome sequence</span>
-
-<span class="c1"># result directory of NGSPipe</span>
-<span class="c1">#testdata_resultsDir: &quot;results/result&quot;</span>
-<span class="c1">#estdata_reportsDir: &quot;results/report&quot;</span>
-<span class="nt">dbDir</span><span class="p">:</span> <span class="s">&quot;results/sqlite3&quot;</span>
-
-<span class="nt">djangoCode</span><span class="p">:</span> <span class="s">&quot;ngsdb&quot;</span>
-<span class="nt">exp_data</span><span class="p">:</span> <span class="s">&quot;results/result/quantify/quantify_by_stringtie/gene_fpkm_all_samples.tsv&quot;</span>
-<span class="nt">report_path</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
-<span class="nt">gbrowse_data</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
-
-<span class="c1"># sample list file</span>
-<span class="nt">samplesList</span><span class="p">:</span> <span class="s">&quot;testdata/samples.xls&quot;</span>
-<span class="c1"># sample file directory</span>
-<span class="nt">samplesDir</span><span class="p">:</span> <span class="s">&quot;testdata&quot;</span>
-<span class="c1"># fastq suffix, read1</span>
-<span class="nt">read1Suffix</span><span class="p">:</span> <span class="s">&quot;_R1.fq.gz&quot;</span>
-<span class="nt">read2Suffix</span><span class="p">:</span> <span class="s">&quot;_R2.fq.gz&quot;</span>
-<span class="c1"># replict can by 1,2,3</span>
-<span class="nt">replict_num</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
-<span class="c1"># condition for differential expression by deseq2</span>
-</code></pre></div>
-<p>Second, edit <code>ngspipe/workflow/db_generate.Snakefile.py</code> file:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># detail parameters in pipe #</span>
-
-<span class="c1"># 5. quantification</span>
-<span class="n">quantify_method</span> <span class="o">=</span> <span class="s1">&#39;stringtie&#39;</span> <span class="c1"># htseqcounts or featurecounts</span>
-<span class="n">quantify_outdir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;resultsDir&quot;</span><span class="p">],</span> <span class="s2">&quot;quantify&quot;</span><span class="p">,</span> <span class="s2">&quot;quantify_by_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quantify_method</span><span class="p">))</span>
-
-<span class="c1"># 4. transcript assembly</span>
-<span class="n">transcript_assembly_method</span> <span class="o">=</span> <span class="s1">&#39;stringtie&#39;</span> <span class="c1"># star</span>
-<span class="n">transcript_assembly_outdir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;resultsDir&quot;</span><span class="p">],</span> <span class="s2">&quot;transcript_assembly&quot;</span><span class="p">,</span> <span class="s2">&quot;transcript_assembly_by_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">transcript_assembly_method</span><span class="p">))</span>
-
-
-<span class="c1"># blast</span>
-<span class="c1"># 1. expression matrix database create</span>
-<span class="n">exp_db_outdir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dbDir&quot;</span><span class="p">],</span> <span class="s2">&quot;exp&quot;</span><span class="p">)</span>
-<span class="n">anno_db_outdir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dbDir&quot;</span><span class="p">],</span> <span class="s2">&quot;anno&quot;</span><span class="p">)</span>
-
-<span class="c1"># sqlite3</span>
-<span class="c1"># 2. blastdb</span>
-<span class="n">blastdb_outdir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dbDir&quot;</span><span class="p">],</span> <span class="s2">&quot;blastdb&quot;</span><span class="p">)</span>
-
-<span class="c1"># 3. gffutils</span>
-<span class="n">gffdb_outdir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dbDir&quot;</span><span class="p">],</span> <span class="s2">&quot;gff_sqlite3&quot;</span><span class="p">)</span>
-
-<span class="c1"># 4. genomebrowse</span>
-<span class="n">gbrowse_outdir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dbDir&quot;</span><span class="p">],</span> <span class="s2">&quot;gbrowse&quot;</span><span class="p">)</span>
-<span class="n">annotation_gbrowse_outdir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">gbrowse_outdir</span><span class="p">,</span> <span class="s1">&#39;annotation&#39;</span><span class="p">)</span>
-
-<span class="c1"># include modules</span>
-<span class="n">include</span><span class="p">:</span> <span class="n">join</span><span class="p">(</span><span class="s2">&quot;rules&quot;</span><span class="p">,</span> <span class="s2">&quot;8.db_generate_of_exp.Snakefile.py&quot;</span><span class="p">)</span>
-<span class="n">include</span><span class="p">:</span> <span class="n">join</span><span class="p">(</span><span class="s2">&quot;rules&quot;</span><span class="p">,</span> <span class="s2">&quot;8.db_generate_of_gff.Snakefile.py&quot;</span><span class="p">)</span>
-<span class="n">include</span><span class="p">:</span> <span class="n">join</span><span class="p">(</span><span class="s2">&quot;rules&quot;</span><span class="p">,</span> <span class="s2">&quot;8.db_generate_of_blastdb.Snakefile.py&quot;</span><span class="p">)</span>
-<span class="n">include</span><span class="p">:</span> <span class="n">join</span><span class="p">(</span><span class="s2">&quot;rules&quot;</span><span class="p">,</span> <span class="s2">&quot;8.db_generate_of_genomebrowser.Snakefile.py&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Then, run db_generate workflow to generate database files.</p>
-<div class="highlight"><pre><span></span><code>snakemake -s ngspipe/db_generate.Snakefile.py --configfile ngspipe/config/ngsdb.config.yaml -p -j <span class="m">1</span>
-</code></pre></div>
-<h3 id="2-config">2. config <a name="DatabaseConfig"></a></h3>
-<p>edit <code>mysite/mysite/settings.py</code> file</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Application definition</span>
-
-<span class="nv">INSTALLED_APPS</span> <span class="o">=</span> <span class="o">[</span>
-    <span class="s1">&#39;django.contrib.admin&#39;</span>,
-    <span class="s1">&#39;django.contrib.auth&#39;</span>,
-    <span class="s1">&#39;django.contrib.contenttypes&#39;</span>,
-    <span class="s1">&#39;django.contrib.sessions&#39;</span>,
-    <span class="s1">&#39;django.contrib.messages&#39;</span>,
-    <span class="s1">&#39;django.contrib.staticfiles&#39;</span>,
-    <span class="c1"># add custom app</span>
-    <span class="s1">&#39;geneAnno&#39;</span>, <span class="c1"># gene annotation from nr/nt/pfam/go/kegg</span>
-    <span class="s1">&#39;geneExpAtlas&#39;</span>, <span class="c1"># gene expression matrix</span>
-    <span class="s1">&#39;blast&#39;</span>, <span class="c1"># blast tool</span>
-<span class="o">]</span>
-</code></pre></div>
-<h3 id="3-start-server">3. start server <a name="RunServer"></a></h3>
-<p>Starting server by run <code>python ngsdb/manage.py runserver</code>, visit sebsite on http://127.0.0.1:8000.</p>
-<h3 id="4-add-your-custome-data">4. add your custome data</h3>
-<p>Let's assume that you have the data you need to generate the database, such as gene annotation files, gene expression matrix and analysis reports. Before further steps, please <a href="../NGSPipe-RNA-seq/#Miniconda">install CONDA</a> and <a href="../NGSPipe-RNA-seq/#NGSPipeDbSource">download the latest source code of NGSPipeDb</a>. Modify the project name and enter the project directory.</p>
-<div class="highlight"><pre><span></span><code>mv NGSPipeDb species_sample_transcript_analysis_by_NGSPipeDb
-<span class="nb">cd</span> species_sample_transcript_analysis_by_NGSPipeDb
-</code></pre></div>
-<ol>
-<li>table data in a page</li>
-<li>
-<p>custome script in wooey</p>
-<p>python manage.py makemigrations
-python manage.py migrate
-python manage.py addscript ../ngsdb/tools/test1.py</p>
-</li>
-</ol>
-<p>If you want use wooey tools on a task model <code>celery -A ProjectName worker -c 1 --beat -l info</code> optional.</p>
-<h3 id="script">添加script</h3>
-<p>因为运行script的时候是使用绝对路径，那么addscript的时候和运行script的时候文件路径必须不能变。如何变成相对路径呢？另外在admin管理页面script也不能直接访问的。</p>
-<h3 id="5-overview-the-ngsdb-apps">5. overview the NGSDb apps</h3>
-<p>We use django project to constructed our NGSDb. We have pareparied many apps for you. embeed. Please have a look:</p>
-<table>
-<thead>
-<tr>
-<th>django apps</th>
-<th>description</th>
-<th>package</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>report</td>
-<td>ngs analysis report</td>
-<td>snakemake</td>
-</tr>
-<tr>
-<td>geneExpAtlas</td>
-<td>table</td>
-<td>datatable js</td>
-</tr>
-<tr>
-<td>network</td>
-<td>table</td>
-<td>datatable js</td>
-</tr>
-<tr>
-<td>igv</td>
-<td>genome browse</td>
-<td><a href="https://github.com/igvteam/igv.js/wiki">IGV</a></td>
-</tr>
-<tr>
-<td>blastplus</td>
-<td>ncbi blast +</td>
-<td>NCBI</td>
-</tr>
-<tr>
-<td>ngstools</td>
-<td>python script</td>
-<td>wooey</td>
-</tr>
-<tr>
-<td>efp</td>
-<td>efp browse</td>
-<td></td>
-</tr>
-<tr>
-<td>heatmap</td>
-<td>expression</td>
-<td>clustergrammer-js https://clustergrammer.readthedocs.io/clustergrammer_js.html</td>
-</tr>
-</tbody>
-</table>
+                <h1 id="conda-usage">conda usage</h1>
+<h2 id="download-pre-build-ngspipe-ranseq-env">download pre-build ngspipe-ranseq env <a name="pre-build"></a></h2>
+<ul>
+<li><a href="">ngspipd-rnaseq-Linux-x86-64</a></li>
+<li><a href="">ngspipd-rnaseq-MacOSX-x86-64</a></li>
+</ul>
                 
               
   <footer class="sponsorship">
@@ -1061,7 +660,7 @@ python manage.py addscript ../ngsdb/tools/test1.py</p>
     >
       
         <a
-          href="../NGSPipe-resequecing/"
+          href="../ngs/"
           class="md-footer__link md-footer__link--prev"
           rel="prev"
         >
@@ -1073,14 +672,14 @@ python manage.py addscript ../ngsdb/tools/test1.py</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              NGSPipe resequecing
+              NGS analysis
             </div>
           </div>
         </a>
       
       
         <a
-          href="../linux/"
+          href="../changelog/"
           class="md-footer__link md-footer__link--next"
           rel="next"
         >
@@ -1089,7 +688,7 @@ python manage.py addscript ../ngsdb/tools/test1.py</p>
               <span class="md-footer__direction">
                 Next
               </span>
-              Linux & shell basic
+              Change logs
             </div>
           </div>
           <div class="md-footer__button md-icon">
