@@ -11,6 +11,7 @@ then
     [[ -e /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh ]] || wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh
     bash /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh -b -p ~/miniconda3
 elif [ $platform == 'macos' ]
+then
     [[ -e /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh ]] || wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh bash /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh -b -f -p ~/miniconda3
 else
     exit -1
