@@ -6,7 +6,7 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /t
 #wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh && bash /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh -b -f -p ~/miniconda3
 
 # conda init
-~/miniconda3/bin/conda init && source ~/miniconda3/etc/profile.d/conda.sh  && conda update conda -y && conda install mamba -c conda-forge -y
+~/miniconda3/bin/conda init bash && source ~/miniconda3/etc/profile.d/conda.sh  && conda update conda -y && conda install mamba -c conda-forge -y
 
 # 3. create conda environment # 如果已经存在的话会询问
 mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0 -y 
