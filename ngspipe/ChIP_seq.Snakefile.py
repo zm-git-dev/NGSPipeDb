@@ -34,7 +34,7 @@ qc_method = 'trim-galore' # trimomatic
 qc_outdir = join(config["resultsDir"], "rawReads_qc", "rawReads_qc_by_{}".format(qc_method))
 
 # 3. mapping to genome
-mapping_method = 'bwa' # bowtie, bwa, 
+mapping_method = 'bwa' # bowtie2, bwa, 
 mapping_outdir = join(config["resultsDir"], "mapping", "mapping_by_{}".format(mapping_method))
 genome_index_prefix = 'genome'
 

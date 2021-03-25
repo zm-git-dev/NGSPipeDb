@@ -3,7 +3,7 @@
 
 # 2. install conda for your platform
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh && bash /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh -b -f -p ~/miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh && bash /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh -b -f -p ~/miniconda3
+#wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh && bash /tmp/`whoami`_Miniconda3-latest-Linux-x86_64.sh -b -f -p ~/miniconda3
 
 # conda init
 ~/miniconda3/bin/conda init && source ~/miniconda3/etc/profile.d/conda.sh  && conda update conda -y && conda install mamba -c conda-forge -y

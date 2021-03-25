@@ -12,3 +12,4 @@ dependencies:
   - samtools=1.11
   - picard
   - macs2
+  - bowtie2
