@@ -3,6 +3,11 @@ import os
 from os.path import join
 import sys
 import pandas as pd
+from scripts.check_ngspipedb_update import parse_with_wget, parse_with_urllib
+
+version = '0.0.1'
+parse_with_urllib("http://www.liu-lab.com/ngspipedb/changelog.md", version)
+
 
 # relative path
 snake_dir = workflow.basedir # all configfile, scripts, restructuretext, ens are relative to snakefile (this file)

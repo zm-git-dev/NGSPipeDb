@@ -4,3 +4,7 @@
 
 - fix "one_step_rnaseq.sh" run error
 - add notify update function
+
+## [0.0.0] - 2021-2-1
+
+- update ngsdb
