@@ -93,7 +93,8 @@ We offer two download options.
     ```
 
     !!! error
-        If you meet problem with network, please try to download the "specific version" or modify the command to `git clone git://www.github.com/xuanblo/NGSPipeDb`.
+        If you meet problem with network, please try to download the "specific version" or modify the command to:  
+        `git clone git://www.github.com/xuanblo/NGSPipeDb`.
 
 === "specific version"
 
@@ -299,7 +300,7 @@ We will explain how to edit and configure these files shortly below.
 
 ### 1. Rawdata sequence data <a name="download_raw_data"></a>
 
-Raw data files can either be fastq, fastq.gz formated files. `makedir rawdata` and upload your own data to this directory. If your raw data are located in __somewhere else__, you can copy them to `rawdata`, or create soft links like `ln -s ../yoursamplepath/*.fq.gz rawdata/`.
+Raw data files can either be fastq, fastq.gz formated files. `mkdir rawdata` and upload your own data to this directory. If your raw data are located in __somewhere else__, you can copy them to `rawdata`, or create soft links like `ln -s ../yoursamplepath/*.fq.gz rawdata/`.
 
     rawdata/
     ├── lung-rep1_R1.fq.gz

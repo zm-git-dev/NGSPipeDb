@@ -6,7 +6,7 @@ import pandas as pd
 from scripts.check_ngspipedb_update import parse_with_wget, parse_with_urllib
 import time
 
-version = '0.0.1'
+version = '0.0.2'
 parse_with_urllib("http://www.liu-lab.com/ngspipedb/changelog.md", version)
 time.sleep(5)
 
