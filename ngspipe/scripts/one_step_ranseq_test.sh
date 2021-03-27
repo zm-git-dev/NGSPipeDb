@@ -44,7 +44,7 @@ snakemake -s ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfi
 snakemake -s ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml -p -j 10
 
 # 8. generate report
-snakemake --snakefile ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --report results/report/report.html
+#snakemake --snakefile ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --report results/report/report.html
 
 # 9. exit env
 #conda deactivate
