@@ -1014,10 +1014,10 @@ tar -xf NGSPipeDb_v0.0.1.tar.gz
 </div>
 <h3 id="5-installing-the-ngspipe-rna-seq-conda-environments">5. Installing the NGSPipe RNA-Seq conda environments <a name="NGSPipeDbEnv"></a></h3>
 <p>First, you will need to create a conda environments. For details, see <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">manage envirement</a> with conda.</p>
-<div class="highlight"><pre><span></span><code>mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq <span class="nv">snakemake</span><span class="o">=</span><span class="m">5</span>.30.2 <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8 <span class="nv">seqkit</span><span class="o">=</span><span class="m">0</span>.14.0
+<div class="highlight"><pre><span></span><code>conda create -c conda-forge -c bioconda --name ngspipe-rnaseq <span class="nv">snakemake</span><span class="o">=</span><span class="m">5</span>.30.2 <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8 <span class="nv">seqkit</span><span class="o">=</span><span class="m">0</span>.14.0
 </code></pre></div>
 <p>Next, to producess and analysis the RNA-Seq sequenceding data, some bioinformatics tools need to be installed. Chick to <a href="https://github.com/xuanblo/NGSPipeDb/blob/master/ngspipe/envs/requirements_rnaseq.yaml">see software we used</a>.</p>
-<div class="highlight"><pre><span></span><code>mamba env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
+<div class="highlight"><pre><span></span><code>conda env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
 </code></pre></div>
 <p>Activate conda environment:</p>
 <div class="highlight"><pre><span></span><code>conda activate ngspipe-rnaseq

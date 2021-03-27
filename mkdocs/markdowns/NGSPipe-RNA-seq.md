@@ -144,13 +144,13 @@ You can view the __NGSPipe__ code structure with `#!shell tree ./ngspipe/ -d -L 
 First, you will need to create a conda environments. For details, see [manage envirement](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) with conda.
 
 ```shell
-mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0
+conda create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0
 ```
 
 Next, to producess and analysis the RNA-Seq sequenceding data, some bioinformatics tools need to be installed. Chick to [see software we used](https://github.com/xuanblo/NGSPipeDb/blob/master/ngspipe/envs/requirements_rnaseq.yaml).
 
 ```shell
-mamba env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
+conda env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
 ```
 
 Activate conda environment:

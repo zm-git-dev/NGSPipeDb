@@ -24,11 +24,11 @@ source ~/miniconda3/etc/profile.d/conda.sh && conda update conda -y && conda ins
 
 # 3. create conda environment # 如果已经存在的话会询问
 echo -e "\033[32m [Step3:] Create conda env \033[0m"
-mamba create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0 -y 
+conda create -c conda-forge -c bioconda --name ngspipe-rnaseq snakemake=5.30.2 python=3.8 seqkit=0.14.0 -y 
 
 # 4. update ensential packages
 echo -e "\033[32m [Step4:] update ensential packages \033[0m"
-mamba env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
+conda env update -n ngspipe-rnaseq --file ngspipe/envs/requirements_rnaseq.yaml --prune
 
 # 5. enter conda env
 echo -e "\033[32m [Step5:] activate conda env \033[0m"
