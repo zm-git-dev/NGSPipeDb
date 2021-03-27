@@ -275,6 +275,18 @@
   </li>
 
       
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../todo/" class="md-tabs__link">
+      Todo
+    </a>
+  </li>
+
+      
     </ul>
   </div>
 </nav>
@@ -492,15 +504,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-run-rna-seq-analysis-on-test-data" class="md-nav__link">
-    6. run RNA-seq analysis on test data 
+  <a href="#7-run-rna-seq-analysis-on-test-data" class="md-nav__link">
+    7. run RNA-seq analysis on test data 
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#7-rgenerate-report" class="md-nav__link">
-    7. rgenerate report 
+  <a href="#8-rgenerate-report" class="md-nav__link">
+    8. rgenerate report 
   </a>
   
 </li>
@@ -703,6 +715,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../todo/" class="md-nav__link">
+        Todo
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -785,15 +812,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-run-rna-seq-analysis-on-test-data" class="md-nav__link">
-    6. run RNA-seq analysis on test data 
+  <a href="#7-run-rna-seq-analysis-on-test-data" class="md-nav__link">
+    7. run RNA-seq analysis on test data 
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#7-rgenerate-report" class="md-nav__link">
-    7. rgenerate report 
+  <a href="#8-rgenerate-report" class="md-nav__link">
+    8. rgenerate report 
   </a>
   
 </li>
@@ -946,7 +973,8 @@ mv NGSPipeDb mouse_transcriptome_analysis
 </code></pre></div></p>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
-<p>If you meet problem with network, please try to download the "specific version" or modify the command to <code>git clone git://www.github.com/xuanblo/NGSPipeDb</code>.</p>
+<p>If you meet problem with network, please try to download the "specific version" or modify the command to:<br />
+<code>git clone git://www.github.com/xuanblo/NGSPipeDb</code>.</p>
 </div>
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">specific version</label><div class="tabbed-content">
@@ -1052,7 +1080,7 @@ gunzip GRCm38.83.chr19.gtf.gz
 <p class="admonition-title">Warning</p>
 <p>The test data is only used to verify that the analytical process is working properly and the results do not have r biological significance.</p>
 </div>
-<h3 id="6-run-rna-seq-analysis-on-test-data">6. run RNA-seq analysis on test data <a name="RunTest"></a></h3>
+<h3 id="7-run-rna-seq-analysis-on-test-data">7. run RNA-seq analysis on test data <a name="RunTest"></a></h3>
 <p>We provied a simple RNA-seq workflow for you to take a glance of NGSPipe. In RNA-seq analysis part, it contains 7 step analysis:</p>
 <div class="highlight"><pre><span></span><code><span class="mf">1.</span> <span class="n">sampling</span> <span class="n">data</span> <span class="p">(</span><span class="n">choose</span> <span class="n">part</span> <span class="n">of</span> <span class="n">your</span> <span class="n">data</span><span class="p">)</span>
 <span class="mf">2.</span> <span class="n">raw</span> <span class="n">reads</span> <span class="n">qc</span>
@@ -1093,7 +1121,7 @@ snakemake -s ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfi
 <p class="admonition-title">Note</p>
 <p>If you encounter any problem in this step, please turn to <code>TroubleShooting</code> for help.</p>
 </div>
-<h3 id="7-rgenerate-report">7. rgenerate report <a name="Report"></a></h3>
+<h3 id="8-rgenerate-report">8. rgenerate report <a name="Report"></a></h3>
 <p>If all goes well, the proper analysis will be followed by the making of the html report using Snakemake to a html report file with pictures and tables.</p>
 <div class="highlight"><pre><span></span><code>snakemake --snakefile ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py --configfile ngspipe/config/rnaseq.config.yaml --report results/report/report.html
 </code></pre></div>
@@ -1109,7 +1137,7 @@ cp ngspipe/1.1.rnaseq_analysis_reference_basic.Snakefile.py ngspipe/my_own_rnase
 </code></pre></div>
 We will explain how to edit and configure these files shortly below.</p>
 <h3 id="1-rawdata-sequence-data">1. Rawdata sequence data <a name="download_raw_data"></a></h3>
-<p>Raw data files can either be fastq, fastq.gz formated files. <code>makedir rawdata</code> and upload your own data to this directory. If your raw data are located in <strong>somewhere else</strong>, you can copy them to <code>rawdata</code>, or create soft links like <code>ln -s ../yoursamplepath/*.fq.gz rawdata/</code>.</p>
+<p>Raw data files can either be fastq, fastq.gz formated files. <code>mkdir rawdata</code> and upload your own data to this directory. If your raw data are located in <strong>somewhere else</strong>, you can copy them to <code>rawdata</code>, or create soft links like <code>ln -s ../yoursamplepath/*.fq.gz rawdata/</code>.</p>
 <div class="highlight"><pre><span></span><code>rawdata/
 ├── lung-rep1_R1.fq.gz
 ├── lung-rep1_R2.fq.gz
