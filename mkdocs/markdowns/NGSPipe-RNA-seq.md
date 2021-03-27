@@ -269,8 +269,7 @@ The final data files are put in the folder `results`. Please check you result fi
         ├── quantify
         ├── rawReads_qc
         ├── sampling_data
-        ├── statistic
-        └── transcript_assembly
+        └── statistic
 
 !!! Note
     If you encounter any problem in this step, please turn to `TroubleShooting` for help.

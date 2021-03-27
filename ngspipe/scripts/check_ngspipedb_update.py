@@ -53,22 +53,24 @@ def parse_with_urllib(change_log_in_markdown, version):
         versions = [i.text[1:6] for i in targets]
         #print(versions)
         current_version_index = versions.index(version)
-        
+        message = ""
         if current_version_index:
-            print("[Your pipeline need update] the lastest version is {}".format(versions[0]))
-            print("[Your pipeline need update] your current version is {}".format(version))
-            print("[Your pipeline need update] Please see https://xuanblo.github.io/NGSPipeDb/NGSPipe-RNA-seq/#NGSPipeDbSource")
+            message += "[Your pipeline need update] the lastest version is {}\n".format(versions[0])
+            message += "[Your pipeline need update] your current version is {}\n".format(version)
+            message += "[Your pipeline need update] Please see https://xuanblo.github.io/NGSPipeDb/NGSPipe-RNA-seq/#NGSPipeDbSource\n"
             for target in targets[0:current_version_index]:
-                print("[Your pipeline need update] ## {}".format(target.text))
+                message += "[Your pipeline need update] ## {}\n".format(target.text)
                 for sib in target.find_next_siblings():
                     if sib.name=="h2":
                         break
                     else:
                         update_text = sib.text.strip()
                         for line in update_text.split('\n'):
-                            print("[Your pipeline need update] {}".format(line))
+                            message += "[Your pipeline need update] {}\n".format(line)
         else:
-            print("[Your pipeline is the lastes version]")
+            message += "[Your pipeline is the lastes version]\n"
+
+    return message
 
 #parse_with_wget(change_log_in_github, version)
 #parse_with_urllib(change_log_in_github, version)

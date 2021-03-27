@@ -3,6 +3,7 @@
 ## [0.0.2] - 2021-3-27
 
 - fix some doc error
+- fix "Error: <stdin>: syntax error in line 1 near '['"
 
 ## [0.0.1] - 2021-3-25
 

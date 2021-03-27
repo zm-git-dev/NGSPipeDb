@@ -7,7 +7,8 @@ from scripts.check_ngspipedb_update import parse_with_wget, parse_with_urllib
 import time
 
 version = '0.0.2'
-parse_with_urllib("http://www.liu-lab.com/ngspipedb/changelog.md", version)
+message = parse_with_urllib("http://www.liu-lab.com/ngspipedb/changelog.md", version)
+sys.stderr.write(message)
 time.sleep(5)
 
 # relative path
