@@ -221,7 +221,7 @@ Make sure you have the following directory structure by command `tree testdata`:
 !!! warning
     The test data is only used to verify that the analytical process is working properly and the results do not have r biological significance.
 
-### 6. run RNA-seq analysis on test data <a name="RunTest"></a>
+### 7. run RNA-seq analysis on test data <a name="RunTest"></a>
 
 We provied a simple RNA-seq workflow for you to take a glance of NGSPipe. In RNA-seq analysis part, it contains 7 step analysis:
 
@@ -275,7 +275,7 @@ The final data files are put in the folder `results`. Please check you result fi
 !!! Note
     If you encounter any problem in this step, please turn to `TroubleShooting` for help.
 
-### 7. rgenerate report <a name="Report"></a>
+### 8. rgenerate report <a name="Report"></a>
 
 If all goes well, the proper analysis will be followed by the making of the html report using Snakemake to a html report file with pictures and tables.
 
