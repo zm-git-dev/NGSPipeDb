@@ -40,7 +40,7 @@ def parse_with_wget(change_log_in_markdown, version):
                         for line in update_text.split('\n'):
                             print("[Your pipeline need update] {}".format(line))
         else:
-            print("[Your pipeline is the lastes version]")
+            print("[Your pipeline is the lastest version]")
 
 def parse_with_urllib(change_log_in_markdown, version):
     with urllib.request.urlopen(change_log_in_markdown) as f:
@@ -68,7 +68,7 @@ def parse_with_urllib(change_log_in_markdown, version):
                         for line in update_text.split('\n'):
                             message += "[Your pipeline need update] {}\n".format(line)
         else:
-            message += "[Your pipeline is the lastes version]\n"
+            message += "[Your pipeline is the lastest version]\n"
 
     return message
 

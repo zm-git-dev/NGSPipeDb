@@ -6,7 +6,7 @@ import pandas as pd
 from scripts.check_ngspipedb_update import parse_with_wget, parse_with_urllib
 import time
 
-version = '0.0.2'
+version = '0.0.3'
 message = parse_with_urllib("http://www.liu-lab.com/ngspipedb/changelog.md", version)
 sys.stderr.write(message)
 time.sleep(5)
@@ -35,7 +35,7 @@ sampling_method = 'links' # tail, seqkit_number, seqkit_proportion, head, tail
 sampling_data_outdir = join(config["resultsDir"], "sampling_data", "sampling_data_by_{}".format(sampling_method))
 
 # 2. raw reads qc
-qc_method = 'trim-galore' # trimomatic
+qc_method = 'trim-galore' # trimmomatic
 qc_outdir = join(config["resultsDir"], "rawReads_qc", "rawReads_qc_by_{}".format(qc_method))
 
 # 3. junction alignmnet

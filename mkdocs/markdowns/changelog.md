@@ -1,5 +1,9 @@
 # Change logs
 
+## [0.0.3] - 2021-3-31
+
+- fix bugs when deseq2 quit
+
 ## [0.0.2] - 2021-3-27
 
 - fix some doc error

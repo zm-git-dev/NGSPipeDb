@@ -65,8 +65,8 @@ coldata <- coldata[sort(rownames(coldata),decreasing = FALSE),]
 # sort rows and columns
 if(!all(rownames(coldata) %in% colnames(countData)))
 {
-  print("error: not all samples in exp matrix and condition are the same\n")
-  q()
+  print("error: not all samples in exp matrix and condition are the same")
+  q("no", 1, FALSE)
 } else {
   if(!all(rownames(coldata) == colnames(countData)))
   {
