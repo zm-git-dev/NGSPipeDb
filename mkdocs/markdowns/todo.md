@@ -9,6 +9,7 @@
 - [ ] ngsdb search
 - [ ] ngsdb tools + seq cut
 - [ ] report slow
+- [ ] add all sample's gene expression in differential expression analysis
 
 ## docs
 

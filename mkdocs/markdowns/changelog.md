@@ -3,6 +3,7 @@
 ## [0.0.3] - 2021-3-31
 
 - fix bugs when deseq2 quit
+- add gene expression value of all samples in deseq2 result
 
 ## [0.0.2] - 2021-3-27
 

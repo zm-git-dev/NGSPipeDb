@@ -119,7 +119,7 @@ for (i in 1:dim(sample_comb)[2]){
   } else {
     baseMean1 <- as.data.frame(rowMedians(base1)) # rowMedians or rowMeans
   }
-  colnames(baseMean1) <- sample1
+  colnames(baseMean1) <- detail_sample_name(sample1)
   #head(baseMean1)
   
   # 获得第二组数据均值
@@ -129,12 +129,13 @@ for (i in 1:dim(sample_comb)[2]){
   } else {
     baseMean2 <- as.data.frame(rowMedians(base2)) # rowMedians or rowMeans
   }
-  colnames(baseMean2) <- sample2
+  colnames(baseMean2) <- detail_sample_name(sample2)
   #head(baseMean2)
   
   # 结果组合
-  res <- cbind(baseMean1, baseMean2, as.data.frame(res))
-  head(res)
+  ## add gene expression value of all samples 
+  res <- cbind(baseMean1, as.data.frame(base1), baseMean2, as.data.frame(base2), as.data.frame(res))
+  #head(res)
   
   # 增加ID信息
   res <- cbind(ID=rownames(res), as.data.frame(res))
@@ -149,20 +150,20 @@ for (i in 1:dim(sample_comb)[2]){
   
   # the base mean is the mean of normalized counts of all samples, normalizing for sequencing depth.
   #resSig_all <- subset(res, padj < 0.05 & abs(log2FoldChange) > 1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
-  resSig_all <- subset(res, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
-  colnames(resSig_all) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
+  resSig_all <- subset(res, select=c('ID', detail_sample_name(sample1), colnames(base1), detail_sample_name(sample2), colnames(base2), 'log2FoldChange', 'lfcSE', 'stat', 'pvalue', 'padj'))
+  #colnames(resSig_all) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
   write.table(resSig_all, file= paste(args$resultDir,sample2,"_vs_",sample1,".all.csv", sep=''), quote=F, row.names = FALSE, sep=',')
   
   cat("all:",dim(resSig_all)[1], ";")
   
-  resSig_up <- subset(res, padj < 0.05 & log2FoldChange > 1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
-  colnames(resSig_up) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
+  resSig_up <- subset(res, padj < 0.05 & log2FoldChange > 1, select=c('ID', detail_sample_name(sample1), colnames(base1), detail_sample_name(sample2), colnames(base2), 'log2FoldChange', 'lfcSE', 'stat', 'pvalue', 'padj'))
+  #colnames(resSig_up) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
   write.table(resSig_up, file= paste(args$resultDir,sample2,"_vs_",sample1,".up.padj.csv", sep=''), quote=F, row.names = FALSE, sep=',')
   
   cat("up_padj<0.5_fc>2:", dim(resSig_up)[1], ";")
   
-  resSig_down <- subset(res, padj < 0.05 & log2FoldChange < -1, select=c('ID', sample1, sample2, 'log2FoldChange', 'padj'))
-  colnames(resSig_down) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
+  resSig_down <- subset(res, padj < 0.05 & log2FoldChange < -1, select=c('ID', detail_sample_name(sample1), colnames(base1), detail_sample_name(sample2), colnames(base2), 'log2FoldChange', 'lfcSE', 'stat', 'pvalue', 'padj'))
+  #colnames(resSig_down) = c('ID', detail_sample_name(sample1), detail_sample_name(sample2), 'log2FoldChange', 'padj')
   write.table(resSig_down, file= paste(args$resultDir,sample2,"_vs_",sample1,".down.padj.csv", sep=''), quote=F, row.names = FALSE, sep=',')
   
   cat("down_padj<0.5_fc>2:", dim(resSig_down)[1], '\n')
