@@ -10,3 +10,6 @@ def about(request):
 
 def report(request):
     return render(request, 'home/report.html')
+
+def download(request):
+    return render(request, 'home/download.html')
